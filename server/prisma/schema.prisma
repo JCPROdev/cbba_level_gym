@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Empleado {
+  id           Int            @id @default(autoincrement())
+  nombre       String
+  turno        String
+  usuario      String         @unique
+  password     String
+  Cliente      Cliente[]
+  Venta        Venta[]
+  DetalleVenta DetalleVenta[]
+}
+
+model Paquete {
+  id      Int       @id @default(autoincrement())
+  nombre  String
+  precio  Float
+  Cliente Cliente[]
+}
+
+model Cliente {
+  id               Int      @id @default(autoincrement())
+  nombre           String
+  detalle          String?
+  paqueteId        Int
+  empleadoId       Int
+  total            Float
+  tipoPago         String
+  diasRestantes    Int
+  fechaInscripcion DateTime
+  fechaLimite      DateTime
+  paquete          Paquete  @relation(fields: [paqueteId], references: [id])
+  empleado         Empleado @relation(fields: [empleadoId], references: [id])
+}
+
+model Venta {
+  id           Int            @id @default(autoincrement())
+  empleadoId   Int
+  total        Float
+  fecha        DateTime       @default(now())
+  empleado     Empleado       @relation(fields: [empleadoId], references: [id])
+  DetalleVenta DetalleVenta[]
+}
+
+model Producto {
+  id       Int       @id @default(autoincrement())
+  nombre   String
+  precio   Float
+  cantidad Int
+  Almacen  Almacen[]
+}
+
+model DetalleVenta {
+  id            Int      @id @default(autoincrement())
+  ventaId       Int
+  empleadoId    Int
+  cantidad      Int
+  precioVendido Float
+  total         Int
+  venta         Venta    @relation(fields: [ventaId], references: [id])
+  empleado      Empleado @relation(fields: [empleadoId], references: [id])
+}
+
+model Almacen {
+  id                Int      @id @default(autoincrement())
+  productoId        Int
+  cantidadAumentada Int
+  totalCompra       Float
+  fecha             DateTime @default(now())
+  producto          Producto @relation(fields: [productoId], references: [id])
+}

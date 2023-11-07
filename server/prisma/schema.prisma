@@ -19,28 +19,39 @@ model Empleado {
   Cliente      Cliente[]
   Venta        Venta[]
   DetalleVenta DetalleVenta[]
+  Inscripcion  Inscripcion[]
 }
 
 model Paquete {
-  id      Int       @id @default(autoincrement())
-  nombre  String
-  precio  Float
-  Cliente Cliente[]
+  id          Int           @id @default(autoincrement())
+  nombre      String
+  precio      Float
+  Inscripcion Inscripcion[]
 }
 
 model Cliente {
-  id               Int      @id @default(autoincrement())
-  nombre           String
-  detalle          String?
-  paqueteId        Int
-  empleadoId       Int
-  total            Float
-  tipoPago         String
-  diasRestantes    Int
-  fechaInscripcion DateTime
-  fechaLimite      DateTime
-  paquete          Paquete  @relation(fields: [paqueteId], references: [id])
-  empleado         Empleado @relation(fields: [empleadoId], references: [id])
+  id     Int    @id @default(autoincrement())
+  nombre String
+
+  Empleado    Empleado?     @relation(fields: [empleadoId], references: [id])
+  empleadoId  Int?
+  Inscripcion Inscripcion[]
+}
+
+model Inscripcion {
+  id            Int      @id @default(autoincrement())
+  clienteId     Int
+  empleadoId    Int
+  paqueteId     Int
+  descuento     Float?
+  total         Float
+  tipoPago      String
+  diasRestantes Int
+  fechaInicio   DateTime
+  fechaLimite   Decimal
+  cliente       Cliente  @relation(fields: [clienteId], references: [id])
+  empleado      Empleado @relation(fields: [empleadoId], references: [id])
+  paquete       Paquete  @relation(fields: [paqueteId], references: [id])
 }
 
 model Venta {

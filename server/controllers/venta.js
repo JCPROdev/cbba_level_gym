@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client"
 const app = express();
 const prisma = new PrismaClient();
 
-app.get("/venta", async (res) => {
+app.get("/venta", async (req,res) => {
   try {
     const venta = await prisma.venta.findMany({});
     res.json({
@@ -32,3 +32,4 @@ app.post("/venta", async (req, res) => {
     })
   }
 })
+export default app;

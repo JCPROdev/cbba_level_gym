@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client"
 const app = express();
 const prisma = new PrismaClient();
 
-app.get("/detalleVenta", async (res) => {
+app.get("/detalleVenta", async (req,res) => {
   try {
     const detalleVenta = await prisma.detalleVenta.findMany({});
     res.json({

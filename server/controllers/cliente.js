@@ -46,7 +46,7 @@ app.put("/cliente/:id", async (req, res) => {
     })
     res.json({
       data: cliente,
-      message: "cliente actualizado Correctamente"
+      message: "cliente actualizado correctamente"
     })
   } catch (error) {
     res.status(500).json({
@@ -72,6 +72,24 @@ app.delete("/cliente/:id", async (req, res) => {
     res.status(500).json({
       message: "Error al eliminar cliente",
       error: error.message
+    })
+  }
+})
+app.post("/cliente/:id",async(req,res)=>{
+  try {
+    const cliente=await prisma.cliente.findMany({
+      where:{
+        id:Number(req.params.id)
+      }
+    })
+    res.json({
+      data:cliente,
+      message:"cliente obtenido correctamente"
+    })
+  } catch (error) {
+    res.status(500).json({
+      message:"Error al obtener el cliente",
+      error:message.error
     })
   }
 })

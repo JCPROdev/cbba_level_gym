@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client"
 const app = express();
 const prisma = new PrismaClient();
 
-app.get("/almacen", async (res) => {
+app.get("/almacen", async (req,res) => {
   try {
     const almacen = await prisma.almacen.findMany({});
     res.json({
@@ -11,7 +11,7 @@ app.get("/almacen", async (res) => {
       message: "Datos del almacen obtenidos correctamente"
     })
   } catch (error) {
-    res.status(500).json({
+    res.sta(500).json({
       message: "Error al obtener los datos del almacen", error: error.message
     })
   }

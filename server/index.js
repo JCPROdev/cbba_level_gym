@@ -8,7 +8,7 @@ import empleado from "./controllers/empleado.js";
 import paquete from "./controllers/paquete.js";
 import producto from "./controllers/producto.js";
 import venta from "./controllers/venta.js";
-
+import inscripcion  from "./controllers/inscripcion.js";
 const app = express();
 const port = 3000;
 dotenv.config();
@@ -24,6 +24,7 @@ app.use(empleado);
 app.use(paquete);
 app.use(producto);
 app.use(venta);
+app.use(inscripcion);
 app.use(bodyParser.json());
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

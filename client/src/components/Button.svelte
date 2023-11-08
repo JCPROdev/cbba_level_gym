@@ -1,8 +1,8 @@
 <script>
-  export let handleClick;
+  export let onClick;
 </script>
 
-<button on:click={handleClick}>
+<button on:click={onClick}>
   <slot />
 </button>
 

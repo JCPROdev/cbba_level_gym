@@ -2,11 +2,27 @@
   import { Route, Router } from 'svelte-routing'
   import Landing from './pages/landing/Index.svelte'
   import Login from './pages/login/Index.svelte'
+  import Aside from './components/Aside.svelte'
+  import Navbar from './components/Navbar.svelte'
+  import Clientes from './pages/clientes/Index.svelte'
+  import Empleados from './pages/empleados/Index.svelte'
 </script>
 
-<main>
-  <Router>
-    <Route path="/" component={Landing} />
-    <Route path="/login" component={Login} />
-  </Router>
-</main>
+<Router>
+  <Route path="/*">
+    <Navbar>
+      <Router>
+        <Route path="/" component={Landing} />
+        <Route path="/login" component={Login} />
+      </Router>
+    </Navbar>
+  </Route>
+  <Route path="/dashboard/*">
+    <Aside>
+      <Router>
+        <Route path="/clientes" component={Clientes} />
+        <Route path="/empleados" component={Empleados} />
+      </Router>
+    </Aside>
+  </Route>
+</Router>

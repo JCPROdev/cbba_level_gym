@@ -2,9 +2,11 @@
   import Logo from '../../assets/logo.png'
   import BG from '../../assets/login.png'
   import Button from '../../components/Button.svelte';
+    import { navigate } from 'svelte-routing';
 
-  const handleClick = () => {
-
+  const login = (e) => {
+    e.preventDefault();
+    navigate('/dashboard/clientes');
   }
 </script>
 
@@ -17,7 +19,7 @@
       <input placeholder="Email" />
       <input placeholder="Contraseña" />
     </div>
-    <Button {handleClick}>Ingresar</Button>
+    <Button onClick={login}>Ingresar</Button>
   </form>
 </div>
 

@@ -37,3 +37,28 @@
   width: 85%;
   box-shadow: 0 5px 10px #0005;
 }
+
+@keyframes fade {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes vertical {
+  0% {
+    background-color: var(--primary);
+    transform: translateX(0);
+  }
+  50% {
+    background-color: var(--primary);
+    transform: translateX(100%);
+  }
+  100% {
+    background-color: var(--primary);
+
+    transform: translateX(0%);
+  }
+}

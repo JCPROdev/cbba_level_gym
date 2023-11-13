@@ -3,15 +3,15 @@
   import eliminar from "../../assets/iconos/elimianar.png";
   import editar from "../../assets/iconos/ediatar.png";
   import store from "../../assets/iconos/store.png";
-  let showInput = false;
+  let verInput = false;
 </script>
 
 <div class="Content">
   <h2>Clientes</h2>
-  <div class="buscar" on:click={() => (showInput = true)}>
+  <div class="buscar" on:click={() => (verInput = true)}>
     <input
       type="text"
-      style="width: {showInput ? '100%' : '0'}; transition: width 1s ease;"
+      style="width: {verInput ? '100%' : '0'}; transition: width 1s ease;"
     />
     <img src={buscar} alt="buscar" />
   </div>
@@ -69,7 +69,7 @@
       position: relative;
       background-color: transparent;
       overflow: hidden;
-      padding: .5em 1em ;
+      padding: 0.5em 1em;
       &::before {
         position: absolute;
         content: "";
@@ -80,10 +80,9 @@
       }
       &:hover {
         color: #fff;
-       &::before{
-        animation: vertical 5s infinite;
-       }
-       
+        &::before {
+          animation: vertical 5s infinite;
+        }
       }
     }
   }

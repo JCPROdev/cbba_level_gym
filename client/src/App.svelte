@@ -1,11 +1,12 @@
 <script>
-  import { Route, Router } from 'svelte-routing'
-  import Landing from './pages/landing/Index.svelte'
-  import Login from './pages/login/Index.svelte'
-  import Aside from './components/Aside.svelte'
-  import Navbar from './components/Navbar.svelte'
-  import Clientes from './pages/clientes/Index.svelte'
-  import Empleados from './pages/empleados/Index.svelte'
+  import { Route, Router } from "svelte-routing";
+  import Landing from "./pages/landing/Index.svelte";
+  import Login from "./pages/login/Index.svelte";
+  import Aside from "./components/Aside.svelte";
+  import Navbar from "./components/Navbar.svelte";
+  import Clientes from "./pages/clientes/Index.svelte";
+  import Empleados from "./pages/empleados/Index.svelte";
+  import Home from "./pages/home/Index.svelte";
 </script>
 
 <Router>
@@ -22,6 +23,7 @@
       <Router>
         <Route path="/clientes" component={Clientes} />
         <Route path="/empleados" component={Empleados} />
+        <Route path="/home" component={Home} />
       </Router>
     </Aside>
   </Route>

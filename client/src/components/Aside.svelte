@@ -2,6 +2,7 @@
   import { Link, navigate } from "svelte-routing";
   import logo from "../assets/logoDash.png";
   import perfil from "../assets/perfil.png";
+  import home from "../assets/iconos/home.png";
   const logout = () => {
     navigate("/login");
   };
@@ -10,14 +11,18 @@
 <div>
   <aside>
     <ul>
-      <li><img src={logo} alt="logo-igm" /></li>
-
+      <img src={logo} alt="logo-igm" class="logo" />
+      <li>
+        <Link to="/dashboard/home" class="link"
+          ><img src={home} alt="logo-home" />Inicio</Link
+        >
+      </li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
     </ul>
     <section class="imgPerfil">
       <img alt="Perfil" src={perfil} />
-      <p>nombre</p>
+      <p class="nombre">nombre</p>
       <p>rol</p>
       <button on:click={logout}>Logout</button>
     </section>
@@ -32,7 +37,6 @@
     display: flex;
     height: 100vh;
   }
-
   aside {
     width: 240px;
     background-color: #fff;
@@ -41,22 +45,22 @@
     align-items: center;
     justify-content: space-around;
     box-shadow: 0 5px 5px #0005;
-    img {
+    .logo {
       width: 170px;
       height: 120px;
-    }
-    img {
-      width: 100;
-      height: 100;
     }
     ul {
       padding: 0;
       margin: 0;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      justify-content: center;
+      align-items: center;
     }
-
     li {
-      margin: 1em;
+      text-align: center;
       list-style: none;
       width: 100%;
     }
@@ -66,12 +70,18 @@
       flex-direction: column;
       align-items: center;
       & > img {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
       }
+      .nombre {
+        color: #65b32e;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        font-size: 0.9em;
+      }
       & p {
-        font-size: 900;
+        font-size: 0.8em;
       }
       & button {
         padding: 0.5em;
@@ -82,22 +92,19 @@
         cursor: pointer;
       }
     }
-    .link {
-      text-decoration: none;
-      color: #333;
-      padding: 8px 16px;
-      display: block;
-    }
+  }
 
-    .link:hover {
-      background-color: #eee;
-    }
-  }
-  button {
-  }
   main {
     width: calc(100vw - 240px);
     overflow-x: hidden;
     overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* background-color: rgb(185, 185, 185); */
+  }
+  .link > :global(a) {
+    text-decoration: none;
   }
 </style>

@@ -18,5 +18,12 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    
+  }
+  @media only screen and (max-width: 980px){
+    section{
+        flex-direction: column;
+    }
+  
   }
 </style>

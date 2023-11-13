@@ -39,6 +39,11 @@
       height: 80%;
       right: 0;
     }
+    @media only screen and (max-width: 980px) {
+      &::after {
+        width: 0;
+      }
+    }
   }
   .cliente {
     display: flex;
@@ -56,7 +61,6 @@
     flex-wrap: wrap;
     gap: 1em;
 
-  
     & > div {
       display: flex;
       gap: 1em;
@@ -64,7 +68,7 @@
     }
   }
   p {
-      color: #0009;
-      width: 50%;
-    }
+    color: #0009;
+    width: 50%;
+  }
 </style>

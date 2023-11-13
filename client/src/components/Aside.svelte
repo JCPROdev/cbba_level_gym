@@ -9,7 +9,7 @@
 </script>
 
 <div>
-  <aside>
+  <aside class="Navaside">
     <ul>
       <img src={logo} alt="logo-igm" class="logo" />
       <li>
@@ -36,6 +36,16 @@
   div {
     display: flex;
     height: 100vh;
+    .Navaside {
+      @media only screen and (max-width: 600px) {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        z-index: 100;
+        background-color: #0008;
+        justify-content: flex-start;
+      }
+    }
   }
   aside {
     width: 240px;
@@ -69,6 +79,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       & > img {
         width: 90px;
         height: 90px;
@@ -92,6 +103,14 @@
         cursor: pointer;
       }
     }
+    @media only screen and (max-width: 600px) {
+      & .imgPerfil {
+        display: none;
+      }
+      &.logo {
+        display: none;
+      }
+    }
   }
 
   main {
@@ -103,6 +122,9 @@
     align-items: center;
     flex-wrap: wrap;
     /* background-color: rgb(185, 185, 185); */
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
   }
   .link > :global(a) {
     text-decoration: none;

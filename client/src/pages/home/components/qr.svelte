@@ -21,6 +21,10 @@
       width: 250px;
       height: 250px;
     }
+    @media only screen and (max-width: 980px) {
+      height: auto;
+      gap: 2em;
+    }
   }
   button {
     display: flex;
@@ -28,7 +32,7 @@
     justify-content: center;
     align-items: center;
     border: none;
-    color:  var(--primary);
+    color: var(--primary);
     font-weight: 600;
     & > img {
       width: 20px;

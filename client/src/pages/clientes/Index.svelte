@@ -15,7 +15,6 @@
     />
     <img src={buscar} alt="buscar" />
   </div>
-
   <table>
     <thead>
       <tr>
@@ -48,11 +47,13 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   .Content {
     width: 90%;
     height: 80%;
-    box-shadow: 0 5px 5px #0005;
+    box-shadow: var(--shadow1); 
+    background-color: var(--white);
+    border-radius: 16px;
     padding: 2em;
     position: relative;
     & h2 {
@@ -111,14 +112,18 @@
   table {
     width: 90%;
     text-align: center;
-    & thead {
-      & th {
-        font-weight: 600;
-        color: #0005;
-        &::first-letter {
-          text-transform: uppercase;
-        }
+    border-collapse: collapse;
+    & th {
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--grayopacity);
+      color: var(--gray);
+      &::first-letter {
+        text-transform: uppercase;
       }
+    }
+    & td {
+      padding: 12px 0;
     }
     & img {
       margin: 0 0.5em;

@@ -54,7 +54,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    box-shadow: 0 5px 5px #0005;
+    border-right: 2px solid var(--grayopacity);
     .logo {
       width: 170px;
       height: 120px;
@@ -112,7 +112,6 @@
       }
     }
   }
-
   main {
     width: calc(100vw - 240px);
     overflow-x: hidden;
@@ -121,10 +120,11 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    background-color: var(--bg);
     /* background-color: rgb(185, 185, 185); */
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-  }
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
   }
   .link > :global(a) {
     text-decoration: none;

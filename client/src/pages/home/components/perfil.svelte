@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   .perfil {
     width: 50%;
     height: 600px;

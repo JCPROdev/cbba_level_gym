@@ -8,7 +8,7 @@
   <button> <img src={store} alt="" />Actualizar</button>
 </div>
 
-<style>
+<style lang="scss">
   .qr {
     width: 50%;
     height: 600px;

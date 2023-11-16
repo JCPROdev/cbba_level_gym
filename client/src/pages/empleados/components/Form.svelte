@@ -1,23 +1,41 @@
 <script>
+  import { afterUpdate } from "svelte";
   import Input from "../../../components/Input.svelte";
   import Select from "../../../components/Select.svelte";
+  import { sendRequest } from "../../../utilities/sendRequest";
+
+  export let closeModal;
+  export let empleado;
 
   let form = {
-    nombre: "",
-    turno: "Mañana",
-    usuario: "",
-    password: ""
+    nombre: empleado?.nombre || "",
+    turno: empleado?.turno || "Mañana",
+    usuario: empleado?.usuario || "",
+    password: empleado?.password || ""
+  }
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    const res = await sendRequest(
+      empleado ? `empleado/${empleado.id}` : 'empleado', 
+      form,
+      empleado ? "PUT" : "POST"
+    );
+    if(res) {
+      alert(res.message);
+      closeModal();
+    }
   }
 </script>
 
 <form>
   <Input 
     text="Nombre"
-    value={form.nombre}
+    bind:value={form.nombre}
   />
   <Select 
     text="Turno"
-    value={form.turno}
+    bind:value={form.turno}
     options={[{
       text: "Mañana",
       value: "Mañana"
@@ -28,11 +46,12 @@
   />
   <Input 
     text="Usuario"
-    value={form.usuario}
+    bind:value={form.usuario}
   />
   <Input 
     text="Contraseña"
-    value={form.password}
+    bind:value={form.password}
     type="password"
   />
+  <button on:click={handleSend}>Enviar</button>
 </form>

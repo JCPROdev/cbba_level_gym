@@ -3,38 +3,69 @@
   import eliminar from "../../assets/iconos/elimianar.png";
   import editar from "../../assets/iconos/ediatar.png";
   import store from "../../assets/iconos/store.png";
+  import Modal from "../../components/Modal.svelte";
+  import Input from "../../components/Input.svelte";
+  
   let verInput = false;
+  let openModal = false;
+
+  let form = {
+    nombre: ""
+  };
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    console.log(form.nombre);
+  }
 </script>
 
 <div class="Content">
   <h2>Clientes</h2>
-  <div class="buscar" on:click={() => (verInput = true)}>
+  <Modal 
+    open={openModal}
+  >
+    <button
+      on:click={() => openModal = false}
+    >Cerrar</button>
+    <form>
+      <Input 
+        text="Nombre"
+        bind:value={form.nombre}
+      />
+      <Input 
+        text="Turno"
+        bind:value={form.nombre}
+      />
+      <Input 
+        text="Nombre"
+        bind:value={form.nombre}
+      />
+      <button on:click={handleSend}>Enviar</button>
+    </form>
+  </Modal>
+  <button class="buscar" on:click={() => (verInput = true)}>
     <input
       type="text"
       style="width: {verInput ? '100%' : '0'}; transition: width 1s ease;"
     />
     <img src={buscar} alt="buscar" />
-  </div>
+  </button>
   <table>
     <thead>
       <tr>
-        <th>id</th>
-        <th>producto</th>
-        <th>precio</th>
-        <th>cantidad</th>
-        <th>fecha</th>
-        <th>total</th>
+        <th>#</th>
+        <th>nombre</th>
+        <th>turno</th>
+        <th>usuario</th>
         <th>opciones</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>1</td>
-        <td>suplemento</td>
-        <td>100</td>
-        <td>20</td>
-        <td>10/20/23</td>
-        <td>100</td>
+        <td>Mauricio Molina</td>
+        <td>Mañana</td>
+        <td>MQInfer12</td>
         <td>
           <img src={editar} alt="icono-editar" />
           <img src={eliminar} alt="icono-eliminar" />
@@ -43,7 +74,10 @@
     </tbody>
   </table>
   <div class="acciones">
-    <button><img src={store} alt="icon-store" />Agregar</button>
+    <button 
+      on:click={() => openModal = true}
+      class="agregar-btn"
+    ><img src={store} alt="icon-store" />Agregar</button>
   </div>
 </div>
 
@@ -59,7 +93,7 @@
     & h2 {
       margin-bottom: 34px;
     }
-    & button {
+    & .agregar-btn {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -103,6 +137,8 @@
     top: 2em;
     right: 2em;
     width: 200px;
+    border: none;
+    background-color: transparent;
   }
   input {
     border: none;

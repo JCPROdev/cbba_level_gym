@@ -30,9 +30,8 @@ model Paquete {
 }
 
 model Cliente {
-  id     Int    @id @default(autoincrement())
-  nombre String
-
+  id          Int           @id @default(autoincrement())
+  nombre      String
   Empleado    Empleado?     @relation(fields: [empleadoId], references: [id])
   empleadoId  Int?
   Inscripcion Inscripcion[]

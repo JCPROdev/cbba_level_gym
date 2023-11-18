@@ -7,50 +7,47 @@
   import Form from "./components/Form.svelte";
   import { getRequest } from "../../utilities/getRequest";
   import { sendRequest } from "../../utilities/sendRequest";
-
+  import fondo from "../../assets/logo-fondo.png";
   let verInput = false;
   let open = false;
   let empleado = null;
 
   const openModal = (item) => {
-    if(item) {
+    if (item) {
       empleado = item;
     } else {
       empleado = null;
     }
     open = true;
-  }
+  };
 
   const closeModal = () => {
     open = false;
-  }
-  let data = getRequest('empleado');
+  };
+  let data = getRequest("empleado");
 
   const handleDelete = async (id) => {
     const res = await sendRequest(`empleado/${id}`, null, "DELETE");
-    if(res) {
+    if (res) {
       alert(res.message);
-      data = getRequest('empleado');
+      data = getRequest("empleado");
     }
-  }
+  };
 </script>
 
 <div class="Content">
   <h2>Empleados</h2>
-  <Modal 
-    open={open}
-  >
-    <button
-      on:click={closeModal}
-    >Cerrar</button>
+  <img src={fondo} alt="" class="backgraund-a" />
+  <Modal {open}>
+    <button on:click={closeModal}>Cerrar</button>
     {#key JSON.stringify(empleado)}
-    <Form 
-      empleado={empleado}
-      closeModal={() => {
-        data = getRequest('empleado');
-        closeModal();
-      }}
-    />
+      <Form
+        {empleado}
+        closeModal={() => {
+          data = getRequest("empleado");
+          closeModal();
+        }}
+      />
     {/key}
   </Modal>
   <button class="buscar" on:click={() => (verInput = true)}>
@@ -62,7 +59,7 @@
   </button>
   {#await data}
     <p>Cargando...</p>
-  {:then res} 
+  {:then res}
     <table>
       <thead>
         <tr>
@@ -75,25 +72,28 @@
       </thead>
       <tbody>
         {#each res.data as empleado, i}
-        <tr>
-          <td>{i + 1}</td>
-          <td>{empleado.nombre}</td>
-          <td>{empleado.turno}</td>
-          <td>{empleado.usuario}</td>
-          <td>
-            <button on:click={() => openModal(empleado)}><img src={editar} alt="icono-editar" /></button>
-            <button on:click={() => handleDelete(empleado.id)}><img src={eliminar} alt="icono-eliminar" /></button>
-          </td>
-        </tr>
+          <tr>
+            <td>{i + 1}</td>
+            <td>{empleado.nombre}</td>
+            <td>{empleado.turno}</td>
+            <td>{empleado.usuario}</td>
+            <td>
+              <button on:click={() => openModal(empleado)}
+                ><img src={editar} alt="icono-editar" /></button
+              >
+              <button on:click={() => handleDelete(empleado.id)}
+                ><img src={eliminar} alt="icono-eliminar" /></button
+              >
+            </td>
+          </tr>
         {/each}
       </tbody>
     </table>
   {/await}
   <div class="acciones">
-    <button 
-      on:click={() => openModal()}
-      class="agregar-btn"
-    ><img src={store} alt="icon-store" />Agregar</button>
+    <button on:click={() => openModal()} class="agregar-btn"
+      ><img src={store} alt="icon-store" />Agregar</button
+    >
   </div>
 </div>
 
@@ -101,11 +101,18 @@
   .Content {
     width: 90%;
     height: 80%;
-    box-shadow: var(--shadow1); 
+    box-shadow: var(--shadow1);
     background-color: var(--white);
     border-radius: 16px;
     padding: 2em;
     position: relative;
+    z-index: 1;
+    .backgraund-a {
+      width: 100%;
+      height: 80%;
+      position: absolute;
+      z-index: -1;
+    }
     & h2 {
       margin-bottom: 34px;
     }

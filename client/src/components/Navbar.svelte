@@ -18,7 +18,5 @@
     position: fixed;
     height: 100px;
     z-index: 5;
-    background-color: rgb(233, 233, 233, 0.6);
   }
-
 </style>

@@ -11,7 +11,7 @@
 <style lang="scss">
   .qr {
     width: 50%;
-    height: 600px;
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;

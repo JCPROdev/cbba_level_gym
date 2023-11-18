@@ -60,6 +60,7 @@
   {#await data}
     <p>Cargando...</p>
   {:then res}
+   <div class="container">
     <table>
       <thead>
         <tr>
@@ -89,24 +90,25 @@
         {/each}
       </tbody>
     </table>
+   </div>
   {/await}
-  <div class="acciones">
-    <button on:click={() => openModal()} class="agregar-btn"
-      ><img src={store} alt="icon-store" />Agregar</button
-    >
-  </div>
+  <button on:click={() => openModal()} class="agregar-btn"
+    ><img src={store} alt="icon-store" />Agregar</button
+  >
 </div>
 
 <style lang="scss">
   .Content {
     width: 90%;
-    height: 80%;
+    height: 80vh;
     box-shadow: var(--shadow1);
     background-color: var(--white);
     border-radius: 16px;
     padding: 2em;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
     .backgraund-a {
       width: 100%;
       height: 80%;
@@ -117,10 +119,6 @@
       margin-bottom: 34px;
     }
     & .agregar-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1em;
       color: var(--primary);
       border: none;
       cursor: pointer;
@@ -128,6 +126,12 @@
       background-color: transparent;
       overflow: hidden;
       padding: 0.5em 1em;
+      align-self: flex-end;
+      justify-self: flex-end;
+      display: flex;
+      align-items: center;
+
+      gap: 1em;
       &::before {
         position: absolute;
         content: "";
@@ -144,13 +148,7 @@
       }
     }
   }
-  .acciones {
-    position: absolute;
-    bottom: 4em;
-    width: 90%;
-    display: flex;
-    justify-content: right;
-  }
+
   .buscar {
     content: "";
     position: absolute;
@@ -168,10 +166,17 @@
     border-bottom: solid 1px var(--primary);
     outline: none;
   }
+   .container {
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
   table {
     width: 90%;
     text-align: center;
     border-collapse: collapse;
+    & tbody{
+ 
+    }
     & th {
       font-weight: 500;
       padding: 8px 0;
@@ -183,9 +188,14 @@
     }
     & td {
       padding: 12px 0;
+      & button{
+        border:none;
+        background-color: transparent;
+      }
     }
     & img {
       margin: 0 0.5em;
     }
   }
+}
 </style>

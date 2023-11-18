@@ -50,6 +50,7 @@
     />
     <img src={buscar} alt="buscar" />
   </button>
+ <div class="container">
   <table>
     <thead>
       <tr>
@@ -79,12 +80,17 @@
       class="agregar-btn"
     ><img src={store} alt="icon-store" />Agregar</button>
   </div>
+ </div>
 </div>
 
 <style lang="scss">
+  .container{
+    height: 60vh;
+    overflow: auto;
+  }
   .Content {
     width: 90%;
-    height: 80%;
+    height: 80vh;
     box-shadow: var(--shadow1); 
     background-color: var(--white);
     border-radius: 16px;

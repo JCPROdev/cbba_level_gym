@@ -3,13 +3,25 @@
   import logo from "../assets/logoDash.png";
   import perfil from "../assets/perfil.png";
   import home from "../assets/iconos/home.png";
+  import menu from "../assets/iconos/menu.png";
+
   const logout = () => {
     navigate("/login");
   };
+
+  let navActivado = false;
+  const activeNav = () => {
+    navActivado = !navActivado;
+  };
 </script>
 
-<div>
-  <aside class="Navaside">
+<div class="data">
+  <button class="menu" on:click={activeNav}><img src={menu} alt="" /></button>
+  <aside class:Navaside={navActivado} class:navres={!navActivado}>
+    <button class="menu-fd" on:click={activeNav}
+      ><img src={menu} alt="" /></button
+    >
+
     <ul>
       <img src={logo} alt="logo-igm" class="logo" />
       <li>
@@ -33,6 +45,35 @@
 </div>
 
 <style lang="scss">
+  .navres {
+    @media only screen and (max-width: 600px) {
+      transform: translateX(-100%);
+      position: fixed;
+    }
+  }
+  .data {
+    display: flex;
+    @media only screen and (max-width: 600px) {
+      flex-direction: column;
+    }
+  }
+  .menu,
+  .menu-fd {
+    display: none;
+    @media only screen and (max-width: 600px) {
+      display: flex;
+      background-color: #fff;
+      width: 100%;
+      display: flex;
+      height: 8vh;
+      justify-content: center;
+      border: none;
+      align-items: center;
+    }
+  }
+  .menu-fd {
+    background-color: transparent;
+  }
   div {
     display: flex;
     height: 100vh;

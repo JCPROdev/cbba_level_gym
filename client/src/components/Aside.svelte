@@ -29,8 +29,10 @@
           ><img src={home} alt="logo-home" />Inicio</Link
         >
       </li>
+      <li><Link to="/dashboard/inscripcion" class="link">Inscripción</Link></li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
+      <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
     </ul>
     <section class="imgPerfil">
       <img alt="Perfil" src={perfil} />

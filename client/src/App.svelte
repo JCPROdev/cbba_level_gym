@@ -7,6 +7,8 @@
   import Clientes from "./pages/clientes/Index.svelte";
   import Empleados from "./pages/empleados/Index.svelte";
   import Home from "./pages/home/Index.svelte";
+  import Paquetes from "./pages/paquetes/Index.svelte";
+  import Inscripcion from "./pages/inscripcion/Index.svelte";
 </script>
 
 <Router>
@@ -23,6 +25,8 @@
       <Router>
         <Route path="/clientes" component={Clientes} />
         <Route path="/empleados" component={Empleados} />
+        <Route path="/paquetes" component={Paquetes} />
+        <Route path="/inscripcion" component={Inscripcion} />
         <Route path="/home" component={Home} />
       </Router>
     </Aside>

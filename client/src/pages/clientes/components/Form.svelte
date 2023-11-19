@@ -1,0 +1,32 @@
+<script>
+  import Input from "../../../components/Input.svelte";
+  import { sendRequest } from "../../../utilities/sendRequest";
+
+  export let closeModal;
+  export let cliente;
+
+  let form = {
+    nombre: cliente?.nombre || "",
+  }
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    const res = await sendRequest(
+      cliente ? `cliente/${cliente.id}` : 'cliente', 
+      form,
+      cliente ? "PUT" : "POST"
+    );
+    if(res) {
+      alert(res.message);
+      closeModal();
+    }
+  }
+</script>
+
+<form>
+  <Input 
+    text="Nombre"
+    bind:value={form.nombre}
+  />
+  <button on:click={handleSend}>Enviar</button>
+</form>

@@ -1,52 +1,33 @@
 <script>
-  import eliminar from "../../assets/iconos/elimianar.png";
-  import editar from "../../assets/iconos/ediatar.png";
   import store from "../../assets/iconos/store.png";
   import Modal from "../../components/Modal.svelte";
   import Form from "./components/Form.svelte";
   import { getRequest } from "../../utilities/getRequest";
-  import { sendRequest } from "../../utilities/sendRequest";
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
   let search = "";
   let open = false;
-  let cliente = null;
 
-  const openModal = (item) => {
-    if (item) {
-      cliente = item;
-    } else {
-      cliente = null;
-    }
+  const openModal = () => {
     open = true;
   };
-
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("cliente");
 
-  const handleDelete = async (id) => {
-    console.log(id);
-    const res = await sendRequest(`cliente/${id}`, null, "DELETE");
-    if (res) {
-      alert(res.message);
-      data = getRequest("cliente");
-    }
-  };
+  let data = getRequest("inscripcion");
 </script>
 
 <div class="Content">
-  <h2>Clientes</h2>
+  <h2>Paquetes</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
     <button on:click={closeModal}>Cerrar</button>
-    {#key JSON.stringify(cliente)}
+    {#key JSON.stringify(open)}
       <Form
-        {cliente}
         closeModal={() => {
-          data = getRequest("cliente");
+          data = getRequest("paquete");
           closeModal();
         }}
       />
@@ -61,22 +42,25 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>nombre</th>
+          <th>cliente</th>
+          <th>paquete</th>
+          <th>total</th>
+          <th>tipo de pago</th>
+          <th>fecha</th>
           <th>opciones</th>
         </tr>
       </thead>
       <tbody>
-        {#each res.data as cliente, i}
+        {#each res.data as paquete, i}
           <tr>
             <td>{i + 1}</td>
-            <td>{cliente.nombre}</td>
+            <td>{paquete.nombre}</td>
+            <td>{paquete.precio}</td>
             <td>
-              <button on:click={() => openModal(cliente)}
-                ><img src={editar} alt="icono-editar" /></button
-              >
-              <button on:click={() => handleDelete(cliente.id)}
-                ><img src={eliminar} alt="icono-eliminar" /></button
-              >
+              <button>
+                Ver
+                <!-- <img src={eliminar} alt="icono-eliminar" /> -->
+              </button>
             </td>
           </tr>
         {/each}
@@ -141,10 +125,10 @@
       }
     }
   }
-  .container {
-  width: 100%;
-  height: 60vh;
-  overflow: auto;
+   .container {
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
   table {
     width: 100%;
     text-align: center;

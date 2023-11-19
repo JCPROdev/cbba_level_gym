@@ -18,7 +18,8 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    
+    background-color: var(--white);
+    border-radius: 16px;
   }
   @media only screen and (max-width: 980px){
     section{

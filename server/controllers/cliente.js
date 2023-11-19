@@ -61,8 +61,7 @@ app.delete("/cliente/:id", async (req, res) => {
     const cliente = await prisma.cliente.delete({
       where: {
         id: Number(req.params.id)
-      },
-      data: req.body
+      }
     })
     res.json({
       data: cliente,

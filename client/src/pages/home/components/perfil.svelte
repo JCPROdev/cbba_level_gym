@@ -8,7 +8,7 @@
     <strong> nombre</strong> rol(Cliente)
   </div>
   <div class="info">
-    <strong> paquete:</strong>
+    <strong> Paquete:</strong>
     <p>Grupo2</p>
     <strong>Fecha: </strong>
     <div>

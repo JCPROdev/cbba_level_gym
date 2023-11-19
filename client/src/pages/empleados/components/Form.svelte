@@ -36,14 +36,10 @@
   <Select 
     text="Turno"
     bind:value={form.turno}
-    options={[{
-      text: "Mañana",
-      value: "Mañana"
-    }, {
-      text: "Tarde",
-      value: "Tarde"
-    }]}
-  />
+  >
+    <option value="Mañana">Mañana</option>
+    <option value="Tarde">Tarde</option>
+  </Select>
   <Input 
     text="Usuario"
     bind:value={form.usuario}

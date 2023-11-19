@@ -1,5 +1,4 @@
 <script>
-  import buscar from "../../assets/iconos/buscar.png";
   import eliminar from "../../assets/iconos/elimianar.png";
   import editar from "../../assets/iconos/ediatar.png";
   import store from "../../assets/iconos/store.png";
@@ -8,7 +7,9 @@
   import { getRequest } from "../../utilities/getRequest";
   import { sendRequest } from "../../utilities/sendRequest";
   import fondo from "../../assets/logo-fondo.png";
-  let verInput = false;
+  import Loader from "../../components/Loader.svelte";
+  import SearchButton from "../../components/SearchButton.svelte";
+  let search = "";
   let open = false;
   let empleado = null;
 
@@ -50,15 +51,9 @@
       />
     {/key}
   </Modal>
-  <button class="buscar" on:click={() => (verInput = true)}>
-    <input
-      type="text"
-      style="width: {verInput ? '100%' : '0'}; transition: width 1s ease;"
-    />
-    <img src={buscar} alt="buscar" />
-  </button>
+  <SearchButton bind:value={search} />
   {#await data}
-    <p>Cargando...</p>
+    <Loader />
   {:then res}
    <div class="container">
     <table>
@@ -113,6 +108,7 @@
       width: 100%;
       height: 80%;
       position: absolute;
+      object-fit: cover;
       z-index: -1;
     }
     & h2 {
@@ -148,35 +144,14 @@
       }
     }
   }
-
-  .buscar {
-    content: "";
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 2em;
-    right: 2em;
-    width: 200px;
-    border: none;
-    background-color: transparent;
-  }
-  input {
-    border: none;
-    border-bottom: solid 1px var(--primary);
-    outline: none;
-  }
-   .container {
-    width: 100%;
-    height: 60vh;
-    overflow: auto;
+  .container {
+  width: 100%;
+  height: 60vh;
+  overflow: auto;
   table {
-    width: 90%;
+    width: 100%;
     text-align: center;
     border-collapse: collapse;
-    & tbody{
- 
-    }
     & th {
       font-weight: 500;
       padding: 8px 0;

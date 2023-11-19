@@ -11,13 +11,13 @@
   import SearchButton from "../../components/SearchButton.svelte";
   let search = "";
   let open = false;
-  let cliente = null;
+  let paquete = null;
 
   const openModal = (item) => {
     if (item) {
-      cliente = item;
+      paquete = item;
     } else {
-      cliente = null;
+      paquete = null;
     }
     open = true;
   };
@@ -25,28 +25,27 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("cliente");
+  let data = getRequest("paquete");
 
   const handleDelete = async (id) => {
-    console.log(id);
-    const res = await sendRequest(`cliente/${id}`, null, "DELETE");
+    const res = await sendRequest(`paquete/${id}`, null, "DELETE");
     if (res) {
       alert(res.message);
-      data = getRequest("cliente");
+      data = getRequest("paquete");
     }
   };
 </script>
 
 <div class="Content">
-  <h2>Clientes</h2>
+  <h2>Paquetes</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
     <button on:click={closeModal}>Cerrar</button>
-    {#key JSON.stringify(cliente)}
+    {#key JSON.stringify(paquete)}
       <Form
-        {cliente}
+        {paquete}
         closeModal={() => {
-          data = getRequest("cliente");
+          data = getRequest("paquete");
           closeModal();
         }}
       />
@@ -62,19 +61,21 @@
         <tr>
           <th>#</th>
           <th>nombre</th>
+          <th>precio</th>
           <th>opciones</th>
         </tr>
       </thead>
       <tbody>
-        {#each res.data as cliente, i}
+        {#each res.data as paquete, i}
           <tr>
             <td>{i + 1}</td>
-            <td>{cliente.nombre}</td>
+            <td>{paquete.nombre}</td>
+            <td>{paquete.precio}</td>
             <td>
-              <button on:click={() => openModal(cliente)}
+              <button on:click={() => openModal(paquete)}
                 ><img src={editar} alt="icono-editar" /></button
               >
-              <button on:click={() => handleDelete(cliente.id)}
+              <button on:click={() => handleDelete(paquete.id)}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>
@@ -141,10 +142,10 @@
       }
     }
   }
-  .container {
-  width: 100%;
-  height: 60vh;
-  overflow: auto;
+   .container {
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
   table {
     width: 100%;
     text-align: center;

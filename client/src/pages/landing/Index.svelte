@@ -1,3 +1,13 @@
+<script>
+  import Banner from "./components/Banner.svelte";
+  import Header from './components/Header.svelte'
+</script>
+
 <div>
-  <p>Hola mundo LevelGym</p>
+  <Header></Header>
+  <Banner />
 </div>
+
+<style lang="scss">
+
+</style>

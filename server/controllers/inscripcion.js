@@ -21,9 +21,24 @@ app.get("/inscripcion", async (req, res) => {
 
 app.post("/inscripcion", async (req, res) => {
   try {
+    const paquete = await prisma.paquete.findUnique({
+      where: {
+        id: req.body.idPaquete
+      }
+    });
     const inscripcion = await prisma.inscripcion.create({
-      data: req.body
-    })
+      data: {
+        clienteId: req.body.idCliente,
+        paqueteId: req.body.idPaquete,
+        tipoPago: req.body.tipoPago,
+        descuento: req.body.descuento,
+        fechaInicio: req.body.fechaInicio,
+        fechaLimite: req.body.fechaLimite,
+        total: paquete.precio - req.body.descuento,
+        diasRestantes: paquete.dias,
+        empleadoId: req.user.id
+      }
+    });
     res.json({
       data: inscripcion,
       message: "inscripcion agregado correctamente"

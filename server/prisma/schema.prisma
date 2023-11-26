@@ -16,6 +16,7 @@ model Empleado {
   turno        String
   usuario      String         @unique
   password     String
+  refreshToken String?        @unique
   Cliente      Cliente[]
   Venta        Venta[]
   DetalleVenta DetalleVenta[]
@@ -26,6 +27,7 @@ model Paquete {
   id          Int           @id @default(autoincrement())
   nombre      String
   precio      Float
+  dias        Int
   Inscripcion Inscripcion[]
 }
 

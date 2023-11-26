@@ -1,8 +1,10 @@
 <script>
-  import Banner from "./components/Banner.svelte";
+  import Head from "../../components/Head.svelte";
+import Banner from "./components/Banner.svelte";
   import Header from './components/Header.svelte'
 </script>
 
+<Head title="Inicio" />
 <div>
   <Header></Header>
   <Banner />

@@ -41,6 +41,7 @@ export const sureAlert = (text, onConfirm = () => {}) => {
     confirmButtonText: "Continuar",
     confirmButtonColor: "#65b32e",
     cancelButtonColor: "#E94E1B",
+    cancelButtonText: "Cancelar"
   }).then((result) => {
     if (result.isConfirmed) {
       onConfirm();

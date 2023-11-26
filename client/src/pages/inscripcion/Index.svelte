@@ -6,6 +6,7 @@
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
+  import Head from "../../components/Head.svelte";
   let search = "";
   let open = false;
 
@@ -19,6 +20,7 @@
   let data = getRequest("inscripcion");
 </script>
 
+<Head title="Inscripciones" />
 <div class="Content">
   <h2>Inscripciones</h2>
   <img src={fondo} alt="" class="backgraund-a" />

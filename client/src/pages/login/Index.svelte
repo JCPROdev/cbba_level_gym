@@ -3,6 +3,7 @@
   import BG from '../../assets/login.png'
   import Button from '../../components/Button.svelte';
     import { navigate } from 'svelte-routing';
+  import Head from '../../components/Head.svelte';
 
   const login = (e) => {
     e.preventDefault();
@@ -10,6 +11,7 @@
   }
 </script>
 
+<Head title="Iniciar sesión" />
 <div class="container">
   <img class="bg" src={BG} alt="background">
   <img class="logo" src={Logo} alt="logo" />

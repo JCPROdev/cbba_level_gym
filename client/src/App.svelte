@@ -10,8 +10,10 @@
   import Paquetes from "./pages/paquetes/Index.svelte";
   import Inscripcion from "./pages/inscripcion/Index.svelte";
   import Productos from "./pages/productos/Index.svelte";
+  import Head from "./components/Head.svelte";
 </script>
 
+<Head />
 <Router>
   <Route path="/*">
     <Navbar>

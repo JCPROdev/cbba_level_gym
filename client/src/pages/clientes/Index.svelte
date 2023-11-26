@@ -10,6 +10,7 @@
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
   import { successAlert, sureAlert } from "../../utilities/alerts";
+  import Head from "../../components/Head.svelte";
   let search = "";
   let open = false;
   let cliente = null;
@@ -38,6 +39,7 @@
   };
 </script>
 
+<Head title="Clientes" />
 <div class="Content">
   <h2>Clientes</h2>
   <img src={fondo} alt="" class="backgraund-a" />

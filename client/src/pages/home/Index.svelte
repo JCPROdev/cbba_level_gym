@@ -1,8 +1,10 @@
 <script>
   import Qr from "./components/qr.svelte";
   import Perfil from "./components/perfil.svelte";
+  import Head from "../../components/Head.svelte";
 </script>
 
+<Head title="QR" />
 <section>
   <Perfil />
   <Qr />

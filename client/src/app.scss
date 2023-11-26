@@ -52,7 +52,7 @@
     }
   }
 }
-.link:hover {
+.link:hover, .link[aria-current="page"] {
   width: 85%;
   box-shadow: 0 5px 10px #0005;
   @media only screen and (max-width: 600px) {

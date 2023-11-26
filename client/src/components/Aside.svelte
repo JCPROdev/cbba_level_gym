@@ -34,6 +34,7 @@
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
       <li><Link to="/dashboard/productos" class="link orange">Productos</Link></li>
+      <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
     </ul>
     <section class="imgPerfil">
       <img alt="Perfil" src={perfil} />
@@ -99,10 +100,6 @@
     align-items: center;
     justify-content: space-around;
     border-right: 2px solid var(--grayopacity);
-    .logo {
-      width: 170px;
-      height: 120px;
-    }
     ul {
       padding: 0;
       margin: 0;
@@ -168,8 +165,5 @@
     @media only screen and (max-width: 600px) {
       width: 100%;
     }
-  }
-  .link > :global(a) {
-    text-decoration: none;
   }
 </style>

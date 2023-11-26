@@ -11,6 +11,7 @@
   import Inscripcion from "./pages/inscripcion/Index.svelte";
   import Productos from "./pages/productos/Index.svelte";
   import Head from "./components/Head.svelte";
+  import Almacen from "./pages/almacen/Index.svelte";
 </script>
 
 <Head />
@@ -31,6 +32,7 @@
         <Route path="/paquetes" component={Paquetes} />
         <Route path="/inscripcion" component={Inscripcion} />
         <Route path="/productos" component={Productos} />
+        <Route path="/almacen" component={Almacen} />
         <Route path="/home" component={Home} />
       </Router>
     </Aside>

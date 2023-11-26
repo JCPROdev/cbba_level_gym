@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 app.get("/almacen", async (req,res) => {
   try {
-    const almacen = await prisma.almacen.findMany({});
+    const almacen = await prisma.almacen.findMany({
+      include: {
+        producto: true
+      }
+    });
     res.json({
       data: almacen,
       message: "Datos del almacen obtenidos correctamente"
@@ -21,10 +25,20 @@ app.post("/almacen", async (req, res) => {
     const almacen = await prisma.almacen.create({
       data: req.body
     })
+    await prisma.producto.update({
+      where: {
+        id: Number(req.body.productoId)
+      },
+      data: {
+        cantidad: {
+          increment: Number(req.body.cantidadAumentada)
+        }
+      }
+    });
     res.json({
       data: almacen,
       message: "Datos agregados al almacen correctamente"
-    })
+    });
   } catch (error) {
     res.status(500).json({
       message: "Error al agregar datos al almacen",

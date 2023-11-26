@@ -3,7 +3,6 @@
   import Landing from "./pages/landing/Index.svelte";
   import Login from "./pages/login/Index.svelte";
   import Aside from "./components/Aside.svelte";
-  import Navbar from "./components/Navbar.svelte";
   import Clientes from "./pages/clientes/Index.svelte";
   import Empleados from "./pages/empleados/Index.svelte";
   import Home from "./pages/home/Index.svelte";
@@ -12,17 +11,18 @@
   import Productos from "./pages/productos/Index.svelte";
   import Head from "./components/Head.svelte";
   import Almacen from "./pages/almacen/Index.svelte";
+  import Header from "./components/Header.svelte";
 </script>
 
 <Head />
 <Router>
   <Route path="/*">
-    <Navbar>
+    <Header>
       <Router>
         <Route path="/" component={Landing} />
         <Route path="/login" component={Login} />
       </Router>
-    </Navbar>
+    </Header>
   </Route>
   <Route path="/dashboard/*">
     <Aside>

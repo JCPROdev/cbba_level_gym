@@ -2,11 +2,23 @@
   import Logo from '../../assets/logo.png'
   import BG from '../../assets/login.png'
   import Button from '../../components/Button.svelte';
-    import { navigate } from 'svelte-routing';
+  import { navigate } from 'svelte-routing';
   import Head from '../../components/Head.svelte';
+  import { sendRequest } from '../../utilities/sendRequest';
+  import { errorAlert, successAlert } from '../../utilities/alerts';
 
-  const login = (e) => {
+  let form = {
+    usuario: "",
+    password: ""
+  }
+
+  const login = async (e) => {
     e.preventDefault();
+    const res = await sendRequest("login", form);
+    if(res.error) return errorAlert(res.error);
+    localStorage.setItem("access_token", res.data.access_token);
+    document.cookie = `refresh_token=${res.data.refresh_token}; path=/; samesite=stric`;
+    successAlert(res.message);
     navigate('/dashboard/clientes');
   }
 </script>
@@ -18,8 +30,8 @@
   <form>
     <p>Iniciar sesión</p>
     <div class="inputs">
-      <input placeholder="Email" />
-      <input placeholder="Contraseña" />
+      <input bind:value={form.usuario} placeholder="Usuario" />
+      <input bind:value={form.password} type="password" placeholder="Contraseña" />
     </div>
     <Button onClick={login}>Ingresar</Button>
   </form>

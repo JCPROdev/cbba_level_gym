@@ -4,9 +4,20 @@
   import perfil from "../assets/perfil.png";
   import home from "../assets/iconos/home.png";
   import menu from "../assets/iconos/menu.png";
+  import { sendRequest } from "../utilities/sendRequest";
+  import { successAlert } from "../utilities/alerts";
 
-  const logout = () => {
-    navigate("/login");
+  const logout = async () => {
+    const refresh_token = document.cookie.replace("refresh_token=", "");
+    const res = await sendRequest("logout", {
+      token: refresh_token
+    }, "DELETE");
+    if(res) {
+      successAlert("Cerrado sesión correctamente");
+      localStorage.removeItem("access_token");
+      document.cookie = `refresh_token=; max-age=0`;
+      navigate("/login");
+    }
   };
 
   let navActivado = false;

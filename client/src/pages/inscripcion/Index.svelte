@@ -20,7 +20,7 @@
 </script>
 
 <div class="Content">
-  <h2>Paquetes</h2>
+  <h2>Inscripciones</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
     <button on:click={closeModal}>Cerrar</button>
@@ -59,7 +59,6 @@
             <td>
               <button>
                 Ver
-                <!-- <img src={eliminar} alt="icono-eliminar" /> -->
               </button>
             </td>
           </tr>
@@ -129,7 +128,7 @@
     width: 100%;
     height: 60vh;
     overflow: auto;
-  table {
+    table {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
@@ -148,9 +147,6 @@
         border:none;
         background-color: transparent;
       }
-    }
-    & img {
-      margin: 0 0.5em;
     }
   }
 }

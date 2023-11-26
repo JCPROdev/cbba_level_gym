@@ -33,6 +33,12 @@
   gap: 0.5em;
   font-weight: 600;
   transition: all 200ms ease-in-out;
+  &.orange {
+    background-color: var(--orange);
+  }
+  &.blue {
+    background-color: var(--blue);
+  }
   & > img {
     width: 21px;
     height: 23px;
@@ -81,3 +87,6 @@
   }
 }
 
+.swal2-success-ring {
+  opacity: 0.3;
+}

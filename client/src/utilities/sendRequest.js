@@ -1,3 +1,4 @@
+import { upsAlert } from "./alerts";
 import { http } from "./http"
 
 export const sendRequest = async (route, body, method = "POST") => {
@@ -16,6 +17,6 @@ export const sendRequest = async (route, body, method = "POST") => {
     }
     return null;
   } catch (e) {
-    alert("Algo salió mal, intentalo de nuevo.")
+    upsAlert("Algo salió mal, intentalo de nuevo.");
   }
 }

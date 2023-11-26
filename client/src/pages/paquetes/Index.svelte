@@ -9,6 +9,7 @@
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
+  import { successAlert, sureAlert } from "../../utilities/alerts";
   let search = "";
   let open = false;
   let paquete = null;
@@ -30,7 +31,7 @@
   const handleDelete = async (id) => {
     const res = await sendRequest(`paquete/${id}`, null, "DELETE");
     if (res) {
-      alert(res.message);
+      successAlert(res.message);
       data = getRequest("paquete");
     }
   };
@@ -75,7 +76,7 @@
               <button on:click={() => openModal(paquete)}
                 ><img src={editar} alt="icono-editar" /></button
               >
-              <button on:click={() => handleDelete(paquete.id)}
+              <button on:click={() => sureAlert("Se eliminará el paquete permanentemente", () => handleDelete(paquete.id))}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>

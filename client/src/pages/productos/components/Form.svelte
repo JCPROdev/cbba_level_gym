@@ -4,22 +4,24 @@
   import { sendRequest } from "../../../utilities/sendRequest";
 
   export let closeModal;
-  export let paquete;
+  export let producto;
 
   let form = {
-    nombre: paquete?.nombre || "",
-    precio: paquete?.precio || "",
+    nombre: producto?.nombre || "",
+    precio: producto?.precio || "",
+    cantidad: producto?.cantidad || "",
   }
 
   const handleSend = async (e) => {
     e.preventDefault();
     const res = await sendRequest(
-      paquete ? `paquete/${paquete.id}` : 'paquete', 
+      producto ? `producto/${producto.id}` : 'producto', 
       {
-        ...form,
-        precio: +form.precio
+        nombre: form.nombre,
+        precio: +form.precio,
+        cantidad: +form.cantidad,
       },
-      paquete ? "PUT" : "POST"
+      producto ? "PUT" : "POST"
     );
     if(res) {
       successAlert(res.message);
@@ -37,6 +39,11 @@
     text="Precio"
     type="number"
     bind:value={form.precio}
+  />
+  <Input 
+    text="Cantidad"
+    type="number"
+    bind:value={form.cantidad}
   />
   <button on:click={handleSend}>Enviar</button>
 </form>

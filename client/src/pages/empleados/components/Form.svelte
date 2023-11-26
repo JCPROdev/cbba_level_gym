@@ -3,6 +3,7 @@
   import Input from "../../../components/Input.svelte";
   import Select from "../../../components/Select.svelte";
   import { sendRequest } from "../../../utilities/sendRequest";
+  import { successAlert } from "../../../utilities/alerts";
 
   export let closeModal;
   export let empleado;
@@ -22,7 +23,7 @@
       empleado ? "PUT" : "POST"
     );
     if(res) {
-      alert(res.message);
+      successAlert(res.message);
       closeModal();
     }
   }

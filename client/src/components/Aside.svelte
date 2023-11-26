@@ -25,14 +25,15 @@
     <ul>
       <img src={logo} alt="logo-igm" class="logo" />
       <li>
-        <Link to="/dashboard/home" class="link"
+        <Link to="/dashboard/home" class="link blue"
           ><img src={home} alt="logo-home" />Inicio</Link
         >
       </li>
-      <li><Link to="/dashboard/inscripcion" class="link">Inscripción</Link></li>
+      <li><Link to="/dashboard/inscripcion" class="link">Inscripciones</Link></li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
+      <li><Link to="/dashboard/productos" class="link orange">Productos</Link></li>
     </ul>
     <section class="imgPerfil">
       <img alt="Perfil" src={perfil} />
@@ -122,7 +123,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
       & > img {
         width: 90px;
         height: 90px;

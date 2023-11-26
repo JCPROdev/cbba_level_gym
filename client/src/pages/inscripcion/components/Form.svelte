@@ -63,6 +63,13 @@
     type="number"
     bind:value={form.descuento}
   />
+  <p>Total: 
+    {#await paquetesData}
+      N/A
+    {:then paqueteRes} 
+      {form.idPaquete ? paqueteRes.data.find(paquete => paquete.id === form.idPaquete).precio - +form.descuento : "N/A"}
+    {/await}
+  </p>
   <Select text="Tipo de pago"
     bind:value={form.tipoPago}
   >

@@ -12,13 +12,13 @@
   import { successAlert, sureAlert } from "../../utilities/alerts";
   let search = "";
   let open = false;
-  let empleado = null;
+  let producto = null;
 
   const openModal = (item) => {
     if (item) {
-      empleado = item;
+      producto = item;
     } else {
-      empleado = null;
+      producto = null;
     }
     open = true;
   };
@@ -26,27 +26,27 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("empleado");
+  let data = getRequest("producto");
 
   const handleDelete = async (id) => {
-    const res = await sendRequest(`empleado/${id}`, null, "DELETE");
+    const res = await sendRequest(`producto/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("empleado");
+      data = getRequest("producto");
     }
   };
 </script>
 
 <div class="Content">
-  <h2>Empleados</h2>
+  <h2>Productos</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
     <button on:click={closeModal}>Cerrar</button>
-    {#key JSON.stringify(empleado)}
+    {#key JSON.stringify(producto)}
       <Form
-        {empleado}
+        {producto}
         closeModal={() => {
-          data = getRequest("empleado");
+          data = getRequest("producto");
           closeModal();
         }}
       />
@@ -62,23 +62,23 @@
         <tr>
           <th>#</th>
           <th>nombre</th>
-          <th>turno</th>
-          <th>usuario</th>
+          <th>precio</th>
+          <th>cantidad</th>
           <th>opciones</th>
         </tr>
       </thead>
       <tbody>
-        {#each res.data as empleado, i}
+        {#each res.data as producto, i}
           <tr>
             <td>{i + 1}</td>
-            <td>{empleado.nombre}</td>
-            <td>{empleado.turno}</td>
-            <td>{empleado.usuario}</td>
+            <td>{producto.nombre}</td>
+            <td>{producto.precio}</td>
+            <td>{producto.cantidad}</td>
             <td>
-              <button on:click={() => openModal(empleado)}
+              <button on:click={() => openModal(producto)}
                 ><img src={editar} alt="icono-editar" /></button
               >
-              <button on:click={() => sureAlert("Se eliminará el empleado y sus datos permanentemente", () => handleDelete(empleado.id))}
+              <button on:click={() => sureAlert("Se eliminará el producto y sus datos permanentemente.", () => handleDelete(producto.id))}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>

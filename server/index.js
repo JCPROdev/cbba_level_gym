@@ -13,7 +13,6 @@ import inscripcion  from "./controllers/inscripcion.js";
 const app = express();
 const port = 3000;
 dotenv.config();
-
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
@@ -21,7 +20,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-
 app.use(cliente);
 app.use(almacen);
 app.use(detalleVenta);
@@ -30,7 +28,6 @@ app.use(paquete);
 app.use(producto);
 app.use(venta);
 app.use(inscripcion);
-
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

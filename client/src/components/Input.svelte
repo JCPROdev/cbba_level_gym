@@ -6,7 +6,7 @@
 
   const typeWorkaround = node => node.type = type
 </script>
-
+ 
 <div>
   <label for={`txt-${text}`}>{text}</label>
   <input 

@@ -9,6 +9,7 @@
   let form = {
     nombre: paquete?.nombre || "",
     precio: paquete?.precio || "",
+    dias: paquete?.dias || ""
   }
 
   const handleSend = async (e) => {
@@ -17,7 +18,8 @@
       paquete ? `paquete/${paquete.id}` : 'paquete', 
       {
         ...form,
-        precio: +form.precio
+        precio: +form.precio,
+        dias: +form.dias
       },
       paquete ? "PUT" : "POST"
     );
@@ -37,6 +39,11 @@
     text="Precio"
     type="number"
     bind:value={form.precio}
+  />
+  <Input 
+    text="Días"
+    type="number"
+    bind:value={form.dias}
   />
   <button on:click={handleSend}>Enviar</button>
 </form>

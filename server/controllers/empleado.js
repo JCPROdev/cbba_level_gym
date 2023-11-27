@@ -1,5 +1,6 @@
 import express from "express"
 import { PrismaClient } from "@prisma/client"
+import { generateRefreshToken } from "./auth.js";
 
 const app = express();
 const prisma = new PrismaClient();
@@ -20,9 +21,9 @@ app.get("/empleado", async (req, res) => {
 })
 app.post("/empleado", async (req, res) => {
   try {
-    const empleado = await prisma.empleado.create({
+    let empleado = await prisma.empleado.create({
       data: req.body
-    })
+    });
     res.json({
       data: empleado,
       message: "Empleado agregado correctamente"

@@ -65,6 +65,7 @@
           <th>#</th>
           <th>nombre</th>
           <th>precio</th>
+          <th>dias</th>
           <th>opciones</th>
         </tr>
       </thead>
@@ -74,6 +75,7 @@
             <td>{i + 1}</td>
             <td>{paquete.nombre}</td>
             <td>{paquete.precio}</td>
+            <td>{paquete.dias}</td>
             <td>
               <button on:click={() => openModal(paquete)}
                 ><img src={editar} alt="icono-editar" /></button

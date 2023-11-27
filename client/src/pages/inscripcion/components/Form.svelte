@@ -18,7 +18,8 @@
 
   const handleSend = async (e) => {
     e.preventDefault();
-    const res = await sendRequest(
+    console.log(form);
+    /* const res = await sendRequest(
       'paquete', 
       form,
       "POST"
@@ -26,7 +27,7 @@
     if(res) {
       alert(res.message);
       closeModal();
-    }
+    } */
   }
 
   let clientesData = getRequest("cliente");

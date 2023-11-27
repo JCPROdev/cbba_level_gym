@@ -11,9 +11,18 @@ app.delete("/logout", async (req, res) => {
     },
     data: {
       refreshToken: null
-    }
+    } 
   });
-  res.sendStatus(204);
+  res.send({
+    message: "Sesión cerrada correctamente"
+  });
+});
+
+app.get("/me",  (req, res) => {
+  res.json({
+    message: "Datos del usuario obtenidos correctamente",
+    data: req.user
+  });
 });
 
 app.post("/token", async (req, res) => {
@@ -21,7 +30,7 @@ app.post("/token", async (req, res) => {
   if(!refresh_token) return res.sendStatus(401);
   const user = await prisma.empleado.findUnique({
     where: {
-      refreshToken: refresh_token
+      refreshToken: refresh_token 
     }
   });
   if(!user) return res.sendStatus(403);
@@ -46,11 +55,11 @@ app.post("/login", async (req, res) => {
     }
   });
   if(!user) {
-    res.json({
+    return res.json({
       error: "Credenciales inválidas"
     });
-    return;
   }
+  delete user.refreshToken;
   const token = generarToken(user);
   const refresh_token = generateRefreshToken(user);
   await prisma.empleado.update({

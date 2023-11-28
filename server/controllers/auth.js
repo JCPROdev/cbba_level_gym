@@ -80,7 +80,7 @@ app.post("/login", async (req, res) => {
 });
 
 function generarToken(user) {
-  return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: "15s" });
+  return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: "5m" });
 }
 
 export function generateRefreshToken(user) {

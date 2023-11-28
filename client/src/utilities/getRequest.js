@@ -1,23 +1,20 @@
 import { http } from "./http"
 import { sendRequest } from "./sendRequest";
 
-export const getRequest = (route) => {
-  const res = getData(route).then(res => {
-    if(res.status === 403) {
-      console.log("Refrescando token");
-      const refresh_token = document.cookie.replace("refresh_token=", "");
-      let newToken;
-      sendRequest("token", {
-        token: refresh_token
-      }).then(res => {
-        newToken = res.data.access_token;
-        localStorage.setItem("access_token", newToken);
-      });
-      return getData(route).then(res => res.json());
-    }
+export const getRequest = async (route) => {
+  const res = await getData(route);
+  if(res.status === 403) {
+    const refresh_token = document.cookie.replace("refresh_token=", "");
+    let newToken;
+    const tokenRes = await sendRequest("token", {
+      token: refresh_token
+    });
+    newToken = tokenRes.data.access_token;
+    localStorage.setItem("access_token", newToken);
+    const res = await getData(route);
     return res.json();
-  });
-  return res;
+  }
+  return res.json();
 }
 
 const getData = (route) => {

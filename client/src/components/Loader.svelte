@@ -1,6 +1,10 @@
+<script>
+  export let text = "Cargando...";
+</script>
+
 <div class="container">
   <div class="loader" />
-  <p>Cargando...</p>
+  <p>{text}</p>
 </div>
 
 <style>

@@ -1,23 +1,21 @@
 <script>
   import { Link, navigate } from "svelte-routing";
   import logo from "../assets/logoDash.png";
-  import perfil from "../assets/perfil.png";
   import home from "../assets/iconos/home.png";
   import menu from "../assets/iconos/menu.png";
   import { sendRequest } from "../utilities/sendRequest";
   import { successAlert } from "../utilities/alerts";
+  import { user } from "../store/user";
 
   const logout = async () => {
-    const refresh_token = document.cookie.replace("refresh_token=", "");
-    const res = await sendRequest("logout", {
+    const refresh_token = localStorage.getItem("refresh_token");
+    await sendRequest("logout", {
       token: refresh_token
     }, "DELETE");
-    if(res) {
-      successAlert("Cerrado sesión correctamente");
-      localStorage.removeItem("access_token");
-      document.cookie = `refresh_token=; max-age=0`;
-      navigate("/login");
-    }
+    successAlert("Cerrado sesión correctamente");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem(`refresh_token`);
+    navigate("/login");
   };
 
   let navActivado = false;
@@ -48,10 +46,10 @@
       <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
     </ul>
     <section class="imgPerfil">
-      <img alt="Perfil" src={perfil} />
-      <p class="nombre">nombre</p>
-      <p>rol</p>
-      <button on:click={logout}>Logout</button>
+      <!-- <img alt="Perfil" src={perfil} /> -->
+      <p class="nombre">{$user.nombre}</p>
+      <p>Turno: {$user.turno}</p>
+      <button class="link blue" on:click={logout}>Logout</button>
     </section>
   </aside>
   <main>
@@ -130,26 +128,24 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      & > img {
+      gap: 12px;
+      & img {
         width: 90px;
         height: 90px;
         border-radius: 50%;
       }
       .nombre {
-        color: #65b32e;
+        color: var(--primary);
         font-weight: 600;
         letter-spacing: 0.5px;
         font-size: 0.9em;
+        align-self: center;
       }
       & p {
         font-size: 0.8em;
+        align-self: center;
       }
       & button {
-        padding: 0.5em;
-        width: 80%;
-        background-color: #65b32e;
-        color: #fff;
         border: none;
         cursor: pointer;
       }

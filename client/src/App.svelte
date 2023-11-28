@@ -12,6 +12,7 @@
   import Head from "./components/Head.svelte";
   import Almacen from "./pages/almacen/Index.svelte";
   import Header from "./components/Header.svelte";
+  import ProtectedRoute from "./components/ProtectedRoute.svelte";
 </script>
 
 <Head />
@@ -25,16 +26,18 @@
     </Header>
   </Route>
   <Route path="/dashboard/*">
-    <Aside>
-      <Router>
-        <Route path="/clientes" component={Clientes} />
-        <Route path="/empleados" component={Empleados} />
-        <Route path="/paquetes" component={Paquetes} />
-        <Route path="/inscripcion" component={Inscripcion} />
-        <Route path="/productos" component={Productos} />
-        <Route path="/almacen" component={Almacen} />
-        <Route path="/home" component={Home} />
-      </Router>
-    </Aside>
+    <ProtectedRoute>
+      <Aside>
+        <Router>
+          <Route path="/clientes" component={Clientes} />
+          <Route path="/empleados" component={Empleados} />
+          <Route path="/paquetes" component={Paquetes} />
+          <Route path="/inscripcion" component={Inscripcion} />
+          <Route path="/productos" component={Productos} />
+          <Route path="/almacen" component={Almacen} />
+          <Route path="/home" component={Home} />
+        </Router>
+      </Aside>
+    </ProtectedRoute>
   </Route>
 </Router>

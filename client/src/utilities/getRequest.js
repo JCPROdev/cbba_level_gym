@@ -1,10 +1,11 @@
+import { getCookie } from "./getCookie";
 import { http } from "./http"
 import { sendRequest } from "./sendRequest";
 
 export const getRequest = async (route) => {
   const res = await getData(route);
   if(res.status === 403) {
-    const refresh_token = document.cookie.replace("refresh_token=", "");
+    const refresh_token = localStorage.getItem("refresh_token");
     let newToken;
     const tokenRes = await sendRequest("token", {
       token: refresh_token

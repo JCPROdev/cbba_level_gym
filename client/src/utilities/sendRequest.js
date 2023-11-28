@@ -6,7 +6,7 @@ export const sendRequest = async (route, body, method = "POST") => {
     let res;
     res = await sendData(route, body, method);
     if(res.status === 403) {
-      const refresh_token = document.cookie.replace("refresh_token=", "");
+      const refresh_token = localStorage.getItem("refresh_token");
       let newToken;
       const tokenRes = await sendRequest("token", {
         token: refresh_token

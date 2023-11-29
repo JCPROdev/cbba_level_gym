@@ -1,12 +1,13 @@
 <script>
-  import Banner from "./components/Banner.svelte";
-  import Header from './components/Header.svelte'
+  import Head from "../../components/Head.svelte";
+import Banner from "./components/Banner.svelte";
+  import Header from '../../components/Header.svelte'
   import About from './components/Aboutus.svelte'
   import Pricing from './components/Pricing.svelte'
 </script>
 
-<div class="back">
-  <Header></Header>
+<Head title="Inicio" />
+<div>
   <Banner />
   <About></About>
   <Pricing></Pricing>

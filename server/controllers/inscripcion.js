@@ -5,7 +5,12 @@ const prisma = new PrismaClient();
 
 app.get("/inscripcion", async (req, res) => {
   try {
-    const inscripcion = await prisma.inscripcion.findMany({});
+    const inscripcion = await prisma.inscripcion.findMany({
+      include: {
+        cliente: true,
+        paquete: true
+      }
+    });
     res.json({
       data: inscripcion,
       message: "inscripciones obtenidos correctamente",
@@ -21,9 +26,24 @@ app.get("/inscripcion", async (req, res) => {
 
 app.post("/inscripcion", async (req, res) => {
   try {
+    const paquete = await prisma.paquete.findUnique({
+      where: {
+        id: req.body.idPaquete
+      }
+    });
     const inscripcion = await prisma.inscripcion.create({
-      data: req.body
-    })
+      data: {
+        clienteId: req.body.idCliente,
+        paqueteId: req.body.idPaquete,
+        tipoPago: req.body.tipoPago,
+        descuento: req.body.descuento,
+        fechaInicio: req.body.fechaInicio,
+        fechaLimite: req.body.fechaLimite,
+        total: paquete.precio - req.body.descuento,
+        diasRestantes: paquete.dias,
+        empleadoId: req.user.id
+      }
+    });
     res.json({
       data: inscripcion,
       message: "inscripcion agregado correctamente"
@@ -61,8 +81,7 @@ app.delete("/inscripcion/:id", async (req, res) => {
     const inscripcion = await prisma.inscripcion.delete({
       where: {
         id: Number(req.params.id)
-      },
-      data: req.body
+      }
     })
     res.json({
       data: inscripcion,
@@ -74,7 +93,8 @@ app.delete("/inscripcion/:id", async (req, res) => {
       error: error.message
     })
   }
-})
+});
+
 app.post("/inscripcion/:id",async(req,res)=>{
   try {
     const inscripcion=await prisma.inscripcion.findMany({

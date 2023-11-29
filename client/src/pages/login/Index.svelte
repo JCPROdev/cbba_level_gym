@@ -2,24 +2,51 @@
   import Logo from '../../assets/logo.png'
   import BG from '../../assets/login.png'
   import Button from '../../components/Button.svelte';
-    import { navigate } from 'svelte-routing';
+  import { navigate } from 'svelte-routing';
+  import Head from '../../components/Head.svelte';
+  import { sendRequest } from '../../utilities/sendRequest';
+  import { errorAlert, successAlert } from '../../utilities/alerts';
+  import { estado, user } from '../../store/user';
 
-  const login = (e) => {
+  let form = {
+    usuario: "",
+    password: ""
+  }
+
+  let loading = false;
+
+  const login = async (e) => {
     e.preventDefault();
-    navigate('/dashboard/clientes');
+    loading = true;
+    const res = await sendRequest("login", form);
+    if(res.error){
+      errorAlert(res.error);
+    } else {
+      localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem("refresh_token", res.data.refresh_token);
+      
+      const userRes = await sendRequest("me", null, "GET");
+      if(userRes) $user = userRes.data;
+      $estado = "logged";
+      
+      successAlert(res.message);
+      navigate('/dashboard/clientes');
+    }
+    loading = false;
   }
 </script>
 
+<Head title="Iniciar sesión" />
 <div class="container">
   <img class="bg" src={BG} alt="background">
   <img class="logo" src={Logo} alt="logo" />
   <form>
     <p>Iniciar sesión</p>
     <div class="inputs">
-      <input placeholder="Email" />
-      <input placeholder="Contraseña" />
+      <input bind:value={form.usuario} placeholder="Usuario" />
+      <input bind:value={form.password} type="password" placeholder="Contraseña" />
     </div>
-    <Button onClick={login}>Ingresar</Button>
+    <Button disabled={loading} onClick={login}>{loading ? "Cargando..." : "Ingresar"}</Button>
   </form>
 </div>
 

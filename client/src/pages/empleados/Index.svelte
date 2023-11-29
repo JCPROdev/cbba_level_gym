@@ -9,6 +9,8 @@
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
+  import { successAlert, sureAlert } from "../../utilities/alerts";
+  import Head from "../../components/Head.svelte";
   let search = "";
   let open = false;
   let empleado = null;
@@ -30,12 +32,13 @@
   const handleDelete = async (id) => {
     const res = await sendRequest(`empleado/${id}`, null, "DELETE");
     if (res) {
-      alert(res.message);
+      successAlert(res.message);
       data = getRequest("empleado");
     }
   };
 </script>
 
+<Head title="Empleados" />
 <div class="Content">
   <h2>Empleados</h2>
   <img src={fondo} alt="" class="backgraund-a" />
@@ -77,7 +80,7 @@
               <button on:click={() => openModal(empleado)}
                 ><img src={editar} alt="icono-editar" /></button
               >
-              <button on:click={() => handleDelete(empleado.id)}
+              <button on:click={() => sureAlert("Se eliminará el empleado y sus datos permanentemente", () => handleDelete(empleado.id))}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>

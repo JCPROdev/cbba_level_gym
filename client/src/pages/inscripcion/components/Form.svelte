@@ -1,6 +1,7 @@
 <script>
   import Input from "../../../components/Input.svelte";
   import Select from "../../../components/Select.svelte";
+    import { successAlert } from "../../../utilities/alerts";
   import { getRequest } from "../../../utilities/getRequest";
   import { sendRequest } from "../../../utilities/sendRequest";
 
@@ -19,12 +20,17 @@
   const handleSend = async (e) => {
     e.preventDefault();
     const res = await sendRequest(
-      'paquete', 
-      form,
+      'inscripcion', 
+      {
+        ...form,
+        idCliente: +form.idCliente,
+        idPaquete: +form.idPaquete,
+        descuento: +form.descuento
+      },
       "POST"
     );
     if(res) {
-      alert(res.message);
+      successAlert(res.message);
       closeModal();
     }
   }
@@ -63,6 +69,13 @@
     type="number"
     bind:value={form.descuento}
   />
+  <p>Total: 
+    {#await paquetesData}
+      N/A
+    {:then paqueteRes} 
+      {form.idPaquete ? paqueteRes.data.find(paquete => paquete.id === form.idPaquete).precio - +form.descuento : "N/A"}
+    {/await}
+  </p>
   <Select text="Tipo de pago"
     bind:value={form.tipoPago}
   >

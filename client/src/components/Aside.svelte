@@ -1,11 +1,20 @@
 <script>
   import { Link, navigate } from "svelte-routing";
   import logo from "../assets/logoDash.png";
-  import perfil from "../assets/perfil.png";
   import home from "../assets/iconos/home.png";
   import menu from "../assets/iconos/menu.png";
+  import { sendRequest } from "../utilities/sendRequest";
+  import { successAlert } from "../utilities/alerts";
+  import { user } from "../store/user";
 
-  const logout = () => {
+  const logout = async () => {
+    const refresh_token = localStorage.getItem("refresh_token");
+    await sendRequest("logout", {
+      token: refresh_token
+    }, "DELETE");
+    successAlert("Cerrado sesión correctamente");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem(`refresh_token`);
     navigate("/login");
   };
 
@@ -25,20 +34,22 @@
     <ul>
       <img src={logo} alt="logo-igm" class="logo" />
       <li>
-        <Link to="/dashboard/home" class="link"
+        <Link to="/dashboard/home" class="link blue"
           ><img src={home} alt="logo-home" />Inicio</Link
         >
       </li>
-      <li><Link to="/dashboard/inscripcion" class="link">Inscripción</Link></li>
+      <li><Link to="/dashboard/inscripcion" class="link">Inscripciones</Link></li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
+      <li><Link to="/dashboard/productos" class="link orange">Productos</Link></li>
+      <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
     </ul>
     <section class="imgPerfil">
-      <img alt="Perfil" src={perfil} />
-      <p class="nombre">nombre</p>
-      <p>rol</p>
-      <button on:click={logout}>Logout</button>
+      <!-- <img alt="Perfil" src={perfil} /> -->
+      <p class="nombre">{$user.nombre}</p>
+      <p>Turno: {$user.turno}</p>
+      <button class="link blue" on:click={logout}>Logout</button>
     </section>
   </aside>
   <main>
@@ -98,10 +109,6 @@
     align-items: center;
     justify-content: space-around;
     border-right: 2px solid var(--grayopacity);
-    .logo {
-      width: 170px;
-      height: 120px;
-    }
     ul {
       padding: 0;
       margin: 0;
@@ -121,27 +128,24 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-
-      & > img {
+      gap: 12px;
+      & img {
         width: 90px;
         height: 90px;
         border-radius: 50%;
       }
       .nombre {
-        color: #65b32e;
+        color: var(--primary);
         font-weight: 600;
         letter-spacing: 0.5px;
         font-size: 0.9em;
+        align-self: center;
       }
       & p {
         font-size: 0.8em;
+        align-self: center;
       }
       & button {
-        padding: 0.5em;
-        width: 80%;
-        background-color: #65b32e;
-        color: #fff;
         border: none;
         cursor: pointer;
       }
@@ -168,8 +172,5 @@
     @media only screen and (max-width: 600px) {
       width: 100%;
     }
-  }
-  .link > :global(a) {
-    text-decoration: none;
   }
 </style>

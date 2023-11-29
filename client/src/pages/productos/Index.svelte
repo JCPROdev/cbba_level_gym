@@ -13,13 +13,13 @@
   import Head from "../../components/Head.svelte";
   let search = "";
   let open = false;
-  let paquete = null;
+  let producto = null;
 
   const openModal = (item) => {
     if (item) {
-      paquete = item;
+      producto = item;
     } else {
-      paquete = null;
+      producto = null;
     }
     open = true;
   };
@@ -27,28 +27,28 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("paquete");
+  let data = getRequest("producto");
 
   const handleDelete = async (id) => {
-    const res = await sendRequest(`paquete/${id}`, null, "DELETE");
+    const res = await sendRequest(`producto/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("paquete");
+      data = getRequest("producto");
     }
   };
 </script>
 
-<Head title="Paquetes" />
+<Head title="Productos" />
 <div class="Content">
-  <h2>Paquetes</h2>
+  <h2>Productos</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
     <button on:click={closeModal}>Cerrar</button>
-    {#key JSON.stringify(paquete)}
+    {#key JSON.stringify(producto)}
       <Form
-        {paquete}
+        {producto}
         closeModal={() => {
-          data = getRequest("paquete");
+          data = getRequest("producto");
           closeModal();
         }}
       />
@@ -65,22 +65,22 @@
           <th>#</th>
           <th>nombre</th>
           <th>precio</th>
-          <th>dias</th>
+          <th>cantidad</th>
           <th>opciones</th>
         </tr>
       </thead>
       <tbody>
-        {#each res.data as paquete, i}
+        {#each res.data as producto, i}
           <tr>
             <td>{i + 1}</td>
-            <td>{paquete.nombre}</td>
-            <td>{paquete.precio}</td>
-            <td>{paquete.dias}</td>
+            <td>{producto.nombre}</td>
+            <td>{producto.precio}</td>
+            <td>{producto.cantidad}</td>
             <td>
-              <button on:click={() => openModal(paquete)}
+              <button on:click={() => openModal(producto)}
                 ><img src={editar} alt="icono-editar" /></button
               >
-              <button on:click={() => sureAlert("Se eliminará el paquete permanentemente", () => handleDelete(paquete.id))}
+              <button on:click={() => sureAlert("Se eliminará el producto y sus datos permanentemente.", () => handleDelete(producto.id))}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>
@@ -147,10 +147,10 @@
       }
     }
   }
-   .container {
-    width: 100%;
-    height: 60vh;
-    overflow: auto;
+  .container {
+  width: 100%;
+  height: 60vh;
+  overflow: auto;
   table {
     width: 100%;
     text-align: center;

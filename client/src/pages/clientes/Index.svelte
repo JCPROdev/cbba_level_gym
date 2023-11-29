@@ -9,6 +9,8 @@
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
+  import { successAlert, sureAlert } from "../../utilities/alerts";
+  import Head from "../../components/Head.svelte";
   let search = "";
   let open = false;
   let cliente = null;
@@ -28,15 +30,15 @@
   let data = getRequest("cliente");
 
   const handleDelete = async (id) => {
-    console.log(id);
     const res = await sendRequest(`cliente/${id}`, null, "DELETE");
     if (res) {
-      alert(res.message);
+      successAlert(res.message);
       data = getRequest("cliente");
     }
   };
 </script>
 
+<Head title="Clientes" />
 <div class="Content">
   <h2>Clientes</h2>
   <img src={fondo} alt="" class="backgraund-a" />
@@ -74,7 +76,7 @@
               <button on:click={() => openModal(cliente)}
                 ><img src={editar} alt="icono-editar" /></button
               >
-              <button on:click={() => handleDelete(cliente.id)}
+              <button on:click={() => sureAlert("Se eliminará el cliente y sus datos permanentemente.", () => handleDelete(cliente.id))}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>

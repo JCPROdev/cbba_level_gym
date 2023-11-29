@@ -11,15 +11,16 @@
   import SearchButton from "../../components/SearchButton.svelte";
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import Head from "../../components/Head.svelte";
+  import { formatDate } from "../../utilities/formatDate";
   let search = "";
   let open = false;
-  let paquete = null;
+  let almacen = null;
 
   const openModal = (item) => {
     if (item) {
-      paquete = item;
+      almacen = item;
     } else {
-      paquete = null;
+      almacen = null;
     }
     open = true;
   };
@@ -27,28 +28,28 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("paquete");
+  let data = getRequest("almacen");
 
   const handleDelete = async (id) => {
-    const res = await sendRequest(`paquete/${id}`, null, "DELETE");
+    const res = await sendRequest(`almacen/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("paquete");
+      data = getRequest("almacen");
     }
   };
 </script>
 
-<Head title="Paquetes" />
+<Head title="Almacen" />
 <div class="Content">
-  <h2>Paquetes</h2>
+  <h2>Almacen</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
     <button on:click={closeModal}>Cerrar</button>
-    {#key JSON.stringify(paquete)}
+    {#key JSON.stringify(almacen)}
       <Form
-        {paquete}
+        {almacen}
         closeModal={() => {
-          data = getRequest("paquete");
+          data = getRequest("almacen");
           closeModal();
         }}
       />
@@ -63,24 +64,26 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>nombre</th>
-          <th>precio</th>
-          <th>dias</th>
+          <th>producto</th>
+          <th>cantidad comprada</th>
+          <th>precio de compra</th>
+          <th>fecha</th>
           <th>opciones</th>
         </tr>
       </thead>
       <tbody>
-        {#each res.data as paquete, i}
+        {#each res.data as almacen, i}
           <tr>
             <td>{i + 1}</td>
-            <td>{paquete.nombre}</td>
-            <td>{paquete.precio}</td>
-            <td>{paquete.dias}</td>
+            <td>{almacen.producto.nombre}</td>
+            <td>{almacen.cantidadAumentada}</td>
+            <td>{almacen.totalCompra}</td>
+            <td>{formatDate(almacen.fecha)}</td>
             <td>
-              <button on:click={() => openModal(paquete)}
+              <!-- <button on:click={() => openModal(almacen)}
                 ><img src={editar} alt="icono-editar" /></button
-              >
-              <button on:click={() => sureAlert("Se eliminará el paquete permanentemente", () => handleDelete(paquete.id))}
+              > -->
+              <button on:click={() => sureAlert("Se eliminará el almacen y sus datos permanentemente.", () => handleDelete(almacen.id))}
                 ><img src={eliminar} alt="icono-eliminar" /></button
               >
             </td>
@@ -147,10 +150,10 @@
       }
     }
   }
-   .container {
-    width: 100%;
-    height: 60vh;
-    overflow: auto;
+  .container {
+  width: 100%;
+  height: 60vh;
+  overflow: auto;
   table {
     width: 100%;
     text-align: center;

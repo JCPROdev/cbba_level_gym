@@ -16,6 +16,7 @@ model Empleado {
   turno        String
   usuario      String         @unique
   password     String
+  refreshToken String?        @unique
   Cliente      Cliente[]
   Venta        Venta[]
   DetalleVenta DetalleVenta[]
@@ -26,6 +27,7 @@ model Paquete {
   id          Int           @id @default(autoincrement())
   nombre      String
   precio      Float
+  dias        Int
   Inscripcion Inscripcion[]
 }
 
@@ -46,8 +48,8 @@ model Inscripcion {
   total         Float
   tipoPago      String
   diasRestantes Int
-  fechaInicio   DateTime
-  fechaLimite   Decimal
+  fechaInicio   String
+  fechaLimite   String
   cliente       Cliente  @relation(fields: [clienteId], references: [id])
   empleado      Empleado @relation(fields: [empleadoId], references: [id])
   paquete       Paquete  @relation(fields: [paqueteId], references: [id])

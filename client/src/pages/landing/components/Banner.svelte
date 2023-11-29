@@ -22,7 +22,7 @@
 <style lang="scss">
   .banner {
     width: 100%;
-    height: 100vh;
+    height: 990px;
     display: flex;
     justify-content: center;
 
@@ -104,7 +104,7 @@
     
     .grad {
       width: 100%;
-      height: 100vh;
+      height: 990px;
       background: linear-gradient(0deg, #125BA8 1.78%, rgba(36, 32, 59, 0.00) 100%);
       align-content: center;
       align-items: center;

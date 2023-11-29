@@ -88,7 +88,7 @@ export function generateRefreshToken(user) {
 }
 
 export function authenticateToken(req, res, next) {
-  if(req.path === "/login" || req.path === "/token" || req.path === "/logout") return next();
+  if(req.path === "/login" || req.path === "/token" || req.path === "/logout" || req.path === "/admin") return next();
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   if(!token) {

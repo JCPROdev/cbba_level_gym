@@ -1,9 +1,30 @@
 import express from "express"
 import { PrismaClient } from "@prisma/client"
-import { generateRefreshToken } from "./auth.js";
 
 const app = express();
 const prisma = new PrismaClient();
+
+app.get("/admin", async (req, res) => {
+  try {
+    let empleado = await prisma.empleado.create({
+      data: {
+        nombre: "Admin",
+        password: "123456",
+        usuario: "admin",
+        turno: "Tarde"
+      }
+    });
+    res.json({
+      data: empleado,
+      message: "Empleado agregado correctamente"
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al crear empleado",
+      error: error.message
+    })
+  }
+});
 
 app.get("/empleado", async (req, res) => {
   try {
@@ -18,7 +39,8 @@ app.get("/empleado", async (req, res) => {
       error: error.message
     })
   }
-})
+});
+
 app.post("/empleado", async (req, res) => {
   try {
     let empleado = await prisma.empleado.create({

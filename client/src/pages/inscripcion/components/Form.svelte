@@ -1,6 +1,7 @@
 <script>
   import Input from "../../../components/Input.svelte";
   import Select from "../../../components/Select.svelte";
+    import { successAlert } from "../../../utilities/alerts";
   import { getRequest } from "../../../utilities/getRequest";
   import { sendRequest } from "../../../utilities/sendRequest";
 
@@ -18,16 +19,20 @@
 
   const handleSend = async (e) => {
     e.preventDefault();
-    console.log(form);
-    /* const res = await sendRequest(
-      'paquete', 
-      form,
+    const res = await sendRequest(
+      'inscripcion', 
+      {
+        ...form,
+        idCliente: +form.idCliente,
+        idPaquete: +form.idPaquete,
+        descuento: +form.descuento
+      },
       "POST"
     );
     if(res) {
-      alert(res.message);
+      successAlert(res.message);
       closeModal();
-    } */
+    }
   }
 
   let clientesData = getRequest("cliente");

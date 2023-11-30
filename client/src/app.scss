@@ -22,6 +22,7 @@
   color: #ffffff;
   display: flex;
   text-decoration: none;
+  position: relative;
   width: 80%;
   height: 100%;
   font-size: 0.9em;
@@ -51,7 +52,50 @@
       display: none;
     }
   }
+
+  & > .animation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;
+    text-align: start;
+    color: var(--white);
+    padding: 2px 8px;
+    font-size: .8rem;
+    right: 0;
+    z-index: -1;
+    border-radius: 0 4px 4px 0;
+    background-color: var(--primary); 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    animation: appearCount 3s ease-in-out;
+
+    @keyframes appearCount {
+      0% {
+        right: 0;
+        opacity: 0;
+      }
+      20% {
+        right: -140px;
+        opacity: 1;
+      }
+      80% {
+        right: -140px;
+        opacity: 1;
+      }
+      100% {
+        right: 0;
+        opacity: 0;
+      }
+    }        
+    
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
+  }
 }
+
 .link:hover, .link[aria-current="page"] {
   width: 85%;
   box-shadow: 0 5px 10px #0005;

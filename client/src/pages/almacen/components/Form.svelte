@@ -1,6 +1,7 @@
 <script>
   import Input from "../../../components/Input.svelte";
   import Select from "../../../components/Select.svelte";
+  import { productMessage } from "../../../store/productMessage";
   import { successAlert } from "../../../utilities/alerts";
   import { getRequest } from "../../../utilities/getRequest";
   import { sendRequest } from "../../../utilities/sendRequest";
@@ -14,6 +15,8 @@
     totalCompra: almacen?.totalCompra || ""
   }
 
+  let productosData = getRequest("producto");
+
   const handleSend = async (e) => {
     e.preventDefault();
     const res = await sendRequest(
@@ -26,12 +29,15 @@
       almacen ? "PUT" : "POST"
     );
     if(res) {
+      if(!almacen) {
+        const productosDataRes = await productosData;
+        const producto = productosDataRes.data.find(producto => producto.id === form.productoId);
+        $productMessage = `+${form.cantidadAumentada} ${producto.nombre}`;
+      }
       successAlert(res.message);
       closeModal();
     }
   }
-
-  let productosData = getRequest("producto");
 </script>
 
 <form>

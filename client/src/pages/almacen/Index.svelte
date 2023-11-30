@@ -12,6 +12,7 @@
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import Head from "../../components/Head.svelte";
   import { formatDate } from "../../utilities/formatDate";
+  import { useGet } from "../../hooks/useGet";
   let search = "";
   let open = false;
   let almacen = null;
@@ -28,13 +29,13 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("almacen");
 
+  let { data, getData } = useGet("almacen");
   const handleDelete = async (id) => {
     const res = await sendRequest(`almacen/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("almacen");
+      getData();
     }
   };
 </script>
@@ -49,16 +50,16 @@
       <Form
         {almacen}
         closeModal={() => {
-          data = getRequest("almacen");
+          getData();
           closeModal();
         }}
       />
     {/key}
   </Modal>
   <SearchButton bind:value={search} />
-  {#await data}
+  {#if !$data}
     <Loader />
-  {:then res}
+  {:else}
    <div class="container">
     <table>
       <thead>
@@ -72,7 +73,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each res.data as almacen, i}
+        {#each $data as almacen, i}
           <tr>
             <td>{i + 1}</td>
             <td>{almacen.producto.nombre}</td>
@@ -92,7 +93,7 @@
       </tbody>
     </table>
    </div>
-  {/await}
+  {/if}
   <button on:click={() => openModal()} class="agregar-btn"
     ><img src={store} alt="icon-store" />Agregar</button
   >

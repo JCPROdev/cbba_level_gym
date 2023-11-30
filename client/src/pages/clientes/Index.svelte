@@ -4,13 +4,13 @@
   import store from "../../assets/iconos/store.png";
   import Modal from "../../components/Modal.svelte";
   import Form from "./components/Form.svelte";
-  import { getRequest } from "../../utilities/getRequest";
   import { sendRequest } from "../../utilities/sendRequest";
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import Head from "../../components/Head.svelte";
+  import { useGet } from "../../hooks/useGet";
   let search = "";
   let open = false;
   let cliente = null;
@@ -27,13 +27,14 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("cliente");
+
+  let { data, getData } = useGet("cliente");
 
   const handleDelete = async (id) => {
     const res = await sendRequest(`cliente/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("cliente");
+      getData();
     }
   };
 </script>
@@ -47,17 +48,17 @@
     {#key JSON.stringify(cliente)}
       <Form
         {cliente}
-        closeModal={() => {
-          data = getRequest("cliente");
+        closeModal={async () => {
+          getData();
           closeModal();
         }}
       />
     {/key}
   </Modal>
   <SearchButton bind:value={search} />
-  {#await data}
+  {#if !$data}
     <Loader />
-  {:then res}
+  {:else}
    <div class="container">
     <table>
       <thead>
@@ -68,7 +69,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each res.data as cliente, i}
+        {#each $data as cliente, i}
           <tr>
             <td>{i + 1}</td>
             <td>{cliente.nombre}</td>
@@ -85,7 +86,7 @@
       </tbody>
     </table>
    </div>
-  {/await}
+  {/if}
   <button on:click={() => openModal()} class="agregar-btn"
     ><img src={store} alt="icon-store" />Agregar</button
   >

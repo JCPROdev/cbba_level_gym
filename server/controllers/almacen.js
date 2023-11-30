@@ -23,8 +23,11 @@ app.get("/almacen", async (req,res) => {
 app.post("/almacen", async (req, res) => {
   try {
     const almacen = await prisma.almacen.create({
-      data: req.body
-    })
+      data: {
+        ...req.body,
+        empleadoId: req.user.id
+      }
+    });
     await prisma.producto.update({
       where: {
         id: Number(req.body.productoId)

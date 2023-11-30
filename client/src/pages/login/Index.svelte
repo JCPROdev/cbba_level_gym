@@ -19,18 +19,20 @@
     e.preventDefault();
     loading = true;
     const res = await sendRequest("login", form);
-    if(res.error){
-      errorAlert(res.error);
-    } else {
-      localStorage.setItem("access_token", res.data.access_token);
-      localStorage.setItem("refresh_token", res.data.refresh_token);
-      
-      const userRes = await sendRequest("me", null, "GET");
-      if(userRes) $user = userRes.data;
-      $estado = "logged";
-      
-      successAlert(res.message);
-      navigate('/dashboard/clientes');
+    if(res) {
+      if(res.error){
+        errorAlert(res.error);
+      } else {
+        localStorage.setItem("access_token", res.data.access_token);
+        localStorage.setItem("refresh_token", res.data.refresh_token);
+        
+        const userRes = await sendRequest("me", null, "GET");
+        if(userRes) $user = userRes.data;
+        $estado = "logged";
+        
+        successAlert(res.message);
+        navigate('/dashboard/clientes');
+      }
     }
     loading = false;
   }

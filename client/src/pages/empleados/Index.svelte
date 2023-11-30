@@ -11,6 +11,7 @@
   import SearchButton from "../../components/SearchButton.svelte";
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import Head from "../../components/Head.svelte";
+  import { useGet } from "../../hooks/useGet";
   let search = "";
   let open = false;
   let empleado = null;
@@ -27,13 +28,14 @@
   const closeModal = () => {
     open = false;
   };
-  let data = getRequest("empleado");
+  
+  let { data, getData } = useGet("empleado");
 
   const handleDelete = async (id) => {
     const res = await sendRequest(`empleado/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("empleado");
+      getData();
     }
   };
 </script>
@@ -48,16 +50,16 @@
       <Form
         {empleado}
         closeModal={() => {
-          data = getRequest("empleado");
+          getData();
           closeModal();
         }}
       />
     {/key}
   </Modal>
   <SearchButton bind:value={search} />
-  {#await data}
+  {#if !$data}
     <Loader />
-  {:then res}
+  {:else}
    <div class="container">
     <table>
       <thead>
@@ -70,7 +72,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each res.data as empleado, i}
+        {#each $data as empleado, i}
           <tr>
             <td>{i + 1}</td>
             <td>{empleado.nombre}</td>
@@ -89,7 +91,7 @@
       </tbody>
     </table>
    </div>
-  {/await}
+  {/if}
   <button on:click={() => openModal()} class="agregar-btn"
     ><img src={store} alt="icon-store" />Agregar</button
   >

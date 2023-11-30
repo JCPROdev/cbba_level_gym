@@ -23,13 +23,10 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-<<<<<<< HEAD
-=======
 
 app.all("*", authenticateToken);
 
 app.use(auth);
->>>>>>> e3df7e4b14180ebb22dfbdfeaa799637885cec5a
 app.use(cliente);
 app.use(almacen);
 app.use(detalleVenta);

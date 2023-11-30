@@ -22,6 +22,7 @@ export const sendRequest = async (route, body, method = "POST") => {
     return null;
   } catch (e) {
     upsAlert("Algo salió mal, intentalo de nuevo.");
+    return null;
   }
 }
 

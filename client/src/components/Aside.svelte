@@ -6,6 +6,7 @@
   import { sendRequest } from "../utilities/sendRequest";
   import { successAlert } from "../utilities/alerts";
   import { user } from "../store/user";
+  import { productMessage } from "../store/productMessage";
 
   const logout = async () => {
     const refresh_token = localStorage.getItem("refresh_token");
@@ -42,7 +43,16 @@
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
-      <li><Link to="/dashboard/productos" class="link orange">Productos</Link></li>
+      <li>
+        <Link to="/dashboard/productos" class="link orange">
+          Productos
+          {#if $productMessage}
+          {#key $productMessage}
+            <p class="animation">{$productMessage}</p>
+          {/key}
+          {/if}
+        </Link>
+      </li>
       <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
     </ul>
     <section class="imgPerfil">
@@ -59,6 +69,7 @@
 
 <style lang="scss">
   .navres {
+    z-index: 100;
     @media only screen and (max-width: 600px) {
       transform: translateX(-100%);
       position: fixed;
@@ -123,6 +134,9 @@
       text-align: center;
       list-style: none;
       width: 100%;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
     }
     .imgPerfil {
       width: 100%;

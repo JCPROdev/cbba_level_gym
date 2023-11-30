@@ -11,6 +11,7 @@
   import eliminar from "../../assets/iconos/elimianar.png";
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import { sendRequest } from "../../utilities/sendRequest";
+  import { useGet } from "../../hooks/useGet";
 
   let search = "";
   let open = false;
@@ -21,14 +22,13 @@
   const closeModal = () => {
     open = false;
   };
-
-  let data = getRequest("inscripcion");
-
+  
+  let { data, getData } = useGet("inscripcion");
   const handleDelete = async (id) => {
     const res = await sendRequest(`inscripcion/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);
-      data = getRequest("inscripcion");
+      getData();
     }
   };
   
@@ -43,16 +43,16 @@
     {#key JSON.stringify(open)}
       <Form
         closeModal={() => {
-          data = getRequest("paquete");
+          getData();
           closeModal();
         }}
       />
     {/key}
   </Modal>
   <SearchButton bind:value={search} />
-  {#await data}
+  {#if !$data}
     <Loader />
-  {:then res}
+  {:else}
    <div class="container">
     <table>
       <thead>
@@ -67,7 +67,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each res.data as inscripcion, i}
+        {#each $data as inscripcion, i}
           <tr>
             <td>{i + 1}</td>
             <td>{inscripcion.cliente.nombre}</td>
@@ -85,7 +85,7 @@
       </tbody>
     </table>
    </div>
-  {/await}
+  {/if}
   <button on:click={() => openModal()} class="agregar-btn"
     ><img src={store} alt="icon-store" />Agregar</button
   >

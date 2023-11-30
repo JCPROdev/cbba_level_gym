@@ -7,6 +7,11 @@
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
   import Head from "../../components/Head.svelte";
+  import { formatDate } from "../../utilities/formatDate";
+  import eliminar from "../../assets/iconos/elimianar.png";
+  import { successAlert, sureAlert } from "../../utilities/alerts";
+  import { sendRequest } from "../../utilities/sendRequest";
+
   let search = "";
   let open = false;
 
@@ -18,6 +23,15 @@
   };
 
   let data = getRequest("inscripcion");
+
+  const handleDelete = async (id) => {
+    const res = await sendRequest(`inscripcion/${id}`, null, "DELETE");
+    if (res) {
+      successAlert(res.message);
+      data = getRequest("inscripcion");
+    }
+  };
+  
 </script>
 
 <Head title="Inscripciones" />
@@ -53,15 +67,18 @@
         </tr>
       </thead>
       <tbody>
-        {#each res.data as paquete, i}
+        {#each res.data as inscripcion, i}
           <tr>
             <td>{i + 1}</td>
-            <td>{paquete.nombre}</td>
-            <td>{paquete.precio}</td>
+            <td>{inscripcion.cliente.nombre}</td>
+            <td>{inscripcion.paquete.nombre}</td>
+            <td>{inscripcion.total}</td>
+            <td>{inscripcion.tipoPago}</td>
+            <td>{formatDate(inscripcion.fechaInicio)}</td>
             <td>
-              <button>
-                Ver
-              </button>
+              <button on:click={() => sureAlert("Se eliminará la inscripción permanentemente", () => handleDelete(inscripcion.id))}
+                ><img src={eliminar} alt="icono-eliminar" /></button
+              >
             </td>
           </tr>
         {/each}

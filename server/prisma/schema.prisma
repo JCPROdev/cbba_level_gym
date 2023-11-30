@@ -48,8 +48,8 @@ model Inscripcion {
   total         Float
   tipoPago      String
   diasRestantes Int
-  fechaInicio   DateTime
-  fechaLimite   Decimal
+  fechaInicio   String
+  fechaLimite   String
   cliente       Cliente  @relation(fields: [clienteId], references: [id])
   empleado      Empleado @relation(fields: [empleadoId], references: [id])
   paquete       Paquete  @relation(fields: [paqueteId], references: [id])

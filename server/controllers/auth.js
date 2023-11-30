@@ -80,7 +80,7 @@ app.post("/login", async (req, res) => {
 });
 
 function generarToken(user) {
-  return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: "15s" });
+  return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: "5m" });
 }
 
 export function generateRefreshToken(user) {
@@ -88,7 +88,7 @@ export function generateRefreshToken(user) {
 }
 
 export function authenticateToken(req, res, next) {
-  if(req.path === "/login" || req.path === "/token" || req.path === "/logout") return next();
+  if(req.path === "/login" || req.path === "/token" || req.path === "/logout" || req.path === "/admin") return next();
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   if(!token) {

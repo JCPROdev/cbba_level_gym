@@ -6,20 +6,33 @@
   import Head from '../../components/Head.svelte';
   import { sendRequest } from '../../utilities/sendRequest';
   import { errorAlert, successAlert } from '../../utilities/alerts';
+  import { estado, user } from '../../store/user';
 
   let form = {
     usuario: "",
     password: ""
   }
 
+  let loading = false;
+
   const login = async (e) => {
     e.preventDefault();
+    loading = true;
     const res = await sendRequest("login", form);
-    if(res.error) return errorAlert(res.error);
-    localStorage.setItem("access_token", res.data.access_token);
-    document.cookie = `refresh_token=${res.data.refresh_token}; path=/; samesite=stric`;
-    successAlert(res.message);
-    navigate('/dashboard/clientes');
+    if(res.error){
+      errorAlert(res.error);
+    } else {
+      localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem("refresh_token", res.data.refresh_token);
+      
+      const userRes = await sendRequest("me", null, "GET");
+      if(userRes) $user = userRes.data;
+      $estado = "logged";
+      
+      successAlert(res.message);
+      navigate('/dashboard/clientes');
+    }
+    loading = false;
   }
 </script>
 
@@ -33,7 +46,7 @@
       <input bind:value={form.usuario} placeholder="Usuario" />
       <input bind:value={form.password} type="password" placeholder="Contraseña" />
     </div>
-    <Button onClick={login}>Ingresar</Button>
+    <Button disabled={loading} onClick={login}>{loading ? "Cargando..." : "Ingresar"}</Button>
   </form>
 </div>
 

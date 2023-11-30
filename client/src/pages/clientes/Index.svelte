@@ -30,7 +30,6 @@
   let data = getRequest("cliente");
 
   const handleDelete = async (id) => {
-    console.log(id);
     const res = await sendRequest(`cliente/${id}`, null, "DELETE");
     if (res) {
       successAlert(res.message);

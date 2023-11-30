@@ -17,30 +17,32 @@ model Empleado {
   usuario      String         @unique
   password     String
   refreshToken String?        @unique
-  Cliente      Cliente[]
+  activo       Boolean        @default(true)
   Venta        Venta[]
   DetalleVenta DetalleVenta[]
   Inscripcion  Inscripcion[]
+  Almacen      Almacen[]
 }
 
 model Paquete {
-  id          Int           @id @default(autoincrement())
-  nombre      String
-  precio      Float
-  dias        Int
+  id     Int     @id @default(autoincrement())
+  nombre String
+  precio Float
+  dias   Int
+  activo Boolean @default(true)
+
   Inscripcion Inscripcion[]
 }
 
 model Cliente {
   id          Int           @id @default(autoincrement())
   nombre      String
-  Empleado    Empleado?     @relation(fields: [empleadoId], references: [id])
-  empleadoId  Int?
+  activo      Boolean       @default(true)
   Inscripcion Inscripcion[]
 }
 
 model Inscripcion {
-  id            Int      @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   clienteId     Int
   empleadoId    Int
   paqueteId     Int
@@ -50,9 +52,10 @@ model Inscripcion {
   diasRestantes Int
   fechaInicio   String
   fechaLimite   String
-  cliente       Cliente  @relation(fields: [clienteId], references: [id])
-  empleado      Empleado @relation(fields: [empleadoId], references: [id])
-  paquete       Paquete  @relation(fields: [paqueteId], references: [id])
+  cliente       Cliente      @relation(fields: [clienteId], references: [id])
+  empleado      Empleado     @relation(fields: [empleadoId], references: [id])
+  paquete       Paquete      @relation(fields: [paqueteId], references: [id])
+  Asistencia    Asistencia[]
 }
 
 model Venta {
@@ -65,22 +68,25 @@ model Venta {
 }
 
 model Producto {
-  id       Int       @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   nombre   String
   precio   Float
   cantidad Int
-  Almacen  Almacen[]
+  activo   Boolean @default(true)
+
+  Almacen Almacen[]
 }
 
 model DetalleVenta {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
+  productoId    Int
   ventaId       Int
-  empleadoId    Int
   cantidad      Int
   precioVendido Float
-  total         Int
-  venta         Venta    @relation(fields: [ventaId], references: [id])
-  empleado      Empleado @relation(fields: [empleadoId], references: [id])
+  total         Float
+  venta         Venta     @relation(fields: [ventaId], references: [id])
+  Empleado      Empleado? @relation(fields: [empleadoId], references: [id])
+  empleadoId    Int?
 }
 
 model Almacen {
@@ -88,6 +94,15 @@ model Almacen {
   productoId        Int
   cantidadAumentada Int
   totalCompra       Float
+  empleadoId        Int
   fecha             DateTime @default(now())
   producto          Producto @relation(fields: [productoId], references: [id])
+  empleado          Empleado @relation(fields: [empleadoId], references: [id])
+}
+
+model Asistencia {
+  id            Int         @id @default(autoincrement())
+  inscripcionId Int
+  fecha         DateTime    @default(now())
+  inscripcion   Inscripcion @relation(fields: [inscripcionId], references: [id])
 }

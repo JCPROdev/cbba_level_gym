@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 app.get("/venta", async (req, res) => {
   try {
-    const venta = await prisma.venta.findMany({});
+    const venta = await prisma.venta.findMany({
+      include:{
+        DetalleVenta:true
+      }
+    });
     res.json({
       data: venta,
       message: "ventas obtenidas correctamente",
@@ -54,7 +58,7 @@ app.post("/venta", async (req, res) => {
     const venta = await prisma.venta.create({
       data: {
         empleadoId: req.body.empleado,
-        total: total - req.body.descuento,
+        total: total,
         DetalleVenta: {
           createMany: {
             data: req.body.productos.map((producto) => ({

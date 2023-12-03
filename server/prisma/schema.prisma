@@ -19,7 +19,6 @@ model Empleado {
   refreshToken String?        @unique
   activo       Boolean        @default(true)
   Venta        Venta[]
-  DetalleVenta DetalleVenta[]
   Inscripcion  Inscripcion[]
   Almacen      Almacen[]
 }
@@ -30,7 +29,6 @@ model Paquete {
   precio Float
   dias   Int
   activo Boolean @default(true)
-
   Inscripcion Inscripcion[]
 }
 
@@ -86,8 +84,6 @@ model DetalleVenta {
   precioVendido Float
   total         Float
   venta         Venta     @relation(fields: [ventaId], references: [id])
-  Empleado      Empleado? @relation(fields: [empleadoId], references: [id])
-  empleadoId    Int?
 }
 
 model Almacen {

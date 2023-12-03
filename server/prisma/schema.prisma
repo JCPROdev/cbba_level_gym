@@ -42,20 +42,21 @@ model Cliente {
 }
 
 model Inscripcion {
-  id            Int          @id @default(autoincrement())
-  clienteId     Int
-  empleadoId    Int
-  paqueteId     Int
-  descuento     Float?
-  total         Float
-  tipoPago      String
-  diasRestantes Int
-  fechaInicio   String
-  fechaLimite   String
-  cliente       Cliente      @relation(fields: [clienteId], references: [id])
-  empleado      Empleado     @relation(fields: [empleadoId], references: [id])
-  paquete       Paquete      @relation(fields: [paqueteId], references: [id])
-  Asistencia    Asistencia[]
+  id               Int          @id @default(autoincrement())
+  clienteId        Int
+  empleadoId       Int
+  paqueteId        Int
+  descuento        Float?
+  total            Float
+  tipoPago         String
+  diasRestantes    Int
+  fechaInicio      String
+  fechaLimite      String
+  detalleDescuento String?
+  cliente          Cliente      @relation(fields: [clienteId], references: [id])
+  empleado         Empleado     @relation(fields: [empleadoId], references: [id])
+  paquete          Paquete      @relation(fields: [paqueteId], references: [id])
+  Asistencia       Asistencia[]
 }
 
 model Venta {

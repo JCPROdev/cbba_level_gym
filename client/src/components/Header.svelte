@@ -1,6 +1,7 @@
 <script>
   import { Link } from 'svelte-routing';
   import Arrow from '../assets/iconos/arrow-right.svg'
+  import Logo from '../assets/logo.png'
 
   let targetDiv;
 
@@ -12,7 +13,9 @@
 <header>
   <div class="headcont">
     <!-- <img src="tu_logo.png" alt="Logo" /> -->
-    <Link class="index-logo" to="/" >Level Gym</Link>
+    <Link class="index-logo" to="/" >
+      <img src={Logo} alt="">
+    </Link>
     <nav>
       <Link class="index-link op" to="#paquetes" on:click={scrollToDiv}>Paquetes</Link>
       <Link class="index-link" to="#nosotros" on:click={scrollToDiv}>Nosotros</Link>
@@ -58,6 +61,14 @@
       width: 1280px;
       max-width: calc(100% - 100px);
 
+      .index-logo{
+        width: 200px;
+        height: auto;
+        img{
+          width: 100%;
+          height: 150px;
+        }
+      }
       nav{
         display: flex;
         flex-direction: row;

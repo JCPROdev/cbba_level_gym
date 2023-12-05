@@ -8,9 +8,9 @@
     <div class="banntext">
       <h1>Estación de gimnasio</h1>
       <p class="desc1">Cuida tu salud con nuestros planes de ejercicio.</p>
-      <p class="desc2">Llevamos muchos años creando e implementando proyectos en la ciudad, tenemos cientos de clientes satisfechos.</p>
+      <p class="desc2">Llevamos muchos años creando e implementando nuevos caminos en la ciudad, tenemos cientos de clientes satisfechos.</p>
       <a class="botonr" href="/">
-        <p>Read more</p>
+        <p>Más</p>
         <img src={Arrowr} alt="">
       </a>
     </div>

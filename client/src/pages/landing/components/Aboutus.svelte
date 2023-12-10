@@ -6,7 +6,26 @@
   import Banner2 from '../../../assets/banner2.jpeg'
 </script>
 
-<div class="aboutcont">
+<div class="about2">
+  <div class="lefttext">
+    <img class="bord" src={Task} alt="">
+    <p class="p1">1400+</p>
+    <h2>Clientes satisfechos</h2>
+    <p class="p2">Mucha gente ya ha confiado en nosotros. Este número crece constantemente gracias a los comentarios positivos de nuestros clientes.</p>
+  </div>
+  <div class="rightside">
+    <div class="image">
+      <img src={Banner2} alt="">
+    </div>
+    <div class="text">
+      <p class="title">Ponte en forma y entrena en el gimnasio o en casa.</p>
+      <p class="sub">Hemos estado creando e implementando proyectos.
+        desde hace muchos años en la ciudad, tenemos cientos
+        de clientes satisfechos.</p>
+    </div>
+  </div>
+</div>
+<!-- <div id="about" class="aboutcont">
   <div class="slot1">
     <div class="cu1">
       <img class="bord" src={Star} alt="">
@@ -33,32 +52,14 @@
         <p>Read more</p>
       </div>
   </div>
-</div>
-<div class="about2">
-  <div class="lefttext">
-    <img class="bord" src={Task} alt="">
-    <p class="p1">1400+</p>
-    <h2>Clientes satisfechos</h2>
-    <p class="p2">Mucha gente ya ha confiado en nosotros. Este número crece constantemente gracias a los comentarios positivos de nuestros clientes.</p>
-  </div>
-  <div class="rightside">
-    <div class="image">
-      <img src={Banner2} alt="">
-    </div>
-    <div class="text">
-      <p class="title">Ponte en forma y entrena en el gimnasio o en casa.</p>
-      <p class="sub">Hemos estado creando e implementando proyectos.
-        desde hace muchos años en la ciudad, tenemos cientos
-        de clientes satisfechos.</p>
-    </div>
-  </div>
-</div>
+</div> -->
+
 
 <style lang="scss">
   .aboutcont {
     width: 1280px;
     height: auto;
-    margin: -130px 50px 0px;
+    margin: 0px 50px 0px;
     z-index: 2;
     display: flex;
     flex-direction: row;
@@ -169,10 +170,13 @@
     height: auto;
     border-radius: 10px;
     margin: 70px 50px 70px;
+    // margin: -130px 50px 70px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    // z-index: 2;
+    // padding: 30px 0px 0px 0px;
 
 
     .lefttext{

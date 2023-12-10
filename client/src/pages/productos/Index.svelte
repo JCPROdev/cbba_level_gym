@@ -45,7 +45,7 @@
   <h2>Productos</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
-    <button on:click={closeModal}>Cerrar</button>
+    <button on:click={closeModal} class="modalA">x</button>
     {#key JSON.stringify(producto)}
       <Form
         {producto}

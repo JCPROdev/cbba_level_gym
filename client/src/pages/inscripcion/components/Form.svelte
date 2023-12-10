@@ -95,3 +95,28 @@
   />
   <button on:click={handleSend}>Enviar</button>
 </form>
+<style lang="scss">
+  form {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:120%;
+    border: none;
+    padding: 2em;
+    border-radius: 1em;
+    box-shadow: 0 0px 5px #0005;gap:2em;
+
+    & > button {
+align-self: flex-end;
+      border: none;
+      bottom: 1em;
+      right: 1em;
+      padding: 0.5em 2em;
+      background-color: var(--primary);
+      color: var(--bg);
+      border-radius: 3em;
+      cursor: pointer;
+    }
+  }
+</style>

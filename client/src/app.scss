@@ -9,13 +9,13 @@
   --whiteopacity: rgba(255, 255, 255, 0.2);
   --green: #00bc99;
   --blue: #125ba8;
-  --orange: #E94E1B;
+  --orange: #e94e1b;
   --primary: #65b32e;
   --shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  --shadow1: 0px 0px 4px 0px rgba(0, 0, 0, 0.25); 
-  --gray: #B2B5C8;
-  --grayopacity: rgba(178, 181, 200, 0.50);
-  --bg: #F4F5FA;
+  --shadow1: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  --gray: #b2b5c8;
+  --grayopacity: rgba(178, 181, 200, 0.5);
+  --bg: #f4f5fa;
   /* border:solid red 1px; */
 }
 .link {
@@ -45,10 +45,10 @@
     height: 23px;
   }
   @media only screen and (max-width: 600px) {
-    background-color: transparent ;
+    background-color: transparent;
     color: var(--primary);
     width: 100%;
-    & img{
+    & img {
       display: none;
     }
   }
@@ -61,11 +61,11 @@
     text-align: start;
     color: var(--white);
     padding: 2px 8px;
-    font-size: .8rem;
+    font-size: 0.8rem;
     right: 0;
     z-index: -1;
     border-radius: 0 4px 4px 0;
-    background-color: var(--primary); 
+    background-color: var(--primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -88,21 +88,21 @@
         right: 0;
         opacity: 0;
       }
-    }        
-    
+    }
+
     @media only screen and (max-width: 600px) {
       display: none;
     }
   }
 }
 
-.link:hover, .link[aria-current="page"] {
+.link:hover,
+.link[aria-current="page"] {
   width: 85%;
   box-shadow: 0 5px 10px #0005;
   @media only screen and (max-width: 600px) {
     box-shadow: none;
     width: 100%;
-
   }
 }
 
@@ -126,7 +126,7 @@
 
 .butrem {
   border-radius: 16px;
-  background: linear-gradient(90deg, #0575E6 0%, #00F260 100%);
+  background: linear-gradient(90deg, #0575e6 0%, #00f260 100%);
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -168,4 +168,37 @@
 
 .swal2-success-ring {
   opacity: 0.3;
+}
+
+@keyframes vertical-in {
+  from {
+    transform: translateY(400px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary);
+  box-shadow: inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 1em;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+.modalA {
+  background-color: var(--primary);
+  border: none;
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  margin: 1em;
+  cursor: pointer;
+  border-radius: 50%;
 }

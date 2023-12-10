@@ -44,7 +44,7 @@
   <h2>Clientes</h2>
   <img src={fondo} alt="" class="backgraund-a" />
   <Modal {open}>
-    <button on:click={closeModal}>Cerrar</button>
+    <button on:click={closeModal} class="modalA">x</button>
     {#key JSON.stringify(cliente)}
       <Form
         {cliente}
@@ -59,33 +59,37 @@
   {#if !$data}
     <Loader />
   {:else}
-   <div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>nombre</th>
-          <th>opciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each $data as cliente, i}
+    <div class="container">
+      <table>
+        <thead>
           <tr>
-            <td>{i + 1}</td>
-            <td>{cliente.nombre}</td>
-            <td>
-              <button on:click={() => openModal(cliente)}
-                ><img src={editar} alt="icono-editar" /></button
-              >
-              <button on:click={() => sureAlert("Se eliminará el cliente y sus datos permanentemente.", () => handleDelete(cliente.id))}
-                ><img src={eliminar} alt="icono-eliminar" /></button
-              >
-            </td>
+            <th>#</th>
+            <th>nombre</th>
+            <th>opciones</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
-   </div>
+        </thead>
+        <tbody>
+          {#each $data as cliente, i}
+            <tr>
+              <td>{i + 1}</td>
+              <td>{cliente.nombre}</td>
+              <td>
+                <button on:click={() => openModal(cliente)}
+                  ><img src={editar} alt="icono-editar" /></button
+                >
+                <button
+                  on:click={() =>
+                    sureAlert(
+                      "Se eliminará el cliente y sus datos permanentemente.",
+                      () => handleDelete(cliente.id)
+                    )}><img src={eliminar} alt="icono-eliminar" /></button
+                >
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   {/if}
   <button on:click={() => openModal()} class="agregar-btn"
     ><img src={store} alt="icon-store" />Agregar</button
@@ -111,6 +115,7 @@
       object-fit: cover;
       z-index: -1;
     }
+   
     & h2 {
       margin-bottom: 34px;
     }
@@ -145,32 +150,32 @@
     }
   }
   .container {
-  width: 100%;
-  height: 60vh;
-  overflow: auto;
-  table {
     width: 100%;
-    text-align: center;
-    border-collapse: collapse;
-    & th {
-      font-weight: 500;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--grayopacity);
-      color: var(--gray);
-      &::first-letter {
-        text-transform: uppercase;
+    height: 60vh;
+    overflow: auto;
+    table {
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+      & th {
+        font-weight: 500;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--grayopacity);
+        color: var(--gray);
+        &::first-letter {
+          text-transform: uppercase;
+        }
       }
-    }
-    & td {
-      padding: 12px 0;
-      & button{
-        border:none;
-        background-color: transparent;
+      & td {
+        padding: 12px 0;
+        & button {
+          border: none;
+          background-color: transparent;
+        }
       }
-    }
-    & img {
-      margin: 0 0.5em;
+      & img {
+        margin: 0 0.5em;
+      }
     }
   }
-}
 </style>

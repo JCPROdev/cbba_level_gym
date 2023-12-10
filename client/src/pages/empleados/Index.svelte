@@ -1,10 +1,8 @@
 <script>
   import eliminar from "../../assets/iconos/elimianar.png";
   import editar from "../../assets/iconos/ediatar.png";
-  import store from "../../assets/iconos/store.png";
   import Modal from "../../components/Modal.svelte";
   import Form from "./components/Form.svelte";
-  import { getRequest } from "../../utilities/getRequest";
   import { sendRequest } from "../../utilities/sendRequest";
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
@@ -12,6 +10,8 @@
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import Head from "../../components/Head.svelte";
   import { useGet } from "../../hooks/useGet";
+  import Table from "../../components/Table.svelte";
+  import AgregarButton from "../../components/AgregarButton.svelte";
   let search = "";
   let open = false;
   let empleado = null;
@@ -58,47 +58,43 @@
   </Modal>
   <SearchButton bind:value={search} />
   {#if !$data}
-    <Loader />
+    <Loader table />
   {:else}
-    <div class="container">
-      <table>
-        <thead>
+    <Table>
+      <thead>
+        <tr>
+          <th class="center">#</th>
+          <th class="big">nombre</th>
+          <th class="medium">turno</th>
+          <th class="medium">usuario</th>
+          <th class="medium center">opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {#each $data as empleado, i}
           <tr>
-            <th>#</th>
-            <th>nombre</th>
-            <th>turno</th>
-            <th>usuario</th>
-            <th>opciones</th>
+            <td class="center"><p>{i + 1}</p></td>
+            <td><p>{empleado.nombre}</p></td>
+            <td><p>{empleado.turno}</p></td>
+            <td><p>{empleado.usuario}</p></td>
+            <td class="center">
+              <button on:click={() => openModal(empleado)}
+                ><img src={editar} alt="icono-editar" /></button
+              >
+              <button
+                on:click={() =>
+                  sureAlert(
+                    "Se eliminará el empleado y sus datos permanentemente",
+                    () => handleDelete(empleado.id)
+                  )}><img src={eliminar} alt="icono-eliminar" /></button
+              >
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {#each $data as empleado, i}
-            <tr>
-              <td>{i + 1}</td>
-              <td>{empleado.nombre}</td>
-              <td>{empleado.turno}</td>
-              <td>{empleado.usuario}</td>
-              <td>
-                <button on:click={() => openModal(empleado)}
-                  ><img src={editar} alt="icono-editar" /></button
-                >
-                <button
-                  on:click={() =>
-                    sureAlert(
-                      "Se eliminará el empleado y sus datos permanentemente",
-                      () => handleDelete(empleado.id)
-                    )}><img src={eliminar} alt="icono-eliminar" /></button
-                >
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
+        {/each}
+      </tbody>
+    </Table>
   {/if}
-  <button on:click={() => openModal()} class="agregar-btn"
-    ><img src={store} alt="icon-store" />Agregar</button
-  >
+  <AgregarButton on:click={() => openModal()} />
 </div>
 
 <style lang="scss">
@@ -122,64 +118,6 @@
     }
     & h2 {
       margin-bottom: 34px;
-    }
-    & .agregar-btn {
-      color: var(--primary);
-      border: none;
-      cursor: pointer;
-      position: relative;
-      background-color: transparent;
-      overflow: hidden;
-      padding: 0.5em 1em;
-      align-self: flex-end;
-      justify-self: flex-end;
-      display: flex;
-      align-items: center;
-
-      gap: 1em;
-      &::before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        animation: vertical 2s ease;
-      }
-      &:hover {
-        color: #fff;
-        &::before {
-          animation: vertical 5s infinite;
-        }
-      }
-    }
-  }
-  .container {
-    width: 100%;
-    height: 60vh;
-    overflow: auto;
-    table {
-      width: 100%;
-      text-align: center;
-      border-collapse: collapse;
-      & th {
-        font-weight: 500;
-        padding: 8px 0;
-        border-bottom: 1px solid var(--grayopacity);
-        color: var(--gray);
-        &::first-letter {
-          text-transform: uppercase;
-        }
-      }
-      & td {
-        padding: 12px 0;
-        & button {
-          border: none;
-          background-color: transparent;
-        }
-      }
-      & img {
-        margin: 0 0.5em;
-      }
     }
   }
 </style>

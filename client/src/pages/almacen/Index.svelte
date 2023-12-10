@@ -1,10 +1,9 @@
 <script>
+  import Table from "../../components/Table.svelte";
   import eliminar from "../../assets/iconos/elimianar.png";
-  import editar from "../../assets/iconos/ediatar.png";
   import store from "../../assets/iconos/store.png";
   import Modal from "../../components/Modal.svelte";
   import Form from "./components/Form.svelte";
-  import { getRequest } from "../../utilities/getRequest";
   import { sendRequest } from "../../utilities/sendRequest";
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
@@ -13,6 +12,7 @@
   import Head from "../../components/Head.svelte";
   import { formatDate } from "../../utilities/formatDate";
   import { useGet } from "../../hooks/useGet";
+  import AgregarButton from "../../components/AgregarButton.svelte";
   let search = "";
   let open = false;
   let almacen = null;
@@ -58,45 +58,38 @@
   </Modal>
   <SearchButton bind:value={search} />
   {#if !$data}
-    <Loader />
+    <Loader table />
   {:else}
-   <div class="container">
-    <table>
-      <thead>
+  <Table>
+    <thead>
+      <tr>
+        <th class="center">#</th>
+        <th class="big">producto</th>
+        <th class="big center">cantidad comprada</th>
+        <th class="medium center">precio de compra</th>
+        <th class="medium">fecha</th>
+        <th class="medium center">opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each $data as almacen, i}
         <tr>
-          <th>#</th>
-          <th>producto</th>
-          <th>cantidad comprada</th>
-          <th>precio de compra</th>
-          <th>fecha</th>
-          <th>opciones</th>
+          <td class="center"><p>{i + 1}</p></td>
+          <td><p>{almacen.producto.nombre}</p></td>
+          <td class="center"><p>{almacen.cantidadAumentada}</p></td>
+          <td class="center"><p>Bs. {almacen.totalCompra}</p></td>
+          <td><p>{formatDate(almacen.fecha)}</p></td>
+          <td class="center">
+            <button on:click={() => sureAlert("Se eliminará el almacen y sus datos permanentemente.", () => handleDelete(almacen.id))}
+              ><img src={eliminar} alt="icono-eliminar" /></button
+            >
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        {#each $data as almacen, i}
-          <tr>
-            <td>{i + 1}</td>
-            <td>{almacen.producto.nombre}</td>
-            <td>{almacen.cantidadAumentada}</td>
-            <td>{almacen.totalCompra}</td>
-            <td>{formatDate(almacen.fecha)}</td>
-            <td>
-              <!-- <button on:click={() => openModal(almacen)}
-                ><img src={editar} alt="icono-editar" /></button
-              > -->
-              <button on:click={() => sureAlert("Se eliminará el almacen y sus datos permanentemente.", () => handleDelete(almacen.id))}
-                ><img src={eliminar} alt="icono-eliminar" /></button
-              >
-            </td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
-   </div>
+      {/each}
+    </tbody>
+  </Table>
   {/if}
-  <button on:click={() => openModal()} class="agregar-btn"
-    ><img src={store} alt="icon-store" />Agregar</button
-  >
+  <AgregarButton on:click={() => openModal()} />
 </div>
 
 <style lang="scss">

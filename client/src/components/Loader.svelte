@@ -1,13 +1,27 @@
 <script>
   export let text = "Cargando...";
+  export let table = false;
 </script>
 
-<div class="container">
-  <div class="loader" />
-  <p>{text}</p>
-</div>
+{#if table}
+  <div class="table">
+    <div class="container">
+      <div class="loader" />
+      <p>{text}</p>
+    </div>
+  </div>
+{:else} 
+  <div class="container">
+    <div class="loader" />
+    <p>{text}</p>
+  </div>
+{/if}
 
 <style>
+  .table {
+    width: 100%;
+    height: 60vh;
+  }
   .container {
     width: 100%;
     height: 100%;

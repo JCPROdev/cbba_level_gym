@@ -54,14 +54,14 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height:auto;
+    height:100%;
     border: none;
     padding: 2em;
     border-radius: 1em;
     box-shadow: 0 0px 5px #0005;gap:2em;
 
     & > button {
-align-self: flex-end;
+      align-self: flex-end;
       border: none;
       bottom: 1em;
       right: 1em;

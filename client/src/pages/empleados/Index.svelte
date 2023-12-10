@@ -12,6 +12,9 @@
   import { useGet } from "../../hooks/useGet";
   import Table from "../../components/Table.svelte";
   import AgregarButton from "../../components/AgregarButton.svelte";
+  import SquareButton from "../../components/SquareButton.svelte";
+  import IconEdit from "../../icons/IconEdit.svelte";
+  import IconDelete from "../../icons/IconDelete.svelte";
   let search = "";
   let open = false;
   let empleado = null;
@@ -44,8 +47,7 @@
 <div class="Content">
   <h2>Empleados</h2>
   <img src={fondo} alt="" class="backgraund-a" />
-  <Modal {open}>
-    <button on:click={closeModal} class="modalA"> x</button>
+  <Modal {open} {closeModal}>
     {#key JSON.stringify(empleado)}
       <Form
         {empleado}
@@ -78,16 +80,19 @@
             <td><p>{empleado.turno}</p></td>
             <td><p>{empleado.usuario}</p></td>
             <td class="center">
-              <button on:click={() => openModal(empleado)}
-                ><img src={editar} alt="icono-editar" /></button
-              >
-              <button
-                on:click={() =>
-                  sureAlert(
-                    "Se eliminará el empleado y sus datos permanentemente",
-                    () => handleDelete(empleado.id)
-                  )}><img src={eliminar} alt="icono-eliminar" /></button
-              >
+              <div class="buttons">
+                <SquareButton
+                  on:click={() => openModal(empleado)}
+                ><IconEdit /></SquareButton>
+                <SquareButton
+                  color="orange"
+                  on:click={() =>
+                    sureAlert(
+                      "Se eliminará el empleado y sus datos permanentemente",
+                      () => handleDelete(empleado.id)
+                    )}
+                ><IconDelete /></SquareButton>
+              </div>
             </td>
           </tr>
         {/each}

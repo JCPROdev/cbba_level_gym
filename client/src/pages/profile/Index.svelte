@@ -41,6 +41,7 @@
     @media screen and (max-width: 1092px) {
       flex-direction: column;
       justify-content: flex-start;
+      gap: 24px;
     }
 
     .backgraund-a {

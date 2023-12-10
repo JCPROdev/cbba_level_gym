@@ -25,13 +25,6 @@
 {/if}
 
 <style lang="scss">
-  button {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: -1;
-    border: none;
-  }
   .modal {
     width: 100vw;
     height: 100dvh;
@@ -44,6 +37,14 @@
     left: 0;
     z-index: 100;
     isolation: isolate;
+  }
+  button {
+    position: fixed;
+    width: 100vw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    z-index: -1;
   }
   .container {
     display: flex;

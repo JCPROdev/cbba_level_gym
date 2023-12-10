@@ -69,7 +69,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height:auto;
+    height:100%;
     border: none;
     padding: 2em;
     border-radius: 1em;

@@ -13,6 +13,9 @@
   import Head from "../../components/Head.svelte";
   import { useGet } from "../../hooks/useGet";
   import AgregarButton from "../../components/AgregarButton.svelte";
+  import SquareButton from "../../components/SquareButton.svelte";
+  import IconEdit from "../../icons/IconEdit.svelte";
+  import IconDelete from "../../icons/IconDelete.svelte";
   let search = "";
   let open = false;
   let producto = null;
@@ -45,8 +48,7 @@
 <div class="Content">
   <h2>Productos</h2>
   <img src={fondo} alt="" class="backgraund-a" />
-  <Modal {open}>
-    <button on:click={closeModal} class="modalA">x</button>
+  <Modal {open} {closeModal}>
     {#key JSON.stringify(producto)}
       <Form
         {producto}
@@ -79,12 +81,15 @@
           <td class="center">Bs. {producto.precio}</td>
           <td class="center">{producto.cantidad}</td>
           <td class="center">
-            <button on:click={() => openModal(producto)}
-              ><img src={editar} alt="icono-editar" /></button
-            >
-            <button on:click={() => sureAlert("Se eliminará el producto y sus datos permanentemente.", () => handleDelete(producto.id))}
-              ><img src={eliminar} alt="icono-eliminar" /></button
-            >
+            <div class="buttons">
+              <SquareButton
+                on:click={() => openModal(producto)}
+              ><IconEdit /></SquareButton>
+              <SquareButton
+                color="orange"
+                on:click={() => sureAlert("Se eliminará el producto y sus datos permanentemente.", () => handleDelete(producto.id))}
+              ><IconDelete /></SquareButton>
+            </div>
           </td>
         </tr>
       {/each}

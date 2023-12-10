@@ -20,15 +20,14 @@
 
 <style lang="scss">
   .container {
-    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
   }
   .img-container {
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     & > img {
       height: 100%;
       width: 100%;

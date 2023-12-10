@@ -27,33 +27,48 @@
   <h3>{data.cliente.nombre}</h3> 
   <b>Paquete {data.paquete.nombre}</b>
   <div class="info">
-    <div>
+    <div class="data">
       <strong>Fecha inicio: </strong>
       <p>{data.fechaInicio}</p>
     </div>
-    <div>
+    <div class="data">
       <strong>Fecha límite: </strong>
       <p>{data.fechaLimite}</p>
     </div>
-    <div>
+    <div class="buttons">
+      <IconButton on:click={() => handleChangeDias(-1)} text="Disminuir">
+        <IconSubtract />
+      </IconButton>
+      <IconButton on:click={() => handleChangeDias(1)} text="Aumentar">
+        <IconAdd />
+      </IconButton>
+      <IconButton 
+        on:click={handleSave} 
+        text="Guardar"
+        color="orange"
+      >
+        <IconSaveOrange />
+      </IconButton>
+    </div>
+    <div class="data">
       <strong>Días restantes: </strong>
       <p>{diasRestantes} días</p>
     </div>
-  </div>
-  <div class="buttons">
-    <IconButton on:click={() => handleChangeDias(-1)} text="Disminuir">
-      <IconSubtract />
-    </IconButton>
-    <IconButton on:click={() => handleChangeDias(1)} text="Aumentar">
-      <IconAdd />
-    </IconButton>
-    <IconButton 
-      on:click={handleSave} 
-      text="Guardar"
-      color="orange"
-    >
-      <IconSaveOrange />
-    </IconButton>
+    <div class="buttons">
+      <IconButton on:click={() => handleChangeDias(-1)} text="Disminuir">
+        <IconSubtract />
+      </IconButton>
+      <IconButton on:click={() => handleChangeDias(1)} text="Aumentar">
+        <IconAdd />
+      </IconButton>
+      <IconButton 
+        on:click={handleSave} 
+        text="Guardar"
+        color="orange"
+      >
+        <IconSaveOrange />
+      </IconButton>
+    </div>
   </div>
 </div>
 
@@ -84,7 +99,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    & > div {
+    width: 100%;
+    align-items: center;
+    & > .data {
       display: flex;
       flex-direction: column;
       gap: 8px;

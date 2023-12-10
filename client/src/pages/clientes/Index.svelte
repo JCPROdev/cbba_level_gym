@@ -12,8 +12,8 @@
   import Table from "../../components/Table.svelte";
   import AgregarButton from "../../components/AgregarButton.svelte";
   import IconEdit from "../../icons/IconEdit.svelte";
-    import SquareButton from "../../components/SquareButton.svelte";
-    import IconDelete from "../../icons/IconDelete.svelte";
+  import SquareButton from "../../components/SquareButton.svelte";
+  import IconDelete from "../../icons/IconDelete.svelte";
 
   let search = "";
   let open = false;

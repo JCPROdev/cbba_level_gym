@@ -10,6 +10,7 @@ import paquete from "./controllers/paquete.js";
 import producto from "./controllers/producto.js";
 import venta from "./controllers/venta.js";
 import inscripcion  from "./controllers/inscripcion.js";
+import asistencia  from "./controllers/asistencia.js";
 import auth, { authenticateToken } from './controllers/auth.js';
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(paquete);
 app.use(producto);
 app.use(venta);
 app.use(inscripcion);
+app.use(asistencia);
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

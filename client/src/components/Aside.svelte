@@ -34,11 +34,11 @@
 
     <ul>
       <img src={logo} alt="logo-igm" class="logo" />
-      <li>
+      <!-- <li>
         <Link to="/dashboard/home" class="link blue"
           ><img src={home} alt="logo-home" />Inicio</Link
         >
-      </li>
+      </li> -->
       <li><Link to="/dashboard/inscripcion" class="link">Inscripciones</Link></li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>

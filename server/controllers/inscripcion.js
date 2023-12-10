@@ -23,6 +23,28 @@ app.get("/inscripcion", async (req, res) => {
   }
 });
 
+app.get("/inscripcion/:id", async (req, res) => {
+  try {
+    const inscripcion = await prisma.inscripcion.findUnique({
+      where: {
+        id: Number(req.params.id)
+      },
+      include: {
+        cliente: true,
+        paquete: true
+      }
+    });
+    res.json({
+      data: inscripcion,
+      message: "inscripcion obtenida correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener inscripcion",
+      error: error.message
+    })
+  }
+});
 
 app.post("/inscripcion", async (req, res) => {
   try {

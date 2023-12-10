@@ -31,7 +31,7 @@
         $estado = "logged";
         
         successAlert(res.message);
-        navigate('/dashboard/clientes');
+        navigate('/dashboard/inscripcion');
       }
     }
     loading = false;

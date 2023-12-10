@@ -1,21 +1,23 @@
 <script>
-  import buscar from "../assets/iconos/buscar.png";
+  import IconSearch from "../icons/IconSearch.svelte";
+  import SquareButton from "./SquareButton.svelte";
   let verInput = false;
   export let value;
 </script>
 
-<button 
+<div 
   class="buscar" 
 >
   <input
+    placeholder="Buscar..."
     type="text"
-    style="width: {verInput ? '100%' : '0'}; transition: width 1s ease;"
+    style="width: {verInput ? '120px' : '0'}; transition: width 0.3s ease;"
     bind:value
   />
-  <button on:click={() => (verInput = !verInput)}>
-    <img src={buscar} alt="buscar" />
-  </button>
-</button>
+  <SquareButton
+    on:click={() => (verInput = !verInput)}
+  ><IconSearch /></SquareButton>
+</div>
 
 <style> 
   .buscar {
@@ -26,16 +28,11 @@
     justify-content: flex-end;
     top: 2em;
     right: 2em;
-    width: 200px;
+    gap: 20px;
   }
   input {
     border: none;
     border-bottom: solid 1px var(--primary);
     outline: none;
-  }
-  button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
   }
 </style>

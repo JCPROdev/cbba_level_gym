@@ -32,14 +32,14 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    height: 70%;
+    height: 100%;
     border: none;
     padding: 2em;
-    border-radius: 1em;
-    box-shadow: 0 0px 5px #0005;
+    border-radius: 8px;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
 
     & > button {
-align-self: flex-end;
+      align-self: flex-end;
       border: none;
       bottom: 1em;
       right: 1em;

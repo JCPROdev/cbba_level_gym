@@ -41,14 +41,14 @@
     </div>
   </div>
   <div class="buttons">
-    <IconButton handleClick={() => handleChangeDias(-1)} text="Disminuir">
+    <IconButton on:click={() => handleChangeDias(-1)} text="Disminuir">
       <IconSubtract />
     </IconButton>
-    <IconButton handleClick={() => handleChangeDias(1)} text="Aumentar">
+    <IconButton on:click={() => handleChangeDias(1)} text="Aumentar">
       <IconAdd />
     </IconButton>
     <IconButton 
-      handleClick={handleSave} 
+      on:click={handleSave} 
       text="Guardar"
       color="orange"
     >

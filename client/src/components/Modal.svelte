@@ -1,35 +1,62 @@
 <script>
   import { afterUpdate } from "svelte";
+  import SquareButton from "./SquareButton.svelte";
+  import IconX from "../icons/IconX.svelte";
+  import { fade, fly } from "svelte/transition";
 
   export let open;
-
-  let dialog;
-  afterUpdate(() => {
-    if (open) {
-      dialog.showModal();
-    } else {
-      dialog.close();
-    }
-  });
+  export let closeModal;
 </script>
 
-<dialog bind:this={dialog}>
-  <slot />
-</dialog>
+{#if open}
+<div class="modal">
+  <button transition:fade={{ duration: 300 }} on:click={closeModal} />
+  <div class="container" transition:fly={{ y: 400, duration: 300 }}>
+    <div class="top">
+      <SquareButton
+        on:click={closeModal}
+      ><IconX /></SquareButton>
+    </div>
+    <div class="bottom">
+      <slot />
+    </div>
+  </div>
+</div>
+{/if}
 
 <style lang="scss">
-  dialog {
+  button {
     position: fixed;
-    top: 60%;
-    padding: 1em;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: -1;
     border: none;
+  }
+  .modal {
     width: 100vw;
-    height: 40%;
+    height: 100dvh;
     margin: 0 auto;
-    animation: vertical-in 1s ease-in-out;
-    background-color:#fff;
-    gap: 1em;
+    position: fixed;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    isolation: isolate;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 400px;
+    background-color: var(--white);
+    width: 60vw;
     box-shadow: 0 5px 5px #0005;
-   
+    padding: 1em;
+    border-radius: 16px 16px 0 0;
+  }
+  .bottom {
+    flex: 1;
   }
 </style>

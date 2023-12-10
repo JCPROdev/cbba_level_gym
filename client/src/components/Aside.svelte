@@ -69,7 +69,6 @@
 
 <style lang="scss">
   .navres {
-    z-index: 100;
     @media only screen and (max-width: 600px) {
       transform: translateX(-100%);
       position: fixed;

@@ -1,12 +1,11 @@
 <script>
-  export let handleClick;
   export let text;
   export let color = "primary";
 </script>
 
 <button 
   style={`--icon-color: var(--${color})`}
-  on:click={handleClick}
+  on:click
 >
   <slot />
   {text}

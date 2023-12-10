@@ -14,6 +14,13 @@
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
+
+      & :global(tbody tr) {
+        transition: all 0.3s;
+      }
+      & :global(tbody tr:hover) {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
       & :global(> thead th:first-child) {
         width: 80px;
       }
@@ -43,19 +50,18 @@
         }
       }
       & :global(td) {
-        padding: 12px 8px;
-      }
-      & :global(td button) {
-        border: none;
-        background-color: transparent;
-      }
-      & :global(img) {
-        margin: 0 0.5em;
+        padding: 6px 8px;
       }
       & :global(p) {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      & :global(.buttons) {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
       }
     }
   }

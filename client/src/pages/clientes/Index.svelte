@@ -1,7 +1,5 @@
 <script>
   import eliminar from "../../assets/iconos/elimianar.png";
-  import editar from "../../assets/iconos/ediatar.png";
-  import store from "../../assets/iconos/store.png";
   import Modal from "../../components/Modal.svelte";
   import Form from "./components/Form.svelte";
   import { sendRequest } from "../../utilities/sendRequest";
@@ -13,6 +11,10 @@
   import { useGet } from "../../hooks/useGet";
   import Table from "../../components/Table.svelte";
   import AgregarButton from "../../components/AgregarButton.svelte";
+  import IconEdit from "../../icons/IconEdit.svelte";
+    import SquareButton from "../../components/SquareButton.svelte";
+    import IconDelete from "../../icons/IconDelete.svelte";
+
   let search = "";
   let open = false;
   let cliente = null;
@@ -45,8 +47,7 @@
 <div class="Content">
   <h2>Clientes</h2>
   <img src={fondo} alt="" class="backgraund-a" />
-  <Modal {open}>
-    <button on:click={closeModal} class="modalA">x</button>
+  <Modal {open} {closeModal}>
     {#key JSON.stringify(cliente)}
       <Form
         {cliente}
@@ -75,16 +76,20 @@
             <td class="center"><p>{i + 1}</p></td>
             <td><p>{cliente.nombre}</p></td>
             <td class="center">
-              <button on:click={() => openModal(cliente)}
-                ><img src={editar} alt="icono-editar" /></button
-              >
-              <button
-                on:click={() =>
-                  sureAlert(
-                    "Se eliminará el cliente y sus datos permanentemente.",
-                    () => handleDelete(cliente.id)
-                  )}><img src={eliminar} alt="icono-eliminar" /></button
-              >
+              <div class="buttons">
+                <SquareButton
+                  on:click={() => openModal(cliente)}
+                ><IconEdit /></SquareButton>
+                <SquareButton
+                  color="orange"
+                  on:click={() =>
+                    sureAlert(
+                      "Se eliminará el cliente y sus datos permanentemente.",
+                      () => handleDelete(cliente.id)
+                    )
+                  }
+                ><IconDelete /></SquareButton>
+              </div>
             </td>
           </tr>
         {/each}

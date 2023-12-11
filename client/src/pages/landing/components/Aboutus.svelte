@@ -19,9 +19,7 @@
     </div>
     <div class="text">
       <p class="title">Ponte en forma y entrena en el gimnasio o en casa.</p>
-      <p class="sub">Hemos estado creando e implementando proyectos.
-        desde hace muchos años en la ciudad, tenemos cientos
-        de clientes satisfechos.</p>
+      <p class="sub">En nuestro gimnasio, somos más que un lugar para entrenar, somos un equipo que te apoya en tu transformación.</p>
     </div>
   </div>
 </div>
@@ -170,13 +168,12 @@
     height: auto;
     border-radius: 10px;
     margin: 70px 50px 70px;
-    // margin: -130px 50px 70px;
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    // z-index: 2;
-    // padding: 30px 0px 0px 0px;
+    max-width: calc(100% - 100px);
 
 
     .lefttext{
@@ -201,6 +198,10 @@
         line-height: 1;
         letter-spacing: -0.05em;
         height: auto;
+
+        @media screen and (max-width: 1140px) {
+          font-size: 90px;
+        }
       }
 
       h2 {
@@ -220,6 +221,16 @@
         font-weight: 400;
         margin: 30px 0px 30px 0px;
         width: 80%;
+
+        @media screen and (max-width: 540px) {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 840px) {
+        width: 100%;
+        max-width: 100%;
       }
       
     }
@@ -244,6 +255,13 @@
           width: 80%;
           max-width: 80%;
           border-radius: 0px 90px 0px 0px;
+
+          @media screen and (max-width: 540px) {
+            display: flex;
+            height: 330px;
+            width: 100%;
+            max-width: 100%;
+          }
         }
       }
 
@@ -265,6 +283,15 @@
           text-align: left;
           justify-content: flex-start;
           height: auto;
+          
+          @media screen and (max-width: 1140px) {
+            font-size: 56px;
+          }
+
+          @media screen and (max-width: 540px) {
+            font-size: 45px;
+          }
+
         }
 
         .sub{
@@ -273,8 +300,39 @@
           font-weight: 400;
           width: 70%;
           max-width: 70%;
+
+          @media screen and (max-width: 540px) {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
+
+        @media screen and (max-width: 540px) {
+            padding: 0px 20px 0px;
+            width: 100%;
+            max-width: 100%;
         }
       }
+
+      @media screen and (max-width: 840px) {
+        margin: 45px 0px 0px 0px;
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+    @media screen and (max-width: 1140px) {
+      margin: 70px 30px 70px;
+      max-width: calc(100% - 60px);
+    }
+
+    @media screen and (max-width: 840px) {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    @media screen and (max-width: 540px) {
+      margin: 70px 20px 35px;
+      max-width: calc(100% - 40px);
     }
 
   }

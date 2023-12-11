@@ -9,17 +9,18 @@
       <p class="t1">250 Bs</p>
       <p class="t2">/ Mes</p>
     </div>
-    <p class="t3">Package for beginners and less
-      demanding customers. You can
-      upgrade to a higher package at any
-      time.</p>
+    <p class="t3">Este plan integral, que combina el uso de aparatos, sesiones de cardio y actividades aeróbicas, está ideado para individuos que desean una mejora completa en fuerza, resistencia y flexibilidad, adecuado tanto para principiantes como para entusiastas del fitness más avanzados.</p>
     <div class="op1">
       <img src={Check} alt="">
-      <h4>Personal trainer</h4>
+      <h4>Entrenador personal</h4>
     </div>
     <div class="op2">
       <img src={Check} alt="">
-      <h4>Dedicated Training plan</h4>
+      <h4>Plan de entrenamiento</h4>
+    </div>
+    <div class="op2">
+      <img src={Check} alt="">
+      <h4>Aeróbicos</h4>
     </div>
   </div>
   <div class="card2">
@@ -28,25 +29,35 @@
       <p class="t1">150 Bs</p>
       <p class="t2">/ Mes</p>
     </div>
-    <p class="t3">Advanced package for demanding 
-      customers. You can switch to a lower 
-      package at any time.
+    <p class="t3">Pensamos en ti y en tu compromiso con la salud y el bienestar. Te esperamos con un espacio excepcional y un equipo dedicado para ayudarte a alcanzar tus metas.
     </p>
     <div class="op">
       <img src={Check} alt="">
-      <h4>Personal trainer</h4>
+      <h4>ZUMBA</h4>
     </div>
     <div class="op">
       <img src={Check} alt="">
-      <h4>Dedicated Training plan</h4>
+      <h4>FIGTH DO</h4>
     </div>
     <div class="op">
       <img src={Check} alt="">
-      <h4>Premium support for Diets</h4>
+      <h4>X55</h4>
     </div>
     <div class="op">
       <img src={Check} alt="">
-      <h4>Access to nutrients</h4>
+      <h4>RITMOS</h4>
+    </div>
+    <div class="op">
+      <img src={Check} alt="">
+      <h4>STRONGNATION</h4>
+    </div>
+    <div class="op">
+      <img src={Check} alt="">
+      <h4>REBOUND</h4>
+    </div>
+    <div class="op">
+      <img src={Check} alt="">
+      <h4>STEPZ</h4>
     </div>
   </div>
   <div class="card3">
@@ -55,22 +66,16 @@
       <p class="t1">200 Bs</p>
       <p class="t2">/ Mes</p>
     </div>
-    <p class="t3">Package for beginners and less 
-      demanding customers. You can 
-      upgrade to a higher package at any 
-      time.</p>
+    <p class="t3">Este plan de entrenamiento con aparatos y sesiones de cardio está diseñado para aquellos que buscan una rutina equilibrada para fortalecer el cuerpo y mejorar la resistencia.</p>
     <div class="op">
       <img src={Check} alt="">
-      <h4>Personal trainer</h4>
+      <h4>Entrenador personal</h4>
     </div>
     <div class="op">
       <img src={Check} alt="">
-      <h4>Dedicated Training plan</h4>
+      <h4>Plan de entrenamiento</h4>
     </div>
-    <div class="op">
-      <img src={Check} alt="">
-      <h4>Premium support for Diets</h4>
-    </div>
+    
   </div>
 </div>
 
@@ -86,6 +91,8 @@
     align-items: center;
     justify-content: center;
     z-index: 2;
+    max-width: calc(100% - 100px);
+    
     
     .card1{
       display: flex;
@@ -114,6 +121,7 @@
         color: #FFFFFF;
         align-items: center;
         margin: 25px 0px 0px 0px;
+        width: max-content;
 
         .t1{
           font-size: 48px;
@@ -153,6 +161,16 @@
           margin: 0px 0px 0px 15px;
         }
       }
+
+      @media screen and (max-width: 1140px) {
+        padding: 60px 20px 60px;
+      }
+
+      @media screen and (max-width: 840px) {
+        margin: 0px 0px 0px 0px;
+        width: 100%;
+        max-width: 100%;
+      }
     }
 
     .card2{
@@ -179,8 +197,7 @@
         color: #FFFFFF;
         align-items: center;
         margin: 25px 0px 0px 0px;
-        width: 100%;
-        max-width: 100%;
+        width: max-content;
         justify-content: flex-start;
         .t1{
           font-size: 48px;
@@ -218,6 +235,16 @@
         }
       }
 
+      @media screen and (max-width: 1140px) {
+        padding: 60px 20px 60px;
+      }
+
+      @media screen and (max-width: 840px) {
+        margin: 20px 0px 20px;
+        width: 100%;
+        max-width: 100%;
+      }
+
     }
 
     .card3{
@@ -246,6 +273,7 @@
         color: #FFFFFF;
         align-items: center;
         margin: 25px 0px 0px 0px;
+        width: max-content;
 
         .t1{
           font-size: 48px;
@@ -285,6 +313,33 @@
           margin: 0px 0px 0px 15px;
         }
       }
+
+      @media screen and (max-width: 1140px) {
+        padding: 60px 20px 60px;
+      }
+
+      @media screen and (max-width: 840px) {
+        margin: 0px 0px 0px 0px;
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 1140px) {
+      margin: -130px 30px 80px;
+      max-width: calc(100% - 60px);
+    }
+
+    @media screen and (max-width: 840px) {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      margin: -260px 30px 25px;
+      max-width: calc(100% - 60px);
+    }
+
+    @media screen and (max-width: 540px) {
+      margin: -130px 20px 15px;
+      max-width: calc(100% - 40px);
     }
   }
 </style>

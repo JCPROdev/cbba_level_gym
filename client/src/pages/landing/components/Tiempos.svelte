@@ -7,11 +7,7 @@
     <div class="text">
       <h1>Flexibilidad</h1>
       <p class="title">Gestiona tu <br>tiempo</p>
-      <p class="sub">If you are looking for a job and 
-        want to join our group, we are 
-        constantly recruiting new 
-        employees for the indicated 
-        positions.</p>
+      <p class="sub">Si estás buscando flexibilidad de acuerdo a tu disponibilidad de tiempo, te ofrecemos nuestros diferentes paquetes adaptados para ti.</p>
     </div>
     <div class="cubes">
       <div class="latizq">
@@ -104,6 +100,10 @@
           width: auto;
           max-width: 100%;
           justify-content: flex-start;
+
+          @media screen and (max-width:1140px) {
+            font-size: 38px;
+          }
         }
 
         .sub{
@@ -116,6 +116,12 @@
           width: 70%;
           max-width: 70%;
           justify-content: flex-start;
+        }
+
+        @media screen and (max-width: 840px) {
+          margin: 0px 0px 0px 0px;
+          width: 100%;
+          max-width: 100%;
         }
       }
 
@@ -215,6 +221,18 @@
             }
           }
 
+          @media screen and (max-width: 840px) {
+            margin: 0px 10px 0px 0px;
+            max-width: calc(100% - 10px);
+          }
+
+          @media screen and (max-width: 540px) {
+            display: flex;
+            margin: 0px 0px 0px 0px;
+            width: 100%;
+            max-width: 100%;
+          }
+
         }
 
         .latder{
@@ -297,6 +315,11 @@
 
           }
 
+          @media screen and (max-width: 540px) {
+            margin: 20px 0px 0px 0px;
+            max-width: 100%;
+            width: 100%;
+          }
       
         }
 
@@ -343,8 +366,55 @@
               line-height: 1;
               margin: 30px 0px 0px 0px;
             }
+
+            @media screen and (max-width: 840px) {
+              background: #0575E6;
+            }
+
+            @media screen and (max-width: 540px) {
+              background: #0575E6;
+            }
+          }
+
+          @media screen and (max-width: 840px) {
+            margin-top: 20px;
+          }
+
+          @media screen and (max-width: 540px) {
+            margin: 20px 0px 0px 0px;
+            max-width: 100%;
+            width: 100%;
           }
         }
+
+        @media screen and (max-width: 840px) {
+          align-content: flex-start;
+          align-items: flex-start;
+          margin: 50px 0px 0px 0px;
+          width: 100%;
+          max-width: 100%;
+          flex-wrap: wrap;
+        }
+
+        @media screen and (max-width: 540px) {
+          flex-direction: column;
+          flex-wrap: nowrap;
+        }
+      }
+
+      @media screen and (max-width: 1140px) {
+        margin: 0px 30px -130px;
+        max-width: calc(100% - 60px);
+      }
+
+      @media screen and (max-width: 840px) {
+        flex-direction: column;
+        flex-wrap: nowrap;
+      }
+
+      @media screen and (max-width: 540px) {
+        margin: 0px 20px -130px;
+        max-width: calc(100% - 40px);
       }
 
     }

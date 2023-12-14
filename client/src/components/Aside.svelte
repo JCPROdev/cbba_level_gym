@@ -119,6 +119,7 @@
     align-items: center;
     justify-content: space-around;
     border-right: 2px solid var(--grayopacity);
+    z-index: 10;
     ul {
       padding: 0;
       margin: 0;

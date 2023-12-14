@@ -4,6 +4,9 @@
   import Select from "../../../components/Select.svelte";
   import { sendRequest } from "../../../utilities/sendRequest";
   import { successAlert } from "../../../utilities/alerts";
+  import Button from "../../../components/Button.svelte";
+  import FormButton from "../../../components/FormButton.svelte";
+  import GlobalForm from "../../../components/GlobalForm.svelte";
 
   export let closeModal;
   export let empleado;
@@ -29,7 +32,7 @@
   };
 </script>
 
-<form>
+<GlobalForm>
   <Input text="Nombre" bind:value={form.nombre} />
   <Select text="Turno" bind:value={form.turno}>
     <option value="Mañana">Mañana</option>
@@ -39,39 +42,5 @@
   <Input text="Usuario" bind:value={form.usuario} />
   <Input text="Contraseña" bind:value={form.password} type="password" />
 
-  <section>
-    <button on:click={handleSend}>Enviar</button>
-  </section>
-</form>
-
-<style lang="scss">
-  form {
-    background-color: #fff;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 100%;
-    border: none;
-    padding: 2em;
-    border-radius: 1em;
-    box-shadow: 0 0px 5px #0005;
-    gap: 1em;
-
-    section {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    & button {
-      align-self: flex-end;
-      border: none;
-      bottom: 1em;
-      right: 1em;
-      padding: 0.5em 2em;
-      background-color: var(--primary);
-      color: var(--bg);
-      border-radius: 3em;
-      cursor: pointer;
-    }
-  }
-</style>
+  <FormButton on:click={handleSend}>Enviar</FormButton>
+</GlobalForm>

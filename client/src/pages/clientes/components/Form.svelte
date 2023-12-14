@@ -1,4 +1,7 @@
 <script>
+  import Button from "../../../components/Button.svelte";
+  import FormButton from "../../../components/FormButton.svelte";
+  import GlobalForm from "../../../components/GlobalForm.svelte";
   import Input from "../../../components/Input.svelte";
   import { errorAlert, successAlert } from "../../../utilities/alerts";
   import { sendRequest } from "../../../utilities/sendRequest";
@@ -22,32 +25,7 @@
   };
 </script>
 
-<form>
+<GlobalForm>
   <Input text="Nombre" bind:value={form.nombre} />
-  <button on:click={handleSend}>Enviar</button>
-</form>
-
-<style lang="scss">
-  form {
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border: none;
-    padding: 2em;
-    border-radius: 8px;
-    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
-
-    & > button {
-      align-self: flex-end;
-      border: none;
-      bottom: 1em;
-      right: 1em;
-      padding: 0.5em 2em;
-      background-color: var(--primary);
-      color: var(--bg);
-      border-radius: 3em;
-      cursor: pointer;
-    }
-  }
-</style>
+  <FormButton on:click={handleSend}>Enviar</FormButton>
+</GlobalForm>

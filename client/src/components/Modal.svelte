@@ -1,5 +1,4 @@
 <script>
-  import { afterUpdate } from "svelte";
   import SquareButton from "./SquareButton.svelte";
   import IconX from "../icons/IconX.svelte";
   import { fade, fly } from "svelte/transition";
@@ -58,6 +57,6 @@
     border-radius: 16px 16px 0 0;
   }
   .bottom {
-    flex: 1;
+    height: calc(400px - 65px);
   }
 </style>

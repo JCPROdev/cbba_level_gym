@@ -1,27 +1,21 @@
-<script>
-  export let color = "blue";
-  export let disabled = false;
-</script>
-
-<button 
-  on:click {disabled}
-  style={`
-    background-color: var(--${color})
-  `}
->
-  <slot />
+<button on:click>
+  <slot />  
 </button>
 
 <style>
   button {
-    padding: 10px;
+    margin-top: 26px;
+    height: 39px;
+    padding: 0 10px;
     border: none;
     color: var(--white);
-    border-radius: 12px;
+    background-color: var(--primary);
+    border-radius: 8px;
     font-weight: 700;
     font-size: 16px;
     transition: opacity 0.3s;
     cursor: pointer;
+    width: max-content;
   }
   button:hover {
     opacity: 0.8;

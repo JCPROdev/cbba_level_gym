@@ -6,29 +6,28 @@
 <div>
   <label for={`select-${text}`}>{text}</label>
   <select id={`select-${text}`} bind:value>
-    <slot  />
+    <slot />
   </select>
 </div>
 
 <style>
-div{
-  display: flex;
-  flex-wrap: wrap;
-  width: 45%;
-  border:solid 1px #000,
-}
-label{
-  width: 30%;
-}
-  select{
-    width: 100%;
-    outline: none;
-    background-color: var(--primary);
-    border: none;
-    padding: .5em;
-    color:#fff;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
-  input{
-    width: 60%;
+  label {
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  select {
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    outline: none;
+    border-radius: 8px;
+    background-color: white;
+  }
+  select:focus {
+    border: 1px solid var(--primary);
   }
 </style>

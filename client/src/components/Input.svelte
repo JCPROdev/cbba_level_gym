@@ -15,22 +15,20 @@
 <style>
   div {
     display: flex;
-    gap:2em;
-    width: 45%;
+    flex-direction: column;
+    gap: 4px;
   }
   label {
-    width: 30%;
     font-size: 14px;
-    display: flex;
-    flex-wrap: wrap;
-  
+    margin-left: 8px;
   }
   input {
-    width: 70%;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, .3);
     outline: none;
-    border: solid 1px var(--primary);
-    border-radius: 14px;
-    box-shadow: 0 0px 5px #0005;
-
+    border-radius: 8px;
+  }
+  input:focus {
+    border: 1px solid var(--primary);
   }
 </style>

@@ -1,4 +1,6 @@
 <script>
+  import FormButton from "../../../components/FormButton.svelte";
+  import GlobalForm from "../../../components/GlobalForm.svelte";
   import Input from "../../../components/Input.svelte";
   import { successAlert } from "../../../utilities/alerts";
   import { sendRequest } from "../../../utilities/sendRequest";
@@ -30,36 +32,9 @@
   };
 </script>
 
-<form>
+<GlobalForm>
   <Input text="Nombre" bind:value={form.nombre} />
   <Input text="Precio" type="number" bind:value={form.precio} />
   <Input text="Días" type="number" bind:value={form.dias} />
-  <button on:click={handleSend}>Enviar</button>
-</form>
-
-<style lang="scss">
-  form {
-    background-color: #fff;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 100%;
-    border: none;
-    padding: 2em;
-    border-radius: 1em;
-    box-shadow: 0 0px 5px #0005;
-    gap: 2em;
-
-    & > button {
-      align-self: flex-end;
-      border: none;
-      bottom: 1em;
-      right: 1em;
-      padding: 0.5em 2em;
-      background-color: var(--primary);
-      color: var(--bg);
-      border-radius: 3em;
-      cursor: pointer;
-    }
-  }
-</style>
+  <FormButton on:click={handleSend}>Enviar</FormButton>
+</GlobalForm>

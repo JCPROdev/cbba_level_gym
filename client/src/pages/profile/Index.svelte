@@ -25,7 +25,7 @@
 <style lang="scss">
   section {
     width: 80%;
-    height: 60vh;
+    height: 65vh;
     box-shadow: 0 2px 2px #0005;
     border: solid 1px #0002;
     display: flex;

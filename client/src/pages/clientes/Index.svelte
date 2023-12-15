@@ -108,7 +108,7 @@
     border-radius: 16px;
     padding: 2em;
     position: relative;
-    z-index: 1;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
     .backgraund-a {

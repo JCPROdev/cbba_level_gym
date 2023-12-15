@@ -61,37 +61,41 @@
   {#if !$data}
     <Loader table />
   {:else}
-  <Table>
-    <thead>
-      <tr>
-        <th class="center">#</th>
-        <th class="big">producto</th>
-        <th class="big center">cantidad comprada</th>
-        <th class="medium center">precio de compra</th>
-        <th class="medium">fecha</th>
-        <th class="medium center">opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each $data as almacen, i}
+    <Table>
+      <thead>
         <tr>
-          <td class="center"><p>{i + 1}</p></td>
-          <td><p>{almacen.producto.nombre}</p></td>
-          <td class="center"><p>{almacen.cantidadAumentada}</p></td>
-          <td class="center"><p>Bs. {almacen.totalCompra}</p></td>
-          <td><p>{formatDate(almacen.fecha)}</p></td>
-          <td class="center">
-            <div class="buttons">
-              <SquareButton
-                color="orange"
-                on:click={() => sureAlert("Se eliminará el almacen y sus datos permanentemente.", () => handleDelete(almacen.id))}
-              ><IconDelete /></SquareButton>
-            </div>
-          </td>
+          <th class="center">#</th>
+          <th class="big">producto</th>
+          <th class="big center">cantidad comprada</th>
+          <th class="medium center">precio de compra</th>
+          <th class="medium">fecha</th>
+          <th class="medium center">opciones</th>
         </tr>
-      {/each}
-    </tbody>
-  </Table>
+      </thead>
+      <tbody>
+        {#each $data as almacen, i}
+          <tr>
+            <td class="center"><p>{i + 1}</p></td>
+            <td><p>{almacen.producto.nombre}</p></td>
+            <td class="center"><p>{almacen.cantidadAumentada}</p></td>
+            <td class="center"><p>Bs. {almacen.totalCompra}</p></td>
+            <td><p>{formatDate(almacen.fecha)}</p></td>
+            <td class="center">
+              <div class="buttons">
+                <SquareButton
+                  color="orange"
+                  on:click={() =>
+                    sureAlert(
+                      "Se eliminará el almacen y sus datos permanentemente.",
+                      () => handleDelete(almacen.id)
+                    )}><IconDelete /></SquareButton
+                >
+              </div>
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </Table>
   {/if}
   <AgregarButton on:click={() => openModal()} />
 </div>
@@ -105,9 +109,9 @@
     border-radius: 16px;
     padding: 2em;
     position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
+    isolation: isolate;
     .backgraund-a {
       width: 100%;
       height: 80%;

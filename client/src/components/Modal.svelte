@@ -35,7 +35,6 @@
     bottom: 0;
     left: 0;
     z-index: 100;
-    isolation: isolate;
   }
   button {
     position: fixed;

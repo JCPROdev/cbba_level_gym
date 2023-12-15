@@ -31,7 +31,7 @@
   const closeModal = () => {
     open = false;
   };
-  
+
   let { data, getData } = useGet("paquete");
 
   const handleDelete = async (id) => {
@@ -62,7 +62,7 @@
   {#if !$data}
     <Loader table />
   {:else}
-   <Table>
+    <Table>
       <thead>
         <tr>
           <th class="center">#</th>
@@ -81,19 +81,22 @@
             <td class="center"><p>{paquete.dias}</p></td>
             <td class="center">
               <div class="buttons">
-                <SquareButton
-                  on:click={() => openModal(paquete)}
-                ><IconEdit /></SquareButton>
+                <SquareButton on:click={() => openModal(paquete)}
+                  ><IconEdit /></SquareButton
+                >
                 <SquareButton
                   color="orange"
-                  on:click={() => sureAlert("Se eliminará el paquete permanentemente", () => handleDelete(paquete.id))}
-                ><IconDelete /></SquareButton>
+                  on:click={() =>
+                    sureAlert("Se eliminará el paquete permanentemente", () =>
+                      handleDelete(paquete.id)
+                    )}><IconDelete /></SquareButton
+                >
               </div>
             </td>
           </tr>
         {/each}
       </tbody>
-   </Table>
+    </Table>
   {/if}
   <AgregarButton on:click={() => openModal()} />
 </div>
@@ -107,7 +110,7 @@
     border-radius: 16px;
     padding: 2em;
     position: relative;
-    z-index: 1;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
     .backgraund-a {

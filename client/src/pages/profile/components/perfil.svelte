@@ -10,21 +10,35 @@
   export let data;
 
   let diasRestantes = data.diasRestantes;
+  let fecha = data.fechaLimite;
+
   const handleChangeDias = (num) => {
     diasRestantes += num;
-  }
-  const handleSave = async () => {
-    const res = await sendRequest(`inscripcion/${data.id}`, {
-      diasRestantes
-    }, "PUT");
-    if(res) {
+  };
+
+  const handleChangeDate = (num) => {
+    let fechaActual = new Date(fecha);
+    fechaActual.setDate(fechaActual.getDate() + num);
+    fecha = fechaActual.toISOString().split("T")[0];
+  };
+
+  const handleSaveDias = async () => {
+    const res = await sendRequest(
+      `inscripcion/${data.id}`,
+      {
+        diasRestantes,
+        fechaLimite: fecha,
+      },
+      "PUT"
+    );
+    if (res) {
       successAlert(res.message);
     }
-  }
+  };
 </script>
 
 <div class="perfil">
-  <h3>{data.cliente.nombre}</h3> 
+  <h3>{data.cliente.nombre}</h3>
   <b>Paquete {data.paquete.nombre}</b>
   <div class="info">
     <div class="data">
@@ -33,21 +47,14 @@
     </div>
     <div class="data">
       <strong>Fecha límite: </strong>
-      <p>{data.fechaLimite}</p>
+      <p>{fecha}</p>
     </div>
     <div class="buttons">
-      <IconButton on:click={() => handleChangeDias(-1)} text="Disminuir">
+      <IconButton on:click={() => handleChangeDate(-1)} text="Disminuir">
         <IconSubtract />
       </IconButton>
-      <IconButton on:click={() => handleChangeDias(1)} text="Aumentar">
+      <IconButton on:click={() => handleChangeDate(1)} text="Aumentar">
         <IconAdd />
-      </IconButton>
-      <IconButton 
-        on:click={handleSave} 
-        text="Guardar"
-        color="orange"
-      >
-        <IconSaveOrange />
       </IconButton>
     </div>
     <div class="data">
@@ -61,14 +68,10 @@
       <IconButton on:click={() => handleChangeDias(1)} text="Aumentar">
         <IconAdd />
       </IconButton>
-      <IconButton 
-        on:click={handleSave} 
-        text="Guardar"
-        color="orange"
-      >
-        <IconSaveOrange />
-      </IconButton>
     </div>
+    <IconButton on:click={handleSaveDias} text="Guardar" color="orange">
+      <IconSaveOrange />
+    </IconButton>
   </div>
 </div>
 

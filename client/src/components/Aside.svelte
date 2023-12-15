@@ -10,9 +10,13 @@
 
   const logout = async () => {
     const refresh_token = localStorage.getItem("refresh_token");
-    await sendRequest("logout", {
-      token: refresh_token
-    }, "DELETE");
+    await sendRequest(
+      "logout",
+      {
+        token: refresh_token,
+      },
+      "DELETE"
+    );
     successAlert("Cerrado sesión correctamente");
     localStorage.removeItem("access_token");
     localStorage.removeItem(`refresh_token`);
@@ -31,7 +35,6 @@
     <button class="menu-fd" on:click={activeNav}
       ><img src={menu} alt="" /></button
     >
-
     <ul>
       <img src={logo} alt="logo-igm" class="logo" />
       <!-- <li>
@@ -39,7 +42,9 @@
           ><img src={home} alt="logo-home" />Inicio</Link
         >
       </li> -->
-      <li><Link to="/dashboard/inscripcion" class="link">Inscripciones</Link></li>
+      <li>
+        <Link to="/dashboard/inscripcion" class="link">Inscripciones</Link>
+      </li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
@@ -47,17 +52,17 @@
         <Link to="/dashboard/productos" class="link orange">
           Productos
           {#if $productMessage}
-          {#key $productMessage}
-            <p class="animation">{$productMessage}</p>
-          {/key}
+            {#key $productMessage}
+              <p class="animation">{$productMessage}</p>
+            {/key}
           {/if}
         </Link>
       </li>
       <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
     </ul>
     <section class="imgPerfil">
-      <!-- <img alt="Perfil" src={perfil} /> -->
-      <p class="nombre">{$user.nombre}</p>
+      <!-- <img alt="Perfil" src={perfil} /> -->  
+      <p class="nombre">Bienvenido {$user.nombre}</p>
       <p>Turno: {$user.turno}</p>
       <button class="link blue" on:click={logout}>Logout</button>
     </section>
@@ -119,7 +124,7 @@
     align-items: center;
     justify-content: space-around;
     border-right: 2px solid var(--grayopacity);
-    z-index: 10;
+    z-index: 1;
     ul {
       padding: 0;
       margin: 0;

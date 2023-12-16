@@ -179,6 +179,15 @@
   }
 }
 
+@keyframes horizontal-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }

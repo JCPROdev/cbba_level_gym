@@ -8,6 +8,7 @@
   import Profile from "./pages/profile/Index.svelte";
   import Paquetes from "./pages/paquetes/Index.svelte";
   import Inscripcion from "./pages/inscripcion/Index.svelte";
+  import Venta from "./pages/venta/index.svelte";
   import Productos from "./pages/productos/Index.svelte";
   import Head from "./components/Head.svelte";
   import Almacen from "./pages/almacen/Index.svelte";
@@ -34,6 +35,7 @@
           <Route path="/empleados" component={Empleados} />
           <Route path="/paquetes" component={Paquetes} />
           <Route path="/inscripcion" component={Inscripcion} />
+          <Route path="/venta" component={Venta} />
           <Route path="/asistencia/:id" component={Asistencia} />
           <Route path="/productos" component={Productos} />
           <Route path="/almacen" component={Almacen} />

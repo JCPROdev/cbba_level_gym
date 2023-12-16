@@ -11,24 +11,24 @@ datasource db {
 }
 
 model Empleado {
-  id           Int            @id @default(autoincrement())
+  id           Int           @id @default(autoincrement())
   nombre       String
   turno        String
-  usuario      String         @unique
+  usuario      String        @unique
   password     String
-  refreshToken String?        @unique
-  activo       Boolean        @default(true)
+  refreshToken String?       @unique
+  activo       Boolean       @default(true)
   Venta        Venta[]
   Inscripcion  Inscripcion[]
   Almacen      Almacen[]
 }
 
 model Paquete {
-  id     Int     @id @default(autoincrement())
-  nombre String
-  precio Float
-  dias   Int
-  activo Boolean @default(true)
+  id          Int           @id @default(autoincrement())
+  nombre      String
+  precio      Float
+  dias        Int
+  activo      Boolean       @default(true)
   Inscripcion Inscripcion[]
 }
 
@@ -73,17 +73,19 @@ model Producto {
   cantidad Int
   activo   Boolean @default(true)
 
-  Almacen Almacen[]
+  Almacen      Almacen[]
+  DetalleVenta DetalleVenta[]
 }
 
 model DetalleVenta {
-  id            Int       @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   productoId    Int
   ventaId       Int
   cantidad      Int
   precioVendido Float
   total         Float
-  venta         Venta     @relation(fields: [ventaId], references: [id])
+  producto      Producto @relation(fields: [productoId], references: [id])
+  venta         Venta    @relation(fields: [ventaId], references: [id])
 }
 
 model Almacen {

@@ -6,9 +6,10 @@ const prisma = new PrismaClient();
 app.get("/venta", async (req, res) => {
   try {
     const venta = await prisma.venta.findMany({
-      include:{
-        DetalleVenta:true
-      }
+      include: {
+        DetalleVenta: true,
+        empleado: true,
+      },
     });
     res.json({
       data: venta,
@@ -17,6 +18,32 @@ app.get("/venta", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Error al obtener las ventas",
+      error: error.message,
+    });
+  }
+});
+app.get("/venta/:id", async (req, res) => {
+  try {
+    const venta = await prisma.venta.findUnique({
+      where: {
+        id: Number(req.params.id),
+      },
+      include: {
+        DetalleVenta: {
+          include: {
+            producto: true,
+          },
+        },
+        empleado: true,
+      },
+    });
+    res.json({
+      data: venta,
+      message: "venta obtenida correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener las venta",
       error: error.message,
     });
   }
@@ -65,7 +92,7 @@ app.post("/venta", async (req, res) => {
               cantidad: producto.cantidad,
               precioVendido: producto.precioVendido,
               productoId: producto.id,
-              total: producto.precioVendido * producto.cantidad
+              total: producto.precioVendido * producto.cantidad,
             })),
           },
         },
@@ -94,4 +121,5 @@ app.post("/venta", async (req, res) => {
     });
   }
 });
+
 export default app;

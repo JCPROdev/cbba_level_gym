@@ -58,10 +58,12 @@
           {/if}
         </Link>
       </li>
+
       <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
+      <li><Link to="/dashboard/venta" class="link orange">Venta</Link></li>
     </ul>
     <section class="imgPerfil">
-      <!-- <img alt="Perfil" src={perfil} /> -->  
+      <!-- <img alt="Perfil" src={perfil} /> -->
       <p class="nombre">Bienvenido {$user.nombre}</p>
       <p>Turno: {$user.turno}</p>
       <button class="link blue" on:click={logout}>Logout</button>

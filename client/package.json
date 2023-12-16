@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "qrcode": "^1.5.3",
+    "svelte-sheets": "^1.0.0",
     "sweetalert2": "^11.10.1"
   }
 }

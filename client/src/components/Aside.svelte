@@ -192,6 +192,7 @@
     /* background-color: rgb(185, 185, 185); */
     @media only screen and (max-width: 600px) {
       width: 100%;
+      height: 100dvh;
     }
   }
 </style>

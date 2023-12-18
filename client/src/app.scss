@@ -36,6 +36,9 @@
   transition: all 200ms ease-in-out;
   &.orange {
     background-color: var(--orange);
+    @media only screen and (max-width: 600px) {
+      color: var(--orange);
+    }
   }
   &.blue {
     background-color: var(--blue);
@@ -45,7 +48,7 @@
     height: 23px;
   }
   @media only screen and (max-width: 600px) {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.05) !important;
     color: var(--primary);
     width: 100%;
     & img {

@@ -14,6 +14,7 @@
 <style>
   div {
     align-self: flex-end;
+    padding-top: 20px;
     justify-self: flex-end;
   }
 </style>

@@ -114,13 +114,13 @@
       margin: 0;
       z-index: 200;
       
-      & button {
+      & > button {
         display: flex;
         position: absolute;
-        top: 10px;
+        top: 0;
         border: none;
         background-color: transparent;
-        width: 100vw;
+        width: 100%;
         justify-content: center;
         box-shadow: 0 5px 10px #0005;
         padding: 1em;
@@ -137,11 +137,18 @@
         justify-content: center;
         margin: 0;
        
-        & button {
+        & > button {
           display: flex;
-          background-color: transparent;
-          border: none;
-          width: 87vw;
+        position: absolute;
+        top: 0;
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        justify-content: center;
+        box-shadow: 0 5px 10px #0005;
+        padding: 1em;
+        margin-bottom: 2em;
+
         }
         & nav {
           flex-direction: column;

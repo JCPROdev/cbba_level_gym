@@ -37,7 +37,9 @@
       closeModal();
     }
   };
+
   let { data } = useGet("producto");
+
   const handleProducto = (e) => {
     e.preventDefault();
     if (cantidad === "") {
@@ -70,6 +72,7 @@
       }
     }
   };
+
   $: productos = form.productos.map((v) => {
     const producto = $data.find((producto) => producto.id == v.id);
     return {
@@ -77,12 +80,14 @@
       cantidad: v.cantidad,
     };
   });
+
   $: total = !productos
     ? "N/A"
     : productos.reduce((suma, producto) => {
         suma += producto.cantidad * producto.producto.precio;
         return suma;
       }, 0) + "Bs";
+
   const handleDeleteProduc = (id) => {
     form.productos = form.productos.filter((producto) => producto.id !== id);
   };
@@ -100,6 +105,8 @@
     {/if}
   </Select>
   <Input text="Cantidad" type="text" bind:value={cantidad} />
+  <FormButton on:click={handleProducto}>Agregar</FormButton>
+  <div />
   <TableVenta>
     <thead>
       <tr>
@@ -112,9 +119,9 @@
       </tr>
     </thead>
     <tbody>
-      {#each productos as product}
+      {#each productos as product, i}
         <tr>
-          <td class="center">{product.producto.id}</td>
+          <td class="center">{i + 1}</td>
           <td class="big">{product.producto.nombre}</td>
           <td class="medium center">{product.cantidad}</td>
           <td class="medium center">Bs.{product.producto.precio}</td>
@@ -134,7 +141,13 @@
       {/each}
     </tbody>
   </TableVenta>
-  <FormButton on:click={handleProducto}>Agregar</FormButton>
   <FormButton on:click={handleSend}>Vender</FormButton>
-  <p>Total a cobrar : {total}</p>
+  <p class="total">Total a cobrar: {total}</p>
 </GlobalForm>
+
+<style>
+  .total {
+    margin-top: 26px;
+    font-size: 14px;
+  }
+</style>

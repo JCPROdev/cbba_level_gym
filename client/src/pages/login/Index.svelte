@@ -111,4 +111,43 @@
     color: var(--white);
     font-size: 16px;
   }
+  @media screen and (max-width: 780px) {
+    .bg {
+      width: 100vw;
+      height: 100vh;
+    }
+    .logo {
+      width: 200px;
+      left: 50%;
+    }
+    form {
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      width: 90vw;
+      height: 70vh;
+    }
+    p {
+      font-size: 2em;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .logo {
+      width: 150px;
+      left: 0%;
+    }
+    p {
+      width: 100%;
+      margin-top: 1em;
+      font-size: 1.8em;
+    }
+    form {
+      padding: 1em;
+    }
+    input {
+      width: 95%;
+      margin: 0 auto;
+      padding: 0.5em;
+    }
+  }
 </style>

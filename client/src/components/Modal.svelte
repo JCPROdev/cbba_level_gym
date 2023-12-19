@@ -44,6 +44,9 @@
     border: none;
     z-index: -1;
   }
+  .top {
+    padding: 0 1rem;
+  }
   .container {
     display: flex;
     flex-direction: column;
@@ -52,10 +55,15 @@
     background-color: var(--white);
     width: 60vw;
     box-shadow: 0 5px 5px #0005;
-    padding: 1em;
+    padding: 1em 0;
     border-radius: 16px 16px 0 0;
+    @media screen and (max-width: 600px) {
+      width: 96vw;
+    }
   }
   .bottom {
     height: calc(400px - 65px);
+    overflow: auto;
+    padding: 0 1rem 1rem;
   }
 </style>

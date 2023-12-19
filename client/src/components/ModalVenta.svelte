@@ -25,7 +25,7 @@
   
   <style lang="scss">
     .modal {
-      width: 110vw;
+      width: 100vw;
       height: 100vh;
       margin: 0 auto;
       position: fixed;
@@ -35,6 +35,9 @@
       bottom: 0;
       left: 0;
       z-index: 100;
+    }
+    .top {
+      padding: 0 1rem;
     }
     button {
       position: fixed;
@@ -48,15 +51,17 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      height:550px;
+      height:500px;
       background-color: var(--white);
       width: 71vw;
       box-shadow: 0 5px 5px #0005;
-      padding: 1em;
+      padding: 1em 0;
       border-radius: 16px ;
     }
     .bottom {
-      height: calc(400px - 65px);
-    }
+      height: calc(500px - 65px);
+      overflow: auto;
+      padding: 0 1rem 1rem;
+      }
   </style>
   

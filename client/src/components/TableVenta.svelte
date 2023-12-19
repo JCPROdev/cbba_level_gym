@@ -6,8 +6,8 @@
   
   <style lang="scss">
     .container {
-      width: 55vw;
-      height: 40vh;
+      width: 100%;
+      grid-column: 1 / -1;
       overflow: auto;
       font-size: 14px;
       table {

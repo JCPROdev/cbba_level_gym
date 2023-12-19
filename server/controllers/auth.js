@@ -94,13 +94,7 @@ export function authenticateToken(req, res, next) {
     req.path === "/token" ||
     req.path === "/logout" ||
     req.path === "/admin" ||
-    req.path === "/venta" ||
-    req.path === "/exceladministrador" ||
-    req.path === "/excelempleado/3" ||
-    req.path === "/empleado" ||
-    req.path === "/inscripcion" ||
-    req.path === "/almacen/1" ||
-    req.path === "/producto"
+    req.path === "/venta"
   )
     return next();
 

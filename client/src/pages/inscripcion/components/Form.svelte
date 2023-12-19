@@ -80,6 +80,6 @@
     <option value="Tarjeta">Tarjeta</option>
   </Select>
   <Input text="Fecha de inicio" type="date" bind:value={form.fechaInicio} />
-  <Input text="Fecha de inicio" type="date" bind:value={form.fechaLimite} />
+  <Input text="Fecha de limite" type="date" bind:value={form.fechaLimite} />
   <FormButton on:click={handleSend}>Enviar</FormButton>
 </GlobalForm>

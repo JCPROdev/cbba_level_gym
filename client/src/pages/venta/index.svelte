@@ -17,6 +17,8 @@
   import ModalVenta from "../../components/ModalVenta.svelte";
   import IconEye from "../../icons/IconEye.svelte";
   import FormVer from "./components/FormVer.svelte";
+  import Excel from "../../components/Excel.svelte";
+  import IconQr from "../../icons/IconQR.svelte";
 
   let search = "";
   let open = false;

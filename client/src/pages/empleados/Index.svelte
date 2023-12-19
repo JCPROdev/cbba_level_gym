@@ -7,7 +7,7 @@
   import fondo from "../../assets/logo-fondo.png";
   import Loader from "../../components/Loader.svelte";
   import SearchButton from "../../components/SearchButton.svelte";
-  import { successAlert, sureAlert } from "../../utilities/alerts";
+  import { errorAlert, successAlert, sureAlert } from "../../utilities/alerts";
   import Head from "../../components/Head.svelte";
   import { useGet } from "../../hooks/useGet";
   import Table from "../../components/Table.svelte";
@@ -15,10 +15,19 @@
   import SquareButton from "../../components/SquareButton.svelte";
   import IconEdit from "../../icons/IconEdit.svelte";
   import IconDelete from "../../icons/IconDelete.svelte";
+  import IconExcel from "../../icons/IconExcel.svelte";
+  import { http } from "../../utilities/http";
+  import FileSaver from "file-saver";
+  import { onMount } from "svelte";
   let search = "";
   let open = false;
   let empleado = null;
-
+  let fechaActual = "";
+  onMount(() => {
+    const today = new Date();
+    const format = today.toISOString().split("T")[0];
+    fechaActual = format;
+  });
   const openModal = (item) => {
     if (item) {
       empleado = item;
@@ -41,6 +50,25 @@
       getData();
     }
   };
+  const handleExcel = async (empleado) => {
+    try {
+      const response = await fetch(http + `excelempleado/${empleado.id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          fecha: fechaActual,
+        }),
+      });
+      const blob = await response.blob();
+      FileSaver.saveAs(blob, `${empleado.nombre}`);
+    } catch (error) {
+      errorAlert("Error al descargar el archivo");
+    }
+  };
+  console.log(fechaActual);
 </script>
 
 <Head title="Empleados" />
@@ -81,17 +109,22 @@
             <td><p>{empleado.usuario}</p></td>
             <td class="center">
               <div class="buttons">
-                <SquareButton
-                  on:click={() => openModal(empleado)}
-                ><IconEdit /></SquareButton>
+                <SquareButton on:click={() => openModal(empleado)}
+                  ><IconEdit /></SquareButton
+                >
                 <SquareButton
                   color="orange"
                   on:click={() =>
                     sureAlert(
                       "Se eliminará el empleado y sus datos permanentemente",
                       () => handleDelete(empleado.id)
-                    )}
-                ><IconDelete /></SquareButton>
+                    )}><IconDelete /></SquareButton
+                >
+                <SquareButton
+                  color="green"
+                  on:click={() => handleExcel(empleado)}
+                  ><IconExcel /></SquareButton
+                >
               </div>
             </td>
           </tr>

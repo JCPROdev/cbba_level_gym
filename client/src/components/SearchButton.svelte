@@ -3,20 +3,24 @@
   import SquareButton from "./SquareButton.svelte";
   let verInput = false;
   export let value;
+  export let placeholder = "Buscar...";
 </script>
 
 <div 
   class="buscar" 
 >
   <input
-    placeholder="Buscar..."
+    placeholder={placeholder}
     type="text"
     style="width: {verInput ? '120px' : '0'}; transition: width 0.3s ease;"
     bind:value
   />
-  <SquareButton
-    on:click={() => (verInput = !verInput)}
-  ><IconSearch /></SquareButton>
+  <div class="top-button">
+    <SquareButton
+      on:click={() => (verInput = !verInput)}
+    ><IconSearch /></SquareButton>
+    <slot />
+  </div>
 </div>
 
 <style> 
@@ -34,5 +38,9 @@
     border: none;
     border-bottom: solid 1px var(--primary);
     outline: none;
+  }
+  .top-button {
+    display: flex;
+    gap: 12px;
   }
 </style>

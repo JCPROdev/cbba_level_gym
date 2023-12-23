@@ -19,6 +19,8 @@
   import { http } from "../../utilities/http";
   import FileSaver from "file-saver";
   import { onMount } from "svelte";
+  import { filterBy } from "../../utilities/filterBy";
+
   let search = "";
   let open = false;
   let empleado = null;
@@ -50,13 +52,32 @@
       getData();
     }
   };
+  const handleAdminExcel = async () => {
+    try {
+      const access_token = localStorage.getItem("access_token");
+      const response = await fetch(http + `exceladministrador`, {
+        headers: {
+          "content-type": "application/json",
+          Accept: "application/json",
+          Authorization: access_token ? `Bearer ${access_token}` : "",
+        },
+      });
+      const blob = await response.blob();
+      FileSaver.saveAs(blob, `admin_reporte`);
+    } catch (error) {
+      errorAlert("Error al descargar el archivo");
+    }
+  };
+
   const handleExcel = async (empleado) => {
     try {
+      const access_token = localStorage.getItem("access_token");
       const response = await fetch(http + `excelempleado/${empleado.id}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          accept: "application/json",
+          Accept: "application/json",
+          Authorization: access_token ? `Bearer ${access_token}` : "",
         },
         body: JSON.stringify({
           fecha: fechaActual,
@@ -68,7 +89,12 @@
       errorAlert("Error al descargar el archivo");
     }
   };
-  console.log(fechaActual);
+
+  $: datos = $data;
+  const handleFilter = () => {
+    datos = $data?.filter((data) => filterBy(data.nombre, search));
+  };
+  $: search, handleFilter();
 </script>
 
 <Head title="Empleados" />
@@ -86,7 +112,11 @@
       />
     {/key}
   </Modal>
-  <SearchButton bind:value={search} />
+  <SearchButton bind:value={search}>
+    <SquareButton on:click={() => handleAdminExcel()} color="green"
+      ><IconExcel /></SquareButton
+    >
+  </SearchButton>
   {#if !$data}
     <Loader table />
   {:else}
@@ -101,7 +131,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each $data as empleado, i}
+        {#each datos as empleado, i}
           <tr>
             <td class="center"><p>{i + 1}</p></td>
             <td><p>{empleado.nombre}</p></td>
@@ -114,6 +144,7 @@
                 >
                 <SquareButton
                   color="orange"
+                  disabled={empleado.usuario === "admin"}
                   on:click={() =>
                     sureAlert(
                       "Se eliminará el empleado y sus datos permanentemente",

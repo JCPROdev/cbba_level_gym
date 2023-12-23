@@ -39,7 +39,7 @@
       <Link class="index-link" to="#programas" on:click={scrollToDiv}
         >Programas</Link
       >
-      <Link class="index-link" to="/login">Login</Link>
+      <!-- <Link class="index-link" to="/login">Login</Link> -->
       <Link class="index-link butrem" to="#foot" on:click={scrollToDiv}>
         <p>Contacto</p>
         <img src={Arrow} alt="" />
@@ -113,7 +113,7 @@
       width: auto;
       margin: 0;
       z-index: 200;
-      
+
       & > button {
         display: flex;
         position: absolute;
@@ -136,19 +136,18 @@
         align-items: center;
         justify-content: center;
         margin: 0;
-       
+
         & > button {
           display: flex;
-        position: absolute;
-        top: 0;
-        border: none;
-        background-color: transparent;
-        width: 100%;
-        justify-content: center;
-        box-shadow: 0 5px 10px #0005;
-        padding: 1em;
-        margin-bottom: 2em;
-
+          position: absolute;
+          top: 0;
+          border: none;
+          background-color: transparent;
+          width: 100%;
+          justify-content: center;
+          box-shadow: 0 5px 10px #0005;
+          padding: 1em;
+          margin-bottom: 2em;
         }
         & nav {
           flex-direction: column;
@@ -159,14 +158,11 @@
         opacity: 1;
         z-index: 200;
         animation: horizontal-in 1s ease-in-out;
-  
       }
       .desactive {
         opacity: 0;
-      display: none;
-     
+        display: none;
       }
     }
-  
   }
 </style>

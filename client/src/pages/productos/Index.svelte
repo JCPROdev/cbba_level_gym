@@ -16,6 +16,8 @@
   import SquareButton from "../../components/SquareButton.svelte";
   import IconEdit from "../../icons/IconEdit.svelte";
   import IconDelete from "../../icons/IconDelete.svelte";
+  import { user } from "../../store/user";
+  import { filterBy } from "../../utilities/filterBy";
   let search = "";
   let open = false;
   let producto = null;
@@ -42,6 +44,12 @@
       getData();
     }
   };
+
+  $: datos = $data;
+  const handleFilter = () => {
+    datos = $data?.filter((data) => filterBy(data.nombre, search));
+  };
+  $: search, handleFilter();
 </script>
 
 <Head title="Productos" />
@@ -70,37 +78,43 @@
           <th class="big">nombre</th>
           <th class="medium center">precio</th>
           <th class="medium center">cantidad</th>
-          <th class="medium center">opciones</th>
+          {#if $user.usuario === "admin"}
+            <th class="medium center">opciones</th>
+          {/if}
         </tr>
       </thead>
       <tbody>
-        {#each $data as producto, i}
+        {#each datos as producto, i}
           <tr>
             <td class="center">{i + 1}</td>
             <td>{producto.nombre}</td>
             <td class="center">Bs. {producto.precio}</td>
             <td class="center">{producto.cantidad}</td>
-            <td class="center">
-              <div class="buttons">
-                <SquareButton on:click={() => openModal(producto)}
-                  ><IconEdit /></SquareButton
-                >
-                <SquareButton
-                  color="orange"
-                  on:click={() =>
-                    sureAlert(
-                      "Se eliminará el producto y sus datos permanentemente.",
-                      () => handleDelete(producto.id)
-                    )}><IconDelete /></SquareButton
-                >
-              </div>
-            </td>
+            {#if $user.usuario === "admin"}
+              <td class="center">
+                <div class="buttons">
+                  <SquareButton on:click={() => openModal(producto)}
+                    ><IconEdit /></SquareButton
+                  >
+                  <SquareButton
+                    color="orange"
+                    on:click={() =>
+                      sureAlert(
+                        "Se eliminará el producto y sus datos permanentemente.",
+                        () => handleDelete(producto.id)
+                      )}><IconDelete /></SquareButton
+                  >
+                </div>
+              </td>
+            {/if}
           </tr>
         {/each}
       </tbody>
     </Table>
   {/if}
-  <AgregarButton on:click={() => openModal()} />
+  {#if $user.usuario === "admin"}
+    <AgregarButton on:click={() => openModal()} />
+  {/if}
 </div>
 
 <style lang="scss">

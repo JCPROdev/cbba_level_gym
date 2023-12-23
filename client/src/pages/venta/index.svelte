@@ -7,16 +7,13 @@
   import SearchButton from "../../components/SearchButton.svelte";
   import Head from "../../components/Head.svelte";
   import { formatDate } from "../../utilities/formatDate";
-  import { successAlert, sureAlert } from "../../utilities/alerts";
-  import { sendRequest } from "../../utilities/sendRequest";
   import { useGet } from "../../hooks/useGet";
-  import { navigate } from "svelte-routing";
   import AgregarButton from "../../components/AgregarButton.svelte";
   import SquareButton from "../../components/SquareButton.svelte";
-  import IconDelete from "../../icons/IconDelete.svelte";
   import ModalVenta from "../../components/ModalVenta.svelte";
   import IconEye from "../../icons/IconEye.svelte";
   import FormVer from "./components/FormVer.svelte";
+  import { filterBy } from "../../utilities/filterBy";
 
   let search = "";
   let open = false;
@@ -37,11 +34,14 @@
   };
 
   let { data, getData } = useGet("venta");
-  $: datafiltrado = $data?.filter((item) =>
-    item.empleado.nombre
-      .toLocaleLowerCase()
-      .includes(search.toLocaleLowerCase())
-  );
+
+  $: datos = $data;
+  const handleFilter = () => {
+    datos = $data?.filter((data) =>
+      filterBy(data.empleado.nombre + " " + formatDate(data.fecha), search)
+    );
+  };
+  $: search, handleFilter();
 </script>
 
 <Head title="Venta" />
@@ -83,7 +83,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each datafiltrado as venta, i}
+        {#each datos as venta, i}
           <tr>
             <td class="center">{i + 1}</td>
             <td class="big">{venta.empleado.nombre}</td>

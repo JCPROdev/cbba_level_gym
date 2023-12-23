@@ -15,6 +15,7 @@
   import SquareButton from "../../components/SquareButton.svelte";
   import IconEdit from "../../icons/IconEdit.svelte";
   import IconDelete from "../../icons/IconDelete.svelte";
+  import { filterBy } from "../../utilities/filterBy";
   let search = "";
   let open = false;
   let paquete = null;
@@ -41,6 +42,12 @@
       getData();
     }
   };
+
+  $: datos = $data;
+  const handleFilter = () => {
+    datos = $data?.filter((data) => filterBy(data.nombre, search));
+  };
+  $: search, handleFilter();
 </script>
 
 <Head title="Paquetes" />
@@ -73,7 +80,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each $data as paquete, i}
+        {#each datos as paquete, i}
           <tr>
             <td class="center"><p>{i + 1}</p></td>
             <td><p>{paquete.nombre}</p></td>

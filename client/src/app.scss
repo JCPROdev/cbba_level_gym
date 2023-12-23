@@ -18,6 +18,10 @@
   --bg: #f4f5fa;
   /* border:solid red 1px; */
 }
+html {
+  scroll-behavior: smooth;
+}
+
 .link {
   color: #ffffff;
   display: flex;

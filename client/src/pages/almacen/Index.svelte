@@ -15,6 +15,7 @@
   import AgregarButton from "../../components/AgregarButton.svelte";
   import SquareButton from "../../components/SquareButton.svelte";
   import IconDelete from "../../icons/IconDelete.svelte";
+  import { filterBy } from "../../utilities/filterBy";
   let search = "";
   let open = false;
   let almacen = null;
@@ -40,6 +41,12 @@
       getData();
     }
   };
+
+  $: datos = $data;
+  const handleFilter = () => {
+    datos = $data?.filter((data) => filterBy(formatDate(data.fecha), search));
+  };
+  $: search, handleFilter();
 </script>
 
 <Head title="Almacen" />
@@ -57,7 +64,7 @@
       />
     {/key}
   </Modal>
-  <SearchButton bind:value={search} />
+  <SearchButton placeholder="Buscar por fecha..." bind:value={search} />
   {#if !$data}
     <Loader table />
   {:else}
@@ -73,7 +80,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each $data as almacen, i}
+        {#each datos as almacen, i}
           <tr>
             <td class="center"><p>{i + 1}</p></td>
             <td><p>{almacen.producto.nombre}</p></td>

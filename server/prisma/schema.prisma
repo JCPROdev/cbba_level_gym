@@ -104,7 +104,6 @@ model Asistencia {
   inscripcionId Int
   fecha         DateTime    @default(now())
   inscripcion   Inscripcion @relation(fields: [inscripcionId], references: [id])
-<<<<<<< HEAD
 }
 
 model Promociones {
@@ -113,6 +112,3 @@ model Promociones {
   titulo      String 
   descripcion String
 }
-=======
-}
->>>>>>> 8452165d7831a80e5a579b61294a93929af5af40

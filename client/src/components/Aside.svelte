@@ -47,7 +47,7 @@
       </li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
       {#if $user.usuario === "admin"}
-      <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
+        <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
       {/if}
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
       <li>
@@ -63,6 +63,11 @@
 
       <li><Link to="/dashboard/almacen" class="link orange">Almacen</Link></li>
       <li><Link to="/dashboard/venta" class="link orange">Venta</Link></li>
+      {#if $user.usuario === "admin"}
+        <li>
+          <Link to="/dashboard/promocion" class="link blue">Promoción</Link>
+        </li>
+      {/if}
     </ul>
     <section class="imgPerfil">
       <!-- <img alt="Perfil" src={perfil} /> -->

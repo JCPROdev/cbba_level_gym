@@ -1,17 +1,22 @@
 <script>
   import Promo1 from '../../../assets/promo1.png'
+  import { useGet } from '../../../hooks/useGet';
+
+  let { data } = useGet("promocion");
 </script>
 
-<div id="promos" class="promocont">
-  <div class="latiz">
-    <img src={Promo1} alt="">
+{#if $data}
+  <div id="promos" class="promocont">
+    <div class="latiz">
+      <img src={$data.foto} alt="">
+    </div>
+    <div class="latder">
+      <h1>Promociones</h1>
+      <p class="title">{$data.titulo}</p>
+      <p class="sub">{$data.descripcion}</p>
+    </div>
   </div>
-  <div class="latder">
-    <h1>Promociones</h1>
-    <p class="title">Descuentos y promociones preparados para ti.</p>
-    <p class="sub">¡No te pierdas la oportunidad de disfrutar grandes ahorros! Descubre nuestras últimas promociones y descuentos exclusivos inscribiéndote hoy mismo. ¡Tu próxima gran oferta te espera!</p>
-  </div>
-</div>
+{/if}
 
 <style lang="scss">
   .promocont{

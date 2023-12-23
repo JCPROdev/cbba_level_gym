@@ -8,19 +8,17 @@
 </script>
 
 {#if open}
-<div class="modal">
-  <button transition:fade={{ duration: 300 }} on:click={closeModal} />
-  <div class="container" transition:fly={{ y: 400, duration: 300 }}>
-    <div class="top">
-      <SquareButton
-        on:click={closeModal}
-      ><IconX /></SquareButton>
-    </div>
-    <div class="bottom">
-      <slot />
+  <div class="modal">
+    <button transition:fade={{ duration: 300 }} on:click={closeModal} />
+    <div class="container" transition:fly={{ y: 400, duration: 300 }}>
+      <div class="top">
+        <SquareButton on:click={closeModal}><IconX /></SquareButton>
+      </div>
+      <div class="bottom">
+        <slot />
+      </div>
     </div>
   </div>
-</div>
 {/if}
 
 <style lang="scss">

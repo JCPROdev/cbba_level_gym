@@ -15,6 +15,7 @@
   import Header from "./components/Header.svelte";
   import ProtectedRoute from "./components/ProtectedRoute.svelte";
   import Asistencia from "./pages/asistencia/Index.svelte";
+  import Promocion from "./pages/promocion/Index.svelte";
 </script>
 
 <Head />
@@ -40,6 +41,7 @@
           <Route path="/productos" component={Productos} />
           <Route path="/almacen" component={Almacen} />
           <Route path="/profile/:id" component={Profile} />
+          <Route path="/promocion" component={Promocion} />
         </Router>
       </Aside>
     </ProtectedRoute>

@@ -1,5 +1,6 @@
 <script>
   export let color = "primary";
+  export let disabled = false;
 </script>
 
 <button
@@ -7,6 +8,7 @@
     background-color: var(--${color});
   `}
   on:click
+  disabled={disabled}
 >
   <slot />  
 </button>
@@ -24,6 +26,9 @@
 
     &:hover {
       opacity: 0.8;
+    }
+    &:disabled {
+      filter: grayscale(1);
     }
   }
 </style>

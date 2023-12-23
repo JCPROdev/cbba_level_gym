@@ -46,7 +46,9 @@
         <Link to="/dashboard/inscripcion" class="link">Inscripciones</Link>
       </li>
       <li><Link to="/dashboard/clientes" class="link">Clientes</Link></li>
+      {#if $user.usuario === "admin"}
       <li><Link to="/dashboard/empleados" class="link">Empleados</Link></li>
+      {/if}
       <li><Link to="/dashboard/paquetes" class="link">Paquetes</Link></li>
       <li>
         <Link to="/dashboard/productos" class="link orange">

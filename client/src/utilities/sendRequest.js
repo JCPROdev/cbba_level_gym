@@ -1,22 +1,25 @@
-import { upsAlert } from "./alerts";
-import { http } from "./http"
+import { errorAlert, upsAlert } from "./alerts";
+import { http } from "./http";
 
 export const sendRequest = async (route, body, method = "POST") => {
   try {
     let res;
     res = await sendData(route, body, method);
-    if(res.status === 403) {
+    if (res.status === 403) {
       const refresh_token = localStorage.getItem("refresh_token");
       let newToken;
       const tokenRes = await sendRequest("token", {
-        token: refresh_token
+        token: refresh_token,
       });
       newToken = tokenRes.data.access_token;
       localStorage.setItem("access_token", newToken);
       res = await sendData(route, body, method);
     }
-    if(res.ok) {
-      const resJson = await res.json();
+    const resJson = await res.json();
+    if (res.status === 409) {
+      errorAlert(resJson.message);
+    }
+    if (res.ok) {
       return resJson;
     }
     return null;
@@ -24,7 +27,7 @@ export const sendRequest = async (route, body, method = "POST") => {
     upsAlert("Algo salió mal, intentalo de nuevo.");
     return null;
   }
-}
+};
 
 const sendData = (route, body, method = "POST") => {
   const access_token = localStorage.getItem("access_token");
@@ -32,10 +35,10 @@ const sendData = (route, body, method = "POST") => {
     method,
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": access_token ? `Bearer ${access_token}` : ""
+      Accept: "application/json",
+      Authorization: access_token ? `Bearer ${access_token}` : "",
     },
-    body: body ? JSON.stringify(body) : undefined
+    body: body ? JSON.stringify(body) : undefined,
   });
   return res;
-}
+};

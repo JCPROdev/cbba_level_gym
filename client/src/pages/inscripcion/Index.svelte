@@ -1,6 +1,5 @@
 <script>
   import Table from "../../components/Table.svelte";
-  import store from "../../assets/iconos/store.png";
   import Modal from "../../components/Modal.svelte";
   import Form from "./components/Form.svelte";
   import fondo from "../../assets/logo-fondo.png";
@@ -8,7 +7,6 @@
   import SearchButton from "../../components/SearchButton.svelte";
   import Head from "../../components/Head.svelte";
   import { formatDate } from "../../utilities/formatDate";
-  import eliminar from "../../assets/iconos/elimianar.png";
   import { successAlert, sureAlert } from "../../utilities/alerts";
   import { sendRequest } from "../../utilities/sendRequest";
   import { useGet } from "../../hooks/useGet";
@@ -16,10 +14,10 @@
   import { navigate } from "svelte-routing";
   import AgregarButton from "../../components/AgregarButton.svelte";
   import SquareButton from "../../components/SquareButton.svelte";
-  import IconEdit from "../../icons/IconEdit.svelte";
   import IconDelete from "../../icons/IconDelete.svelte";
   import IconQr from "../../icons/IconQR.svelte";
   import IconEye from "../../icons/IconEye.svelte";
+  import { filterBy } from "../../utilities/filterBy";
 
   let search = "";
   let open = false;
@@ -39,7 +37,7 @@
   const closeModalQR = () => {
     openQR = false;
   };
-  
+
   let { data, getData } = useGet("inscripcion");
   const handleDelete = async (id) => {
     const res = await sendRequest(`inscripcion/${id}`, null, "DELETE");
@@ -48,6 +46,17 @@
       getData();
     }
   };
+
+  $: datos = $data;
+
+  const handleFilter = () => {
+    datos = $data?.filter((inscripcion) =>
+      filterBy(inscripcion.cliente.nombre, search)
+    );
+  };
+
+  $: search, handleFilter();
+  $: datos, console.log(datos);
 </script>
 
 <Head title="Inscripciones" />
@@ -66,57 +75,62 @@
   </Modal>
   <Modal open={openQR} closeModal={closeModalQR}>
     {#key idSelected}
-      <QrModal 
-        id={idSelected}
-      />
+      <QrModal id={idSelected} />
     {/key}
   </Modal>
   <SearchButton bind:value={search} />
   {#if !$data}
     <Loader table />
   {:else}
-  <Table>
-    <thead>
-      <tr>
-        <th class="center">#</th>
-        <th class="big">cliente</th>
-        <th class="big">paquete</th>
-        <th class="small">total</th>
-        <th class="medium">tipo de pago</th>
-        <th class="medium">fecha</th>
-        <th class="small">restante</th>
-        <th class="medium center">opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each $data as inscripcion, i}
+    <Table>
+      <thead>
         <tr>
-          <td class="center"><p>{i + 1}</p></td>
-          <td><p>{inscripcion.cliente.nombre}</p></td>
-          <td><p>{inscripcion.paquete.nombre}</p></td>
-          <td><p>Bs. {inscripcion.total}</p></td>
-          <td><p>{inscripcion.tipoPago}</p></td>
-          <td><p>{formatDate(inscripcion.fechaInicio)}</p></td>
-          <td><p>{inscripcion.diasRestantes} días</p></td>
-          <td class="center">
-            <div class="buttons">
-              <SquareButton
-                on:click={() => navigate(`/dashboard/profile/${inscripcion.id}`)}
-              ><IconEye /></SquareButton>
-              <SquareButton
-                color="blue"
-                on:click={() => openModalQR(inscripcion.id)}
-              ><IconQr /></SquareButton>
-              <SquareButton
-                color="orange"
-                on:click={() => sureAlert("Se eliminará la inscripción permanentemente", () => handleDelete(inscripcion.id))}
-              ><IconDelete /></SquareButton>
-            </div>
-          </td>
+          <th class="center">#</th>
+          <th class="big">cliente</th>
+          <th class="big">paquete</th>
+          <th class="small">total</th>
+          <th class="medium">tipo de pago</th>
+          <th class="medium">fecha</th>
+          <th class="small">restante</th>
+          <th class="medium center">opciones</th>
         </tr>
-      {/each}
-    </tbody>
-  </Table>
+      </thead>
+      <tbody>
+        {#each datos as inscripcion, i}
+          <tr>
+            <td class="center"><p>{i + 1}</p></td>
+            <td><p>{inscripcion.cliente.nombre}</p></td>
+            <td><p>{inscripcion.paquete.nombre}</p></td>
+            <td><p>Bs. {inscripcion.total}</p></td>
+            <td><p>{inscripcion.tipoPago}</p></td>
+            <td><p>{inscripcion.fechaInicio}</p></td>
+            <td><p>{inscripcion.diasRestantes} días</p></td>
+            <td class="center">
+              <div class="buttons">
+                <SquareButton
+                  on:click={() =>
+                    navigate(`/dashboard/profile/${inscripcion.id}`)}
+                  ><IconEye /></SquareButton
+                >
+                <SquareButton
+                  color="blue"
+                  on:click={() => openModalQR(inscripcion.id)}
+                  ><IconQr /></SquareButton
+                >
+                <SquareButton
+                  color="orange"
+                  on:click={() =>
+                    sureAlert(
+                      "Se eliminará la inscripción permanentemente",
+                      () => handleDelete(inscripcion.id)
+                    )}><IconDelete /></SquareButton
+                >
+              </div>
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </Table>
   {/if}
   <AgregarButton on:click={() => openModal()} />
 </div>
